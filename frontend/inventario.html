@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventario · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in"><a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a class="on" href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a></div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Inventario</h1><p>Existencias por lote y ubicación. El stock se calcula a partir de los movimientos, nunca se edita a mano.</p></div>
+  <a class="btn" href="movimientos.html">Registrar movimiento</a>
+</div></section>
+<main class="wrap">
+<div class="card mb"><h2>Mapa de la bodega</h2><div class="k">Cuatro zonas con cuatro estantes cada una · ejemplo ficticio</div><div class="zm">
+<div class="zn"><h3>Zona 1</h3><div class="zt">Secos</div><div class="sh"><div class="sf e0"><b>E1</b>Libre</div><div class="sf u"><b>E2</b>L-0012 leche · 7 d</div><div class="sf e0"><b>E3</b>Libre</div><div class="sf e3"><b>E4</b>L-0017 fideos · L-0009 arroz</div></div></div>
+<div class="zn"><h3>Zona 2</h3><div class="zt">Panificados</div><div class="sh"><div class="sf w"><b>E1</b>L-0018 pan · 12 d</div><div class="sf e0"><b>E2</b>Libre</div><div class="sf u"><b>E3</b>L-0003 jugo · vencido</div><div class="sf e0"><b>E4</b>Libre</div></div></div>
+<div class="zn"><h3>Zona 3</h3><div class="zt">Refrigerados</div><div class="sh"><div class="sf w"><b>E1</b>L-0015 yogur · 10 d</div><div class="sf e0"><b>E2</b>Libre</div><div class="sf e2"><b>E3</b>L-0020 manzanas</div><div class="sf e0"><b>E4</b>Libre</div></div></div>
+<div class="zn"><h3>Zona 4</h3><div class="zt">No alimentos</div><div class="sh"><div class="sf e1"><b>E1</b>L-0021 detergente</div><div class="sf e0"><b>E2</b>Libre</div><div class="sf e0"><b>E3</b>Libre</div><div class="sf e0"><b>E4</b>Libre</div></div></div>
+</div>
+<div class="lgm"><span style="--c:#FEF2F2">Urgente o vencido</span><span style="--c:#FFF1E3">Vence en menos de 14 días</span><span style="--c:#BFE3C3">Con existencias</span><span style="--c:#fff">Libre</span></div></div>
+<div class="card"><h2>Lotes en existencia</h2><div class="k">Ordenados por vencimiento más próximo</div>
+<div class="search"><input placeholder="Buscar por producto o lote"><select><option>Todas las zonas</option></select><select><option>Todos los estados</option></select></div>
+<div class="sc"><table><tr><th>Lote</th><th>Producto</th><th class="num">Disponible</th><th>Ubicación</th><th>Vence</th><th>Días restantes</th><th>Estado</th></tr><tr><td><a href="lote.html"><b>L-0012</b></a></td><td>Leche UHT 1 L</td><td class="num">80 cajas</td><td>Z1-E2</td><td>29/11/2026</td><td><div class="fm"><div class="tr"><i class="r" style="width:12%"></i></div><span class="dd2">7 d</span></div></td><td><span class="chip r">Por vencer</span></td></tr><tr><td><a href="lote.html"><b>L-0015</b></a></td><td>Yogur natural</td><td class="num">200 un</td><td>Z3-E1</td><td>02/12/2026</td><td><div class="fm"><div class="tr"><i class="o" style="width:18%"></i></div><span class="dd2">10 d</span></div></td><td><span class="chip o">Por vencer</span></td></tr><tr><td><a href="lote.html"><b>L-0018</b></a></td><td>Pan de molde</td><td class="num">150 un</td><td>Z2-E1</td><td>04/12/2026</td><td><div class="fm"><div class="tr"><i class="o" style="width:22%"></i></div><span class="dd2">12 d</span></div></td><td><span class="chip o">Por vencer</span></td></tr><tr><td><a href="lote.html"><b>L-0017</b></a></td><td>Fideos</td><td class="num">60 bolsas</td><td>Z1-E4</td><td>10/01/2027</td><td><div class="fm"><div class="tr"><i class="g" style="width:55%"></i></div><span class="dd2">49 d</span></div></td><td><span class="chip g">Disponible</span></td></tr><tr><td><a href="lote.html"><b>L-0009</b></a></td><td>Arroz</td><td class="num">40 bolsas</td><td>Z1-E4</td><td>15/03/2027</td><td><div class="fm"><div class="tr"><i class="g" style="width:95%"></i></div><span class="dd2">113 d</span></div></td><td><span class="chip g">Disponible</span></td></tr><tr><td><a href="lote.html"><b>L-0020</b></a></td><td>Manzanas</td><td class="num">120 kg</td><td>Z3-E3</td><td>sin fecha</td><td><div class="fm"><div class="tr"><i class="g" style="width:60%"></i></div><span class="dd2">—</span></div></td><td><span class="chip g">Disponible</span></td></tr><tr><td><a href="lote.html"><b>L-0021</b></a></td><td>Detergente</td><td class="num">30 un</td><td>Z4-E1</td><td>sin fecha</td><td><div class="fm"><div class="tr"><i class="g" style="width:60%"></i></div><span class="dd2">—</span></div></td><td><span class="chip n">No alimento</span></td></tr><tr><td><a href="lote.html"><b>L-0003</b></a></td><td>Jugo de fruta</td><td class="num">24 un</td><td>Z2-E3</td><td>10/10/2026</td><td><div class="fm"><div class="tr"><i class="r" style="width:2%"></i></div><span class="dd2">vencido</span></div></td><td><span class="chip r">Vencido</span></td></tr></table></div></div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

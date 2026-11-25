@@ -1,0 +1,78 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000000e"
+    },
+    "nombre": "Hogar de Niños Demo",
+    "tipo": "hogar de niños",
+    "direccion": "Zona Norte, Cochabamba",
+    "zona": "Zona Norte",
+    "responsable": {
+      "nombre": "Persona Demo",
+      "telefono": "70000000"
+    },
+    "poblacion": {
+      "ninos": 45,
+      "adultosMayores": 0,
+      "total": 45
+    },
+    "activa": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000000f"
+    },
+    "nombre": "Asilo Demo",
+    "tipo": "asilo",
+    "direccion": "Zona Sur, Cochabamba",
+    "zona": "Zona Sur",
+    "responsable": {
+      "nombre": "Persona Demo",
+      "telefono": "70000001"
+    },
+    "poblacion": {
+      "ninos": 0,
+      "adultosMayores": 32,
+      "total": 32
+    },
+    "activa": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000010"
+    },
+    "nombre": "Comedor Popular Demo",
+    "tipo": "comedor",
+    "direccion": "Zona Central, Cochabamba",
+    "zona": "Zona Central",
+    "responsable": {
+      "nombre": "Persona Demo",
+      "telefono": "70000002"
+    },
+    "poblacion": {
+      "ninos": 60,
+      "adultosMayores": 25,
+      "total": 85
+    },
+    "activa": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000011"
+    },
+    "nombre": "Hogar Demo II",
+    "tipo": "hogar de niños",
+    "direccion": "Zona Oeste, Cochabamba",
+    "zona": "Zona Oeste",
+    "responsable": {
+      "nombre": "Persona Demo",
+      "telefono": "70000003"
+    },
+    "poblacion": {
+      "ninos": 20,
+      "adultosMayores": 0,
+      "total": 20
+    },
+    "activa": false
+  }
+]

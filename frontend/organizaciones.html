@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Organizaciones beneficiarias · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>
+body{margin:0}
+.gr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.pp{display:flex;gap:28px;padding:14px 0;margin:12px 0;border-top:1px solid #ECEFF2;border-bottom:1px solid #ECEFF2}
+.pp b{display:block;font-family:'DM Serif Display',serif;font-weight:400;font-size:30px;line-height:1.1}
+.pp span{font-size:13px;color:#616161}
+@media (max-width:900px){.gr{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in">
+    <a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a class="on" href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a>
+  </div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Organizaciones beneficiarias</h1><p>Hogares, asilos y comedores que reciben alimentos, con su población y su convenio.</p></div>
+  <a class="btn" href="organizaciones.html">Nueva organización</a>
+</div></section>
+<main class="wrap">
+  <div class="gr">
+    <div class="card"><h2>Hogar de Niños Demo</h2><span class="chip g">Activa</span>
+      <div class="k" style="margin-top:8px">Hogar de niños · Zona Norte, Cochabamba<br>Responsable: Persona Demo · 70000000</div>
+      <div class="pp"><div><b>45</b><span>niños</span></div><div><b>0</b><span>adultos mayores</span></div><div><b>45</b><span>total</span></div></div>
+      <div class="acts"><a class="btn-o btn-s" href="archivos.html">Convenio PDF</a><a class="btn-o btn-s" href="entregas.html">Ver entregas</a><a class="btn btn-s" href="nuevaentrega.html">Nueva entrega</a></div></div>
+    <div class="card"><h2>Asilo Demo</h2><span class="chip g">Activa</span>
+      <div class="k" style="margin-top:8px">Asilo · Zona Sur, Cochabamba<br>Responsable: Persona Demo · 70000001</div>
+      <div class="pp"><div><b>0</b><span>niños</span></div><div><b>32</b><span>adultos mayores</span></div><div><b>32</b><span>total</span></div></div>
+      <div class="acts"><a class="btn-o btn-s" href="archivos.html">Convenio PDF</a><a class="btn-o btn-s" href="entregas.html">Ver entregas</a><a class="btn btn-s" href="nuevaentrega.html">Nueva entrega</a></div></div>
+    <div class="card"><h2>Comedor Popular Demo</h2><span class="chip g">Activa</span>
+      <div class="k" style="margin-top:8px">Comedor · Zona Central, Cochabamba<br>Responsable: Persona Demo · 70000002</div>
+      <div class="pp"><div><b>60</b><span>niños</span></div><div><b>25</b><span>adultos mayores</span></div><div><b>85</b><span>total</span></div></div>
+      <div class="acts"><a class="btn-o btn-s" href="archivos.html">Convenio PDF</a><a class="btn-o btn-s" href="entregas.html">Ver entregas</a><a class="btn btn-s" href="nuevaentrega.html">Nueva entrega</a></div></div>
+    <div class="card"><h2>Hogar Demo II</h2><span class="chip n">Inactiva</span>
+      <div class="k" style="margin-top:8px">Hogar de niños · Zona Oeste, Cochabamba<br>Responsable: Persona Demo · 70000003</div>
+      <div class="pp"><div><b>20</b><span>niños</span></div><div><b>0</b><span>adultos mayores</span></div><div><b>20</b><span>total</span></div></div>
+      <div class="acts"><a class="btn-o btn-s" href="archivos.html">Convenio PDF</a><a class="btn-o btn-s" href="entregas.html">Ver entregas</a></div></div>
+  </div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

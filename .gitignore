@@ -1,0 +1,14 @@
+node_modules/
+.env*
+!.env.example
+.next/
+out/
+.vercel/
+.runtime/
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+*.log
+.DS_Store
+db/respaldos/

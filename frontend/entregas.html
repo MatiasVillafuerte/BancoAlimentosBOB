@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entregas · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}.kb{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+.kc{background:#EFEBE3;border-radius:18px;padding:14px}
+.kc h3{margin:2px 4px 12px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#4A4A4A;display:flex;justify-content:space-between;align-items:center}
+.kc h3 span{background:#fff;border-radius:999px;padding:1px 10px;font-size:12px}
+.kd{background:#fff;border:1px solid #E8E2D8;border-left:5px solid var(--c);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(34,34,34,.05)}
+.kd b{font-size:15px}.kd p{margin:4px 0;font-size:13.5px;color:#4A4A4A}
+.kd .acts{margin-top:10px}
+@media (max-width:900px){.kb{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in"><a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a class="on" href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a></div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Entregas</h1><p>Del plan a la entrega confirmada. Cada entrega descuenta stock con un movimiento y termina con su acta.</p></div>
+  <a class="btn" href="nuevaentrega.html">Nueva entrega</a>
+</div></section>
+<main class="wrap">
+<div class="al o"><span class="ic i-alert"></span> Se sugieren primero los lotes que vencen antes (FEFO). Solo se registran personas atendidas en número, no sus datos.</div>
+<div class="kb">
+<div class="kc"><h3>Programadas <span>1</span></h3><div class="kd" style="--c:#FA7712"><b>ENT-2026-0026</b> <span class="chip o tag">FEFO</span><p>Comedor Popular Demo · 85 personas</p><p>Programada para el 24/11</p><p>L-0018 pan de molde · 80 un</p><div class="acts"><a class="btn btn-s" href="nuevaentrega.html">Preparar</a><a class="btn-o btn-s" href="entregas.html">Ver</a></div></div></div>
+<div class="kc"><h3>En preparación <span>1</span></h3><div class="kd" style="--c:#C02126"><b>ENT-2026-0025</b> <span class="chip n tag">Falta acta</span><p>Asilo Demo · 32 personas</p><p>Preparación el 23/11</p><p>L-0015 yogur natural · 60 un</p><div class="acts"><a class="btn btn-s" href="entregas.html">Subir acta</a><a class="btn-o btn-s" href="entregas.html">Ver</a></div></div></div>
+<div class="kc"><h3>Entregadas <span>2</span></h3><div class="kd" style="--c:#379542"><b>ENT-2026-0024</b> <span class="chip g tag">Con acta</span><p>Hogar de Niños Demo · 45 personas</p><p>Entregada el 21/11 · acta firmada</p><p>L-0012 leche 30 cajas · L-0015 yogur 100 un</p><div class="acts"><a class="btn-o btn-s" href="entregas.html">Ver</a><a class="btn-o btn-s" href="trazabilidad.html">Trazar</a></div></div><div class="kd" style="--c:#379542"><b>ENT-2026-0023</b> <span class="chip g tag">Con acta</span><p>Comedor Popular Demo · 85 personas</p><p>Entregada el 14/11 · acta firmada</p><p>L-0009 arroz 20 bolsas</p><div class="acts"><a class="btn-o btn-s" href="entregas.html">Ver</a><a class="btn-o btn-s" href="trazabilidad.html">Trazar</a></div></div></div>
+</div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

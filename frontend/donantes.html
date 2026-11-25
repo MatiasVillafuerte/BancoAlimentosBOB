@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Donantes y convenios · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in">
+    <a href="index.html">Panel</a><a class="on" href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a>
+  </div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Donantes y convenios</h1><p>Empresas, mercados, productores y personas que donan alimentos, con cada versión de su convenio.</p></div>
+  <a class="btn" href="donantes.html">Nuevo donante</a>
+</div></section>
+<main class="wrap">
+  <div class="cols">
+    <div class="card" style="flex:1.3 1 520px">
+      <div class="search">
+        <label for="q" style="display:none">Buscar donante</label><input id="q" placeholder="Buscar por nombre o NIT" style="flex:2 1 220px">
+        <label for="tp" style="display:none">Tipo</label><select id="tp"><option>Todos los tipos</option></select>
+      </div>
+      <div class="sc"><table>
+        <tr><th>Donante</th><th>Tipo</th><th>Convenio</th><th>Estado</th></tr>
+        <tr class="sel"><td><b>Supermercado Demo S.A.</b></td><td>Empresa</td><td>Versión 2</td><td><span class="chip g">Activo</span></td></tr>
+        <tr><td><b>Mercado Campesino Demo</b></td><td>Mercado</td><td>Versión 1</td><td><span class="chip g">Activo</span></td></tr>
+        <tr><td><b>Panificadora Demo S.R.L.</b></td><td>Empresa</td><td>Versión 1</td><td><span class="chip g">Activo</span></td></tr>
+        <tr><td><b>Productor Demo (frutas)</b></td><td>Productor</td><td>Sin convenio</td><td><span class="chip o">Aporte ocasional</span></td></tr>
+        <tr><td><b>Donante Persona Demo</b></td><td>Persona</td><td>Sin convenio</td><td><span class="chip n">Inactivo</span></td></tr>
+      </table></div>
+    </div>
+    <div class="card" style="flex:1 1 380px">
+      <h2>Supermercado Demo S.A.</h2>
+      <div class="k">Empresa · NIT 0000000000 (ficticio) · alta el 12/03/2026</div>
+      <dl class="dl">
+        <dt>Contacto</dt><dd>Encargado de donaciones</dd>
+        <dt>Medio de contacto</dt><dd>Correo y teléfono</dd>
+        <dt>Dirección</dt><dd>Cochabamba</dd>
+      </dl>
+      <h2 style="margin-top:22px;font-size:20px">Versiones del convenio</h2>
+      <div class="li"><div><b>CONV-001 · versión 2</b> <span class="chip g tag">Vigente</span><small>Desde el 01/09/2026, sin fecha de fin</small></div><a class="btn-o btn-s" href="archivos.html">Ver PDF</a></div>
+      <div class="li"><div><b>CONV-001 · versión 1</b><small>Del 01/03/2026 al 31/08/2026</small></div><a class="btn-o btn-s" href="archivos.html">Ver PDF</a></div>
+      <h2 style="margin-top:22px;font-size:20px">Donaciones recibidas</h2>
+      <div class="li"><div><b>DON-2026-0031</b><small>Convenio versión 2</small></div><span>20/11/2026</span></div>
+      <div class="li"><div><b>DON-2026-0024</b><small>Convenio versión 2</small></div><span>02/11/2026</span></div>
+      <div style="margin-top:14px"><a class="btn-o btn-s" href="trazabilidad.html">Ver recorrido de una donación</a></div>
+    </div>
+  </div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

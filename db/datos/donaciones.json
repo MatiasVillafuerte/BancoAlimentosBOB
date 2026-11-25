@@ -1,0 +1,157 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000012"
+    },
+    "codigo": "DON-2026-0015",
+    "donante": {
+      "donanteId": {
+        "$oid": "6a1f00000000000000000006"
+      },
+      "nombre": "Supermercado Demo S.A."
+    },
+    "fechaRecepcion": {
+      "$date": "2026-09-30T12:00:00Z"
+    },
+    "registradaPor": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "archivos": [],
+    "observaciones": "Datos ficticios de ejemplo",
+    "convenioId": {
+      "$oid": "6a1f0000000000000000000b"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000013"
+    },
+    "codigo": "DON-2026-0024",
+    "donante": {
+      "donanteId": {
+        "$oid": "6a1f00000000000000000006"
+      },
+      "nombre": "Supermercado Demo S.A."
+    },
+    "fechaRecepcion": {
+      "$date": "2026-11-02T12:00:00Z"
+    },
+    "registradaPor": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "archivos": [],
+    "observaciones": "Datos ficticios de ejemplo",
+    "convenioId": {
+      "$oid": "6a1f0000000000000000000c"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000014"
+    },
+    "codigo": "DON-2026-0027",
+    "donante": {
+      "donanteId": {
+        "$oid": "6a1f00000000000000000006"
+      },
+      "nombre": "Supermercado Demo S.A."
+    },
+    "fechaRecepcion": {
+      "$date": "2026-11-08T12:00:00Z"
+    },
+    "registradaPor": {
+      "$oid": "6a1f00000000000000000003"
+    },
+    "archivos": [],
+    "observaciones": "Datos ficticios de ejemplo",
+    "convenioId": {
+      "$oid": "6a1f0000000000000000000c"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000015"
+    },
+    "codigo": "DON-2026-0028",
+    "donante": {
+      "donanteId": {
+        "$oid": "6a1f00000000000000000009"
+      },
+      "nombre": "Productor Demo (frutas)"
+    },
+    "fechaRecepcion": {
+      "$date": "2026-11-12T12:00:00Z"
+    },
+    "registradaPor": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "archivos": [],
+    "observaciones": "Datos ficticios de ejemplo"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000016"
+    },
+    "codigo": "DON-2026-0029",
+    "donante": {
+      "donanteId": {
+        "$oid": "6a1f00000000000000000007"
+      },
+      "nombre": "Mercado Campesino Demo"
+    },
+    "fechaRecepcion": {
+      "$date": "2026-11-15T12:00:00Z"
+    },
+    "registradaPor": {
+      "$oid": "6a1f00000000000000000003"
+    },
+    "archivos": [],
+    "observaciones": "Datos ficticios de ejemplo",
+    "convenioId": {
+      "$oid": "6a1f0000000000000000000d"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000017"
+    },
+    "codigo": "DON-2026-0030",
+    "donante": {
+      "donanteId": {
+        "$oid": "6a1f00000000000000000008"
+      },
+      "nombre": "Panificadora Demo S.R.L."
+    },
+    "fechaRecepcion": {
+      "$date": "2026-11-18T12:00:00Z"
+    },
+    "registradaPor": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "archivos": [],
+    "observaciones": "Datos ficticios de ejemplo"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000018"
+    },
+    "codigo": "DON-2026-0031",
+    "donante": {
+      "donanteId": {
+        "$oid": "6a1f00000000000000000006"
+      },
+      "nombre": "Supermercado Demo S.A."
+    },
+    "fechaRecepcion": {
+      "$date": "2026-11-20T12:00:00Z"
+    },
+    "registradaPor": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "archivos": [],
+    "observaciones": "Datos ficticios de ejemplo",
+    "convenioId": {
+      "$oid": "6a1f0000000000000000000c"
+    }
+  }
+]

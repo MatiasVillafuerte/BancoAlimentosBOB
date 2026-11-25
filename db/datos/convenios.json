@@ -1,0 +1,52 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000000b"
+    },
+    "donanteId": {
+      "$oid": "6a1f00000000000000000006"
+    },
+    "codigo": "CONV-001",
+    "nombre": "Convenio de donación Supermercado Demo",
+    "version": 1,
+    "desde": {
+      "$date": "2026-03-01T12:00:00Z"
+    },
+    "hasta": {
+      "$date": "2026-08-31T12:00:00Z"
+    },
+    "condiciones": "Donación de productos próximos a vencer, con entrega en bodega.",
+    "periodicidad": "semanal"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000000c"
+    },
+    "donanteId": {
+      "$oid": "6a1f00000000000000000006"
+    },
+    "codigo": "CONV-001",
+    "nombre": "Convenio de donación Supermercado Demo",
+    "version": 2,
+    "desde": {
+      "$date": "2026-09-01T12:00:00Z"
+    },
+    "condiciones": "Se amplía la lista de productos y se incluyen lácteos refrigerados.",
+    "periodicidad": "semanal"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000000d"
+    },
+    "donanteId": {
+      "$oid": "6a1f00000000000000000007"
+    },
+    "codigo": "CONV-002",
+    "nombre": "Convenio Mercado Campesino Demo",
+    "version": 1,
+    "desde": {
+      "$date": "2026-03-20T12:00:00Z"
+    },
+    "condiciones": "Frutas y verduras de temporada."
+  }
+]

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informes · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>
+body{margin:0}
+.bars{display:flex;align-items:flex-end;gap:10px;height:220px;border-bottom:2px solid #CEDBE5;padding:0 8px}
+.bc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.bc i{display:block;width:100%;border-radius:6px 6px 0 0}
+.bc.r i{background:#379542}.bc.e i{background:#FA7712}
+.lb{display:flex;gap:10px;padding:8px 8px 0;font-size:13px;color:#616161}
+.lb span{flex:2;text-align:center}
+.lg{display:flex;gap:18px;font-size:13px;color:#616161;margin-bottom:12px}
+.lg span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.lg .a::before{background:#379542}.lg .b::before{background:#FA7712}
+.hb{display:flex;align-items:center;gap:12px;margin:12px 0;font-size:14.5px}
+.hb .n{flex:0 0 170px}
+.hb i{display:block;height:16px;background:#C02126;border-radius:4px}
+.hb b{font-size:14px}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in">
+    <a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a class="on" href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a>
+  </div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Informes</h1><p>Se calculan a partir de recepciones, lotes, movimientos y entregas confirmadas.</p></div>
+  <a class="btn" href="informes.html">Descargar informe</a>
+</div></section>
+<main class="wrap">
+  <div class="search" style="max-width:560px">
+    <label for="p" style="display:none">Periodo</label><select id="p"><option>Últimos 6 meses</option></select>
+    <label for="t" style="display:none">Informe</label><select id="t"><option>Resumen general</option></select>
+  </div>
+  <div class="cols">
+    <div class="card" style="flex:1.4 1 520px">
+      <h2>Kilos recibidos y entregados por mes</h2><div class="k">Ejemplo con datos ficticios</div>
+      <div class="lg"><span class="a">Recibidos</span><span class="b">Entregados</span></div>
+      <div class="bars">
+        <div class="bc r"><i style="height:48%"></i></div><div class="bc e"><i style="height:40%"></i></div>
+        <div class="bc r"><i style="height:60%"></i></div><div class="bc e"><i style="height:54%"></i></div>
+        <div class="bc r"><i style="height:56%"></i></div><div class="bc e"><i style="height:50%"></i></div>
+        <div class="bc r"><i style="height:74%"></i></div><div class="bc e"><i style="height:62%"></i></div>
+        <div class="bc r"><i style="height:68%"></i></div><div class="bc e"><i style="height:60%"></i></div>
+        <div class="bc r"><i style="height:82%"></i></div><div class="bc e"><i style="height:70%"></i></div>
+      </div>
+      <div class="lb"><span>Jun</span><span>Jul</span><span>Ago</span><span>Sep</span><span>Oct</span><span>Nov</span></div>
+    </div>
+    <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:20px">
+      <div class="card">
+        <h2>Entregas por organización</h2><div class="k">Entregas confirmadas · ejemplo ficticio</div>
+        <div class="hb"><span class="n">Comedor Popular Demo</span><i style="width:190px"></i><b>11</b></div>
+        <div class="hb"><span class="n">Hogar de Niños Demo</span><i style="width:155px"></i><b>9</b></div>
+        <div class="hb"><span class="n">Asilo Demo</span><i style="width:105px"></i><b>6</b></div>
+        <div class="hb"><span class="n">Hogar Demo II</span><i style="width:35px"></i><b>2</b></div>
+      </div>
+      <div class="card">
+        <h2>Otros informes</h2><div class="k">Disponibles para coordinadores</div>
+        <div class="li"><span>Donaciones por donante</span><a class="btn-o btn-s" href="informes.html">Abrir</a></div>
+        <div class="li"><span>Lotes vencidos y mermas</span><a class="btn-o btn-s" href="informes.html">Abrir</a></div>
+        <div class="li"><span>Personas atendidas por mes</span><a class="btn-o btn-s" href="informes.html">Abrir</a></div>
+        <div class="li"><span>Tiempo para reconstruir un recorrido</span><a class="btn-o btn-s" href="informes.html">Abrir</a></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

@@ -1,0 +1,261 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000025"
+    },
+    "claveOperacion": "recepcion-L-0003-2026-09-30-1",
+    "loteId": {
+      "$oid": "6a1f00000000000000000019"
+    },
+    "tipo": "recepcion",
+    "cantidad": 36,
+    "unidad": "un",
+    "fecha": {
+      "$date": "2026-09-30T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "Recepción DON-2026-0015"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000026"
+    },
+    "claveOperacion": "recepcion-L-0009-2026-11-02-2",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001a"
+    },
+    "tipo": "recepcion",
+    "cantidad": 58,
+    "unidad": "bolsas",
+    "fecha": {
+      "$date": "2026-11-02T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "Recepción DON-2026-0024"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000027"
+    },
+    "claveOperacion": "recepcion-L-0017-2026-11-02-3",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001d"
+    },
+    "tipo": "recepcion",
+    "cantidad": 60,
+    "unidad": "bolsas",
+    "fecha": {
+      "$date": "2026-11-02T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "Recepción DON-2026-0024"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000028"
+    },
+    "claveOperacion": "recepcion-L-0012-2026-11-20-4",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001b"
+    },
+    "tipo": "recepcion",
+    "cantidad": 110,
+    "unidad": "cajas",
+    "fecha": {
+      "$date": "2026-11-20T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "motivo": "Recepción DON-2026-0031"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000029"
+    },
+    "claveOperacion": "recepcion-L-0015-2026-11-12-5",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001c"
+    },
+    "tipo": "recepcion",
+    "cantidad": 300,
+    "unidad": "un",
+    "fecha": {
+      "$date": "2026-11-12T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "motivo": "Recepción DON-2026-0028"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000002a"
+    },
+    "claveOperacion": "recepcion-L-0018-2026-11-18-6",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001e"
+    },
+    "tipo": "recepcion",
+    "cantidad": 150,
+    "unidad": "un",
+    "fecha": {
+      "$date": "2026-11-18T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "Recepción DON-2026-0030"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000002b"
+    },
+    "claveOperacion": "recepcion-L-0020-2026-11-15-7",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001f"
+    },
+    "tipo": "recepcion",
+    "cantidad": 120,
+    "unidad": "kg",
+    "fecha": {
+      "$date": "2026-11-15T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000003"
+    },
+    "motivo": "Recepción DON-2026-0029"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000002c"
+    },
+    "claveOperacion": "recepcion-L-0021-2026-11-08-8",
+    "loteId": {
+      "$oid": "6a1f00000000000000000020"
+    },
+    "tipo": "recepcion",
+    "cantidad": 30,
+    "unidad": "un",
+    "fecha": {
+      "$date": "2026-11-08T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000003"
+    },
+    "motivo": "Recepción DON-2026-0027"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000002d"
+    },
+    "claveOperacion": "entrega-L-0009-2026-11-14-9",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001a"
+    },
+    "tipo": "entrega",
+    "cantidad": 20,
+    "unidad": "bolsas",
+    "fecha": {
+      "$date": "2026-11-14T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "ENT-2026-0023",
+    "entregaId": {
+      "$oid": "6a1f00000000000000000021"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000002e"
+    },
+    "claveOperacion": "entrega-L-0012-2026-11-21-10",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001b"
+    },
+    "tipo": "entrega",
+    "cantidad": 30,
+    "unidad": "cajas",
+    "fecha": {
+      "$date": "2026-11-21T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "ENT-2026-0024",
+    "entregaId": {
+      "$oid": "6a1f00000000000000000022"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000002f"
+    },
+    "claveOperacion": "entrega-L-0015-2026-11-21-11",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001c"
+    },
+    "tipo": "entrega",
+    "cantidad": 100,
+    "unidad": "un",
+    "fecha": {
+      "$date": "2026-11-21T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "ENT-2026-0024",
+    "entregaId": {
+      "$oid": "6a1f00000000000000000022"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000030"
+    },
+    "claveOperacion": "merma-L-0003-2026-11-19-12",
+    "loteId": {
+      "$oid": "6a1f00000000000000000019"
+    },
+    "tipo": "merma",
+    "cantidad": 12,
+    "unidad": "un",
+    "fecha": {
+      "$date": "2026-11-19T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "motivo": "Envases dañados al transportar"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000031"
+    },
+    "claveOperacion": "devolucionEntrada-L-0009-2026-11-19-13",
+    "loteId": {
+      "$oid": "6a1f0000000000000000001a"
+    },
+    "tipo": "devolucionEntrada",
+    "cantidad": 2,
+    "unidad": "bolsas",
+    "fecha": {
+      "$date": "2026-11-19T12:00:00Z"
+    },
+    "responsableId": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "motivo": "Devuelto por la organización · corrige ENT-2026-0023",
+    "entregaId": {
+      "$oid": "6a1f00000000000000000021"
+    }
+  }
+]

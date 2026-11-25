@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trazabilidad de una entrega · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in"><a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a class="on" href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a></div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Trazabilidad de una entrega</h1><p>Desde una entrega se vuelve al lote, a la donación y al convenio que la amparó.</p></div>
+  <div class="search" style="margin:0;flex:1 1 360px;max-width:520px"><label for="cod" style="display:none">Código de entrega</label><input id="cod" value="ENT-2026-0024"><a class="btn" href="trazabilidad.html" style="flex:0 0 auto">Buscar</a></div>
+</div></section>
+<main class="wrap">
+<div class="flow"><div class="nd" style="--c:#379542"><div class="num">1</div><h3>Convenio</h3><div class="sb">CONV-001 · versión 2 <span class="chip g tag">Vigente</span></div><p>Supermercado Demo S.A.</p><p>Desde el 01/09/2026</p><p>Condiciones en el PDF original</p><div class="acts"><a class="btn-o btn-s" href="donantes.html">Ver convenio</a></div></div><div class="nd" style="--c:#C02126"><div class="num">2</div><h3>Donación</h3><div class="sb">DON-2026-0031 · 20/11/2026</div><p>Recibida por Ana Demo</p><p>Foto de etiqueta y factura adjuntas</p><p>Genera el lote L-0012</p><div class="acts"><a class="btn-o btn-s" href="donaciones.html">Ver donación</a></div></div><div class="nd" style="--c:#FA7712"><div class="num">3</div><h3>Lote</h3><div class="sb">L-0012 · Leche UHT 1 L <span class="chip n tag">Z1-E2</span></div><p>Recibido 110 cajas</p><p>Entregadas 30 · disponibles 80</p><p>Vence el 29/11/2026</p><div class="acts"><a class="btn-o btn-s" href="lote.html">Ver ficha del lote</a></div></div><div class="nd" style="--c:#222"><div class="num">4</div><h3>Entrega</h3><div class="sb">ENT-2026-0024 · 21/11/2026</div><p>Hogar de Niños Demo</p><p>45 personas atendidas</p><p>L-0012 (30 cajas) y L-0015 (100 un)</p><div class="acts"><a class="btn-o btn-s" href="entregas.html">Ver entrega</a></div></div></div>
+<div class="cols">
+  <div class="card" style="flex:1.5 1 560px"><h2>Evidencias de la entrega</h2><div class="k">Guardadas en MongoDB (GridFS) · solo productos y actas, sin beneficiarios</div>
+    <div class="cols" style="gap:16px;flex-wrap:nowrap">
+      <div class="card" style="flex:1;padding:0;overflow:hidden;box-shadow:none"><div class="th pdf" style="height:100px">Acta firmada</div><div class="li" style="padding:12px 14px"><div><b>entrega-0024-acta.pdf</b></div><a class="btn-o btn-s" href="archivos.html">Ver</a></div></div>
+      <div class="card" style="flex:1;padding:0;overflow:hidden;box-shadow:none"><div class="th" style="height:100px">Foto del producto</div><div class="li" style="padding:12px 14px"><div><b>entrega-0024-foto1.jpg</b></div><a class="btn-o btn-s" href="archivos.html">Ver</a></div></div>
+      <div class="card" style="flex:1;padding:0;overflow:hidden;box-shadow:none"><div class="th b" style="height:100px">Foto del producto</div><div class="li" style="padding:12px 14px"><div><b>entrega-0024-foto2.jpg</b></div><a class="btn-o btn-s" href="archivos.html">Ver</a></div></div>
+    </div></div>
+  <div class="card" style="flex:1 1 320px"><h2>Tiempo de la consulta</h2><div class="k">Se mide en las pruebas de rendimiento</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:40px;color:#C02126">[tiempo medido]</div>
+    <div class="k" style="margin:6px 0 0">Aquí se mostrará el tiempo real al reconstruir el recorrido completo, de la entrega al convenio.</div></div>
+</div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

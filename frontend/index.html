@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in"><a class="on" href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a></div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><div class="crumb">Jueves 22 de noviembre · Bodega Cochabamba</div><h1>Buen día, Ana</h1><p>Así está la bodega hoy: lo que entró, lo que vence pronto y lo que ya llegó a quienes lo necesitan.</p></div>
+  <div class="acts"><a class="btn" href="nuevadonacion.html">Registrar donación</a><a class="btn btn-o" href="nuevaentrega.html">Nueva entrega</a></div>
+</div>
+<div class="steps">
+  <a href="donaciones.html"><i>01</i><b>Recolectar</b><small>Donaciones recibidas</small></a>
+  <a href="inventario.html"><i>02</i><b>Seleccionar</b><small>Lotes y control de calidad</small></a>
+  <a href="entregas.html"><i>03</i><b>Distribuir</b><small>Entregas a organizaciones</small></a>
+  <a href="organizaciones.html"><i>04</i><b>Acompañar</b><small>Seguimiento a beneficiarios</small></a>
+  <a href="informes.html"><i>05</i><b>Informar</b><small>Informes y trazabilidad</small></a>
+</div></section>
+<main class="wrap">
+<div class="al o"><span class="ic i-alert"></span> Hay 1 lote que vence en 7 días: L-0012 Leche UHT. El sistema sugiere entregarlo primero (FEFO).</div>
+<div class="kpis"><div class="kpi  h"><div class="ico i-box"></div><div><span>Donaciones del mes</span><b>14</b><small>3 más que el mes pasado</small></div></div><div class="kpi o h"><div class="ico o i-clock"></div><div><span>Lotes por vencer</span><b>3</b><small>en los próximos 14 días</small></div></div><div class="kpi  h"><div class="ico i-truck"></div><div><span>Entregas del mes</span><b>9</b><small>confirmadas con acta</small></div></div><div class="kpi r h"><div class="ico r i-users"></div><div><span>Personas atendidas</span><b>162</b><small>en 3 organizaciones activas</small></div></div></div>
+<div class="cols">
+  <div class="card" style="flex:1.5 1 560px"><h2>Primero en vencer, primero en salir</h2><div class="k">Criterio FEFO · ordenado por fecha de vencimiento</div><div class="li"><div><b>L-0012 · Leche UHT 1 L</b><small>Z1-E2 · 80 cajas</small></div><div class="fm" style="min-width:230px"><div class="tr"><i class="r" style="width:12%"></i></div><span class="dd2">7 días</span></div></div><div class="li"><div><b>L-0015 · Yogur natural</b><small>Z3-E1 · 200 un</small></div><div class="fm" style="min-width:230px"><div class="tr"><i class="o" style="width:18%"></i></div><span class="dd2">10 días</span></div></div><div class="li"><div><b>L-0018 · Pan de molde</b><small>Z2-E1 · 150 un</small></div><div class="fm" style="min-width:230px"><div class="tr"><i class="o" style="width:22%"></i></div><span class="dd2">12 días</span></div></div><div class="li"><div><b>L-0017 · Fideos</b><small>Z1-E4 · 60 bolsas</small></div><div class="fm" style="min-width:230px"><div class="tr"><i class="g" style="width:55%"></i></div><span class="dd2">49 días</span></div></div><div class="li"><div><b>L-0009 · Arroz</b><small>Z1-E4 · 40 bolsas</small></div><div class="fm" style="min-width:230px"><div class="tr"><i class="g" style="width:95%"></i></div><span class="dd2">113 días</span></div></div><div class="acts" style="margin-top:16px"><a class="btn-o btn-s" href="inventario.html">Ver inventario completo</a></div></div>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:22px">
+    <div class="card"><h2>Stock por categoría</h2><div class="k">Ejemplo con datos ficticios</div>
+      <div class="cols" style="flex-wrap:nowrap;align-items:center;gap:22px"><div class="donut" style="background:conic-gradient(#C02126 0 38%,#FA7712 38% 60%,#379542 60% 80%,#222 80% 100%)"><div class="dnc">620<small>unidades</small></div></div>
+      <div class="lgd"><span style="--c:#C02126">Lácteos · 38%</span><span style="--c:#FA7712">Panificados · 22%</span><span style="--c:#379542">Frutas · 20%</span><span style="--c:#222">Secos · 20%</span></div></div></div>
+    <div class="card"><h2>Actividad reciente</h2><div class="k">Últimos movimientos del expediente</div><div class="feed"><div class="fi" style="--c:#379542"><b>Entrega ENT-2026-0024 confirmada</b><small>Hogar de Niños Demo · 21/11 · Luis Demo</small></div><div class="fi" style="--c:#C02126"><b>Donación DON-2026-0031 recibida</b><small>Supermercado Demo S.A. · 20/11 · Ana Demo</small></div><div class="fi" style="--c:#FA7712"><b>Lote L-0012 marcado por vencer</b><small>Leche UHT · vence el 29/11</small></div><div class="fi" style="--c:#379542"><b>Convenio CONV-001 v2 vigente</b><small>Supermercado Demo S.A. · 01/09</small></div></div></div>
+  </div>
+</div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

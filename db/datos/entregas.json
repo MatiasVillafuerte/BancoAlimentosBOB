@@ -1,0 +1,137 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000021"
+    },
+    "codigo": "ENT-2026-0023",
+    "organizacion": {
+      "organizacionId": {
+        "$oid": "6a1f00000000000000000010"
+      },
+      "nombre": "Comedor Popular Demo"
+    },
+    "fecha": {
+      "$date": "2026-11-14T12:00:00Z"
+    },
+    "items": [
+      {
+        "loteId": {
+          "$oid": "6a1f0000000000000000001a"
+        },
+        "cantidad": 20,
+        "unidad": "bolsas"
+      }
+    ],
+    "beneficiariosAtendidos": 85,
+    "entregadaPor": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "recibidoPor": "Persona Demo",
+    "lugar": "Comedor Popular Demo",
+    "estado": "entregada",
+    "archivos": []
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000022"
+    },
+    "codigo": "ENT-2026-0024",
+    "organizacion": {
+      "organizacionId": {
+        "$oid": "6a1f0000000000000000000e"
+      },
+      "nombre": "Hogar de Niños Demo"
+    },
+    "fecha": {
+      "$date": "2026-11-21T12:00:00Z"
+    },
+    "items": [
+      {
+        "loteId": {
+          "$oid": "6a1f0000000000000000001b"
+        },
+        "cantidad": 30,
+        "unidad": "cajas"
+      },
+      {
+        "loteId": {
+          "$oid": "6a1f0000000000000000001c"
+        },
+        "cantidad": 100,
+        "unidad": "un"
+      }
+    ],
+    "beneficiariosAtendidos": 45,
+    "entregadaPor": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "recibidoPor": "Persona Demo",
+    "lugar": "Hogar de Niños Demo",
+    "estado": "entregada",
+    "archivos": []
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000023"
+    },
+    "codigo": "ENT-2026-0025",
+    "organizacion": {
+      "organizacionId": {
+        "$oid": "6a1f0000000000000000000f"
+      },
+      "nombre": "Asilo Demo"
+    },
+    "fecha": {
+      "$date": "2026-11-23T12:00:00Z"
+    },
+    "items": [
+      {
+        "loteId": {
+          "$oid": "6a1f0000000000000000001c"
+        },
+        "cantidad": 60,
+        "unidad": "un"
+      }
+    ],
+    "beneficiariosAtendidos": 32,
+    "entregadaPor": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "recibidoPor": "",
+    "lugar": "Asilo Demo",
+    "estado": "en preparación",
+    "archivos": []
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000024"
+    },
+    "codigo": "ENT-2026-0026",
+    "organizacion": {
+      "organizacionId": {
+        "$oid": "6a1f00000000000000000010"
+      },
+      "nombre": "Comedor Popular Demo"
+    },
+    "fecha": {
+      "$date": "2026-11-24T12:00:00Z"
+    },
+    "items": [
+      {
+        "loteId": {
+          "$oid": "6a1f0000000000000000001e"
+        },
+        "cantidad": 80,
+        "unidad": "un"
+      }
+    ],
+    "beneficiariosAtendidos": 85,
+    "entregadaPor": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "recibidoPor": "",
+    "lugar": "Comedor Popular Demo",
+    "estado": "programada",
+    "archivos": []
+  }
+]

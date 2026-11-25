@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Movimientos de inventario · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in">
+    <a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a class="on" href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a>
+  </div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Movimientos de inventario</h1><p>Cada entrada o salida de un lote queda registrada. El historial no se borra ni se edita.</p></div>
+  <a class="btn" href="movimientos.html">Registrar merma o devolución</a>
+</div></section>
+<main class="wrap">
+  <div class="al g">Si algo se registró mal, se crea un movimiento compensatorio con su motivo y la referencia al movimiento original.</div>
+  <div class="card">
+    <div class="search">
+      <label for="l" style="display:none">Lote</label><input id="l" placeholder="Buscar por lote o producto" style="flex:2 1 240px">
+      <label for="t" style="display:none">Tipo</label><select id="t"><option>Todos los tipos</option></select>
+      <label for="p" style="display:none">Periodo</label><select id="p"><option>Noviembre 2026</option></select>
+    </div>
+    <div class="sc"><table>
+      <tr><th>Fecha</th><th>Tipo</th><th>Lote</th><th>Producto</th><th class="num">Cantidad</th><th>Responsable</th><th>Motivo / referencia</th></tr>
+      <tr><td>21/11/2026</td><td><span class="chip o">Entrega</span></td><td>L-0012</td><td>Leche UHT 1 L</td><td class="num">−30 cajas</td><td>Luis Demo</td><td>ENT-2026-0024</td></tr>
+      <tr><td>21/11/2026</td><td><span class="chip o">Entrega</span></td><td>L-0015</td><td>Yogur natural</td><td class="num">−100 un</td><td>Luis Demo</td><td>ENT-2026-0024</td></tr>
+      <tr><td>20/11/2026</td><td><span class="chip g">Recepción</span></td><td>L-0012</td><td>Leche UHT 1 L</td><td class="num">+110 cajas</td><td>Ana Demo</td><td>DON-2026-0031</td></tr>
+      <tr><td>20/11/2026</td><td><span class="chip g">Recepción</span></td><td>L-0015</td><td>Yogur natural</td><td class="num">+300 un</td><td>Ana Demo</td><td>DON-2026-0031</td></tr>
+      <tr><td>19/11/2026</td><td><span class="chip r">Merma</span></td><td>L-0003</td><td>Jugo en caja</td><td class="num">−12 un</td><td>Ana Demo</td><td>Envases dañados al transportar</td></tr>
+      <tr><td>19/11/2026</td><td><span class="chip n">Devolución (entrada)</span></td><td>L-0009</td><td>Arroz (25 kg)</td><td class="num">+2 bolsas</td><td>Luis Demo</td><td>Devuelto por la organización · corrige ENT-2026-0023</td></tr>
+      <tr><td>18/11/2026</td><td><span class="chip g">Recepción</span></td><td>L-0020</td><td>Manzanas</td><td class="num">+120 kg</td><td>Ana Demo</td><td>DON-2026-0030</td></tr>
+    </table></div>
+  </div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

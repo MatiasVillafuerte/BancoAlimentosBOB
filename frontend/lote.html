@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ficha de lote · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}.tl{position:relative;padding-left:34px}
+.tl::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:3px;background:#E8E2D8;border-radius:2px}
+.ev{position:relative;padding:0 0 22px}
+.ev::before{content:"";position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--c);border:3px solid #fff;box-shadow:0 0 0 2px var(--c)}
+.ev b{font-size:15px}.ev small{display:block;color:#5E5E5E;font-size:13px}
+.q{display:flex;gap:16px;flex-wrap:wrap}
+.q div{flex:1 1 120px;background:#FAF8F4;border:1px solid #E8E2D8;border-radius:14px;padding:12px 14px}
+.q span{font-size:12.5px;color:#5E5E5E}.q b{display:block;font-family:'DM Serif Display',serif;font-weight:400;font-size:30px}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in"><a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a class="on" href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a></div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><div class="crumb"><a href="inventario.html">Inventario</a> / Lote</div><h1>L-0012 · Leche UHT 1 L</h1><p>Ficha del lote: de dónde vino, dónde está y qué se hizo con él.</p></div>
+  <div class="acts"><span class="chip o" style="font-size:14px;padding:6px 16px">Vence en 7 días</span><a class="btn" href="nuevaentrega.html">Usar en una entrega</a></div>
+</div></section>
+<main class="wrap">
+<div class="cols">
+  <div class="card" style="flex:1.2 1 420px"><h2>Resumen</h2><div class="k">Cantidades calculadas desde los movimientos</div>
+    <div class="q"><div><span>Recibido</span><b>110</b></div><div><span>Entregado</span><b>30</b></div><div><span>Disponible</span><b style="color:#2B7A35">80</b></div></div>
+    <dl class="dl" style="margin-top:20px"><dt>Producto</dt><dd>Leche UHT 1 L · cajas</dd><dt>Donante</dt><dd>Supermercado Demo S.A.</dd><dt>Ubicación</dt><dd>Zona 1 · Estante 2</dd><dt>Vencimiento</dt><dd>29/11/2026</dd></dl>
+    <div class="fm" style="margin-top:14px"><div class="tr"><i class="r" style="width:12%"></i></div><span class="dd2">7 días</span></div>
+    <div class="acts" style="margin-top:18px"><a class="btn-o btn-s" href="trazabilidad.html">Ver recorrido</a><a class="btn-o btn-s" href="archivos.html">Evidencias</a></div></div>
+  <div class="card" style="flex:1 1 420px"><h2>Historial de movimientos</h2><div class="k">No se edita ni se borra: un error se corrige con un movimiento compensatorio</div><div class="tl"><div class="ev" style="--c:#379542"><b>Entrada +110 cajas</b><small>20/11/2026 · DON-2026-0031 · Ana Demo</small></div><div class="ev" style="--c:#222"><b>Ubicado en Z1-E2</b><small>20/11/2026 · Ana Demo</small></div><div class="ev" style="--c:#C02126"><b>Salida −30 cajas</b><small>21/11/2026 · ENT-2026-0024 · Luis Demo</small></div><div class="ev" style="--c:#FA7712"><b>Alerta FEFO</b><small>22/11/2026 · vence el 29/11, se sugiere entregar primero</small></div></div></div>
+</div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

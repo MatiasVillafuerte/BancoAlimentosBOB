@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Donaciones · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}.dg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.dn{display:flex;gap:16px;background:#fff;border:1px solid #E8E2D8;border-radius:18px;padding:20px;box-shadow:0 1px 2px rgba(34,34,34,.05),0 10px 28px rgba(34,34,34,.07)}
+.lo{flex:0 0 56px;height:56px;border-radius:16px;background:var(--c);color:#fff;font-family:'DM Serif Display',serif;font-size:26px;display:flex;align-items:center;justify-content:center}
+.dn h3{margin:0;font-size:17px}.dn p{margin:3px 0;font-size:14px;color:#4A4A4A}
+.dn .acts{margin-top:12px}
+@media (max-width:900px){.dg{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in"><a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a class="on" href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a></div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Donaciones</h1><p>Cada donación queda como un expediente con su donante, su recepción, su lote y sus evidencias.</p></div>
+  <a class="btn" href="nuevadonacion.html">Registrar donación</a>
+</div></section>
+<main class="wrap">
+<div class="search"><input placeholder="Buscar por código o donante"><select><option>Todos los donantes</option></select><select><option>Últimos 30 días</option></select></div>
+<div class="dg"><div class="dn"><div class="lo" style="--c:#C02126">S</div><div style="flex:1"><h3>DON-2026-0031 <span class="chip g tag">Con lote</span></h3><p><b>Supermercado Demo S.A.</b> · 20/11/2026</p><p>Leche UHT · 110 cajas</p><p>Recibida por Ana Demo · L-0012</p><div class="acts"><a class="btn-o btn-s" href="donaciones.html">Ver donación</a><a class="btn-o btn-s" href="archivos.html">Evidencias</a></div></div></div><div class="dn"><div class="lo" style="--c:#FA7712">P</div><div style="flex:1"><h3>DON-2026-0030 <span class="chip g tag">Con lote</span></h3><p><b>Panificadora Demo</b> · 18/11/2026</p><p>Pan de molde · 150 un</p><p>Recibida por Luis Demo · L-0018</p><div class="acts"><a class="btn-o btn-s" href="donaciones.html">Ver donación</a><a class="btn-o btn-s" href="archivos.html">Evidencias</a></div></div></div><div class="dn"><div class="lo" style="--c:#379542">M</div><div style="flex:1"><h3>DON-2026-0029 <span class="chip g tag">Con lote</span></h3><p><b>Mercado Campesino Demo</b> · 15/11/2026</p><p>Manzanas · 120 kg</p><p>Recibida por Carla Demo · L-0020</p><div class="acts"><a class="btn-o btn-s" href="donaciones.html">Ver donación</a><a class="btn-o btn-s" href="archivos.html">Evidencias</a></div></div></div><div class="dn"><div class="lo" style="--c:#222222">P</div><div style="flex:1"><h3>DON-2026-0028 <span class="chip g tag">Con lote</span></h3><p><b>Productor Demo (ocasional)</b> · 12/11/2026</p><p>Yogur natural · 200 un</p><p>Recibida por Ana Demo · L-0015</p><div class="acts"><a class="btn-o btn-s" href="donaciones.html">Ver donación</a><a class="btn-o btn-s" href="archivos.html">Evidencias</a></div></div></div></div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

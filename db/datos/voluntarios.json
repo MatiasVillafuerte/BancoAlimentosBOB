@@ -1,0 +1,52 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000001"
+    },
+    "nombre": "Ana Demo",
+    "email": "ana.demo@example.com",
+    "telefono": "70000010",
+    "rol": "coordinador",
+    "activo": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000002"
+    },
+    "nombre": "Luis Demo",
+    "email": "luis.demo@example.com",
+    "telefono": "70000011",
+    "rol": "voluntario",
+    "activo": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000003"
+    },
+    "nombre": "Carla Demo",
+    "email": "carla.demo@example.com",
+    "telefono": "70000012",
+    "rol": "voluntario",
+    "activo": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000004"
+    },
+    "nombre": "Admin Demo",
+    "email": "admin.demo@example.com",
+    "telefono": "70000013",
+    "rol": "administrador",
+    "activo": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000005"
+    },
+    "nombre": "Pedro Demo",
+    "email": "pedro.demo@example.com",
+    "telefono": "70000014",
+    "rol": "voluntario",
+    "activo": false
+  }
+]

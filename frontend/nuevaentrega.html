@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registrar entrega · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in">
+    <a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a class="on" href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a>
+  </div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><div class="crumb"><a href="entregas.html">Entregas</a> / Nueva</div><h1>Registrar entrega</h1><p>Elige la organización y los lotes que salen de bodega.</p></div>
+  <span class="chip g" style="font-size:13px;padding:6px 14px">Código automático: ENT-2026-0025</span>
+</div></section>
+<main class="wrap">
+  <div class="card mb">
+    <h2>Destino</h2><div class="k">Quién recibe, cuándo y dónde</div>
+    <div class="fg">
+      <div><label for="o">Organización beneficiaria</label><select id="o"><option>Asilo Demo</option></select></div>
+      <div><label for="fe">Fecha de entrega</label><input id="fe" value="22/11/2026"></div>
+      <div><label for="lu">Lugar de entrega</label><input id="lu" value="Bodega Cochabamba"></div>
+      <div><label for="rb">Recibido por (nombre de quien firmó)</label><input id="rb" value="Persona Demo"></div>
+      <div><label for="ba">Personas atendidas</label><input id="ba" value="32"></div>
+      <div><label for="pt">Peso total (kg, opcional)</label><input id="pt" value="95"></div>
+    </div>
+  </div>
+  <div class="card mb">
+    <h2>Lotes que salen</h2><div class="k">Se sugieren primero los lotes que vencen antes (FEFO)</div>
+    <div class="sc"><table>
+      <tr><th>Lote</th><th>Producto</th><th class="num">Disponible</th><th>Cantidad a entregar</th><th>Unidad</th></tr>
+      <tr><td><select aria-label="Lote"><option>L-0018</option></select></td><td>Pan de molde</td><td class="num">150 un</td><td><input value="50" aria-label="Cantidad"></td><td>un</td></tr>
+      <tr><td><select aria-label="Lote"><option>L-0017</option></select></td><td>Fideos</td><td class="num">60 bolsas</td><td><input value="20" aria-label="Cantidad"></td><td>bolsas</td></tr>
+      <tr><td><select aria-label="Lote"><option>L-0009</option></select></td><td>Arroz (25 kg)</td><td class="num">40 bolsas</td><td><input value="10" aria-label="Cantidad"></td><td>bolsas</td></tr>
+    </table></div>
+    <div class="al o" style="margin:14px 0 0">Si la cantidad supera lo disponible, el sistema no deja guardar la entrega.</div>
+    <div style="margin-top:14px"><a class="btn-o btn-s" href="nuevaentrega.html">Agregar otro lote</a></div>
+  </div>
+  <div class="card mb">
+    <h2>Evidencias</h2><div class="k">Acta de entrega firmada y fotos de los productos</div>
+    <div class="drop">Arrastra aquí el acta en PDF y las fotos, o haz clic para elegirlos.<br>No fotografíes a los beneficiarios.</div>
+  </div>
+  <div class="acts"><a class="btn" href="entregas.html">Confirmar entrega</a><a class="btn-o" href="entregas.html" style="padding:11px 24px">Cancelar</a></div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

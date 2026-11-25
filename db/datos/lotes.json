@@ -1,0 +1,156 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000019"
+    },
+    "codigo": "L-0003",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000012"
+    },
+    "producto": "Jugo de fruta",
+    "categoria": "no perecedero",
+    "cantidad": 36,
+    "unidad": "un",
+    "cantidadDisponible": 24,
+    "estado": "vencido",
+    "ubicacion": "Z2-E3",
+    "conservacion": "ambiente",
+    "fechaVencimiento": {
+      "$date": "2026-10-10T12:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000001a"
+    },
+    "codigo": "L-0009",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000013"
+    },
+    "producto": "Arroz (25 kg)",
+    "categoria": "no perecedero",
+    "cantidad": 58,
+    "unidad": "bolsas",
+    "cantidadDisponible": 40,
+    "estado": "disponible",
+    "ubicacion": "Z1-E4",
+    "conservacion": "ambiente",
+    "fechaVencimiento": {
+      "$date": "2027-03-15T12:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000001b"
+    },
+    "codigo": "L-0012",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000018"
+    },
+    "producto": "Leche UHT 1 L",
+    "categoria": "lácteo",
+    "cantidad": 110,
+    "unidad": "cajas",
+    "cantidadDisponible": 80,
+    "estado": "disponible",
+    "ubicacion": "Z1-E2",
+    "conservacion": "ambiente",
+    "fechaVencimiento": {
+      "$date": "2026-11-29T12:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000001c"
+    },
+    "codigo": "L-0015",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000015"
+    },
+    "producto": "Yogur natural",
+    "categoria": "lácteo",
+    "cantidad": 300,
+    "unidad": "un",
+    "cantidadDisponible": 200,
+    "estado": "disponible",
+    "ubicacion": "Z3-E1",
+    "conservacion": "refrigerado",
+    "fechaVencimiento": {
+      "$date": "2026-12-02T12:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000001d"
+    },
+    "codigo": "L-0017",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000013"
+    },
+    "producto": "Fideos",
+    "categoria": "no perecedero",
+    "cantidad": 60,
+    "unidad": "bolsas",
+    "cantidadDisponible": 60,
+    "estado": "disponible",
+    "ubicacion": "Z1-E4",
+    "conservacion": "ambiente",
+    "fechaVencimiento": {
+      "$date": "2027-01-10T12:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000001e"
+    },
+    "codigo": "L-0018",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000017"
+    },
+    "producto": "Pan de molde",
+    "categoria": "fresco",
+    "cantidad": 150,
+    "unidad": "un",
+    "cantidadDisponible": 150,
+    "estado": "disponible",
+    "ubicacion": "Z2-E1",
+    "conservacion": "ambiente",
+    "fechaVencimiento": {
+      "$date": "2026-12-04T12:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000001f"
+    },
+    "codigo": "L-0020",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000016"
+    },
+    "producto": "Manzanas",
+    "categoria": "fresco",
+    "cantidad": 120,
+    "unidad": "kg",
+    "cantidadDisponible": 120,
+    "estado": "disponible",
+    "ubicacion": "Z3-E3",
+    "conservacion": "refrigerado"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000020"
+    },
+    "codigo": "L-0021",
+    "donacionId": {
+      "$oid": "6a1f00000000000000000014"
+    },
+    "producto": "Detergente",
+    "categoria": "limpieza",
+    "cantidad": 30,
+    "unidad": "un",
+    "cantidadDisponible": 30,
+    "estado": "disponible",
+    "ubicacion": "Z4-E1",
+    "conservacion": "ambiente"
+  }
+]

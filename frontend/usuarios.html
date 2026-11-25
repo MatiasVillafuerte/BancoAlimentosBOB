@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usuarios y roles · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in">
+    <a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a class="on" href="usuarios.html">Usuarios</a>
+  </div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><h1>Usuarios y roles</h1><p>Voluntarios que usan el sistema y lo que puede hacer cada rol.</p></div>
+  <a class="btn" href="usuarios.html">Nuevo usuario</a>
+</div></section>
+<main class="wrap">
+  <div class="cols">
+    <div class="card" style="flex:1.5 1 560px">
+      <h2>Voluntarios</h2><div class="k">Quién registró cada donación y cada entrega queda guardado en el expediente</div>
+      <div class="sc"><table>
+        <tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Rol</th><th>Estado</th></tr>
+        <tr><td><b>Ana Demo</b></td><td>ana.demo@example.com</td><td>70000010</td><td><span class="chip r">Coordinador</span></td><td><span class="chip g">Activo</span></td></tr>
+        <tr><td><b>Luis Demo</b></td><td>luis.demo@example.com</td><td>70000011</td><td><span class="chip n">Voluntario</span></td><td><span class="chip g">Activo</span></td></tr>
+        <tr><td><b>Carla Demo</b></td><td>carla.demo@example.com</td><td>70000012</td><td><span class="chip n">Voluntario</span></td><td><span class="chip g">Activo</span></td></tr>
+        <tr><td><b>Admin Demo</b></td><td>admin.demo@example.com</td><td>70000013</td><td><span class="chip o">Administrador</span></td><td><span class="chip g">Activo</span></td></tr>
+        <tr><td><b>Pedro Demo</b></td><td>pedro.demo@example.com</td><td>70000014</td><td><span class="chip n">Voluntario</span></td><td><span class="chip n">Inactivo</span></td></tr>
+      </table></div>
+    </div>
+    <div class="card" style="flex:1 1 380px">
+      <h2>Qué puede hacer cada rol</h2><div class="k">Propuesta de permisos para el prototipo</div>
+      <div class="li"><div><b>Voluntario</b><small>Registra donaciones y entregas, consulta inventario y archivos</small></div></div>
+      <div class="li"><div><b>Coordinador</b><small>Además gestiona donantes, convenios, organizaciones, mermas e informes</small></div></div>
+      <div class="li"><div><b>Administrador</b><small>Además gestiona usuarios y roles</small></div></div>
+      <div class="al g" style="margin:16px 0 0">Las contraseñas se guardan cifradas y la conexión con la base usa TLS.</div>
+    </div>
+  </div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>

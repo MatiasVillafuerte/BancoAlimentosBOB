@@ -1,0 +1,89 @@
+[
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000006"
+    },
+    "tipo": "empresa",
+    "nombre": "Supermercado Demo S.A.",
+    "contacto": {
+      "nombre": "Encargado de donaciones",
+      "funcion": "Donaciones",
+      "medio": "Correo y teléfono"
+    },
+    "direccion": "Cochabamba",
+    "fechaRegistro": {
+      "$date": "2026-03-12T12:00:00Z"
+    },
+    "activo": true,
+    "nit": "0000000000"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000007"
+    },
+    "tipo": "mercado",
+    "nombre": "Mercado Campesino Demo",
+    "contacto": {
+      "nombre": "Encargado del mercado",
+      "funcion": "Administración",
+      "medio": "Teléfono"
+    },
+    "direccion": "Cochabamba",
+    "fechaRegistro": {
+      "$date": "2026-03-20T12:00:00Z"
+    },
+    "activo": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000008"
+    },
+    "tipo": "empresa",
+    "nombre": "Panificadora Demo S.R.L.",
+    "contacto": {
+      "nombre": "Encargado de ventas",
+      "funcion": "Ventas",
+      "medio": "Correo"
+    },
+    "direccion": "Cochabamba",
+    "fechaRegistro": {
+      "$date": "2026-04-02T12:00:00Z"
+    },
+    "activo": true,
+    "nit": "0000000001"
+  },
+  {
+    "_id": {
+      "$oid": "6a1f00000000000000000009"
+    },
+    "tipo": "productor",
+    "nombre": "Productor Demo (frutas)",
+    "contacto": {
+      "nombre": "Productor Demo",
+      "funcion": "Productor",
+      "medio": "Teléfono"
+    },
+    "direccion": "Cochabamba",
+    "fechaRegistro": {
+      "$date": "2026-05-10T12:00:00Z"
+    },
+    "activo": true
+  },
+  {
+    "_id": {
+      "$oid": "6a1f0000000000000000000a"
+    },
+    "tipo": "persona",
+    "nombre": "Donante Persona Demo",
+    "contacto": {
+      "nombre": "Donante Persona Demo",
+      "funcion": "Persona",
+      "medio": "Teléfono"
+    },
+    "direccion": "Cochabamba",
+    "fechaRegistro": {
+      "$date": "2026-06-01T12:00:00Z"
+    },
+    "activo": false
+  }
+]

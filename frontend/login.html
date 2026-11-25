@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inicio de sesión · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>
+body{margin:0}
+.lg{display:grid;grid-template-columns:1.1fr 1fr;min-height:820px}
+.lf{position:relative;overflow:hidden;color:#fff;background:linear-gradient(140deg,#C02126 0%,#A21B20 55%,#7E1216 100%);padding:56px 56px 40px;display:flex;flex-direction:column;justify-content:space-between}
+.lf::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1.2px,transparent 0);background-size:22px 22px}
+.lf::after{content:"";position:absolute;right:-120px;bottom:-140px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(250,119,18,.8) 0,rgba(250,119,18,0) 66%)}
+.lf>*{position:relative;z-index:1}
+.lf .wm-t{color:#fff;font-size:34px}.lf .wm-s{color:#fff}
+.lf h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:54px;line-height:1.05;margin:0 0 14px}
+.lf p{font-size:17px;max-width:460px;color:rgba(255,255,255,.92);margin:0}
+.cr{display:grid;grid-template-columns:repeat(3,92px);gap:10px;margin:30px 0 10px}
+.cr div{height:64px;border-radius:10px;border:3px solid rgba(255,255,255,.9);background:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 8px,transparent 8px 16px);position:relative}
+.cr div::after{content:"";position:absolute;left:12px;right:12px;top:-20px;height:20px;border-radius:20px 20px 0 0;background:var(--c)}
+.rt{display:flex;flex-direction:column;justify-content:center;padding:56px 72px;background:#fff}
+.rt h2{font-family:'DM Serif Display',serif;font-weight:400;font-size:36px;margin:0 0 4px}
+.rt .k{color:#5E5E5E;margin-bottom:26px}
+.rt .btn{width:100%;text-align:center;margin-top:8px}
+.st5{display:flex;gap:8px;flex-wrap:wrap}
+.st5 span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:5px 12px}
+</style>
+</head>
+<body>
+<div class="lg">
+  <section class="lf">
+    <div style="display:flex;align-items:center;gap:12px"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s" style="border-color:#FA7712">de Bolivia</span></div>
+    <div>
+      <h1>Cada alimento<br>tiene su historia.</h1>
+      <p>Registra donaciones, controla lotes por vencimiento y demuestra a dónde llegó cada entrega.</p>
+      <div class="cr"><div style="--c:#FA7712"></div><div style="--c:#379542"></div><div style="--c:#FFD2A8"></div><div style="--c:#379542"></div><div style="--c:#FA7712"></div><div style="--c:#fff"></div></div>
+    </div>
+    <div class="st5"><span>Recolectar</span><span>Seleccionar</span><span>Distribuir</span><span>Acompañar</span><span>Informar</span></div>
+  </section>
+  <section class="rt">
+    <h2>Ingresar al sistema</h2>
+    <div class="k">Solo para voluntarios y coordinadores autorizados.</div>
+    <div style="margin-bottom:16px"><label for="u">Correo</label><input id="u" value="ana.demo@example.com"></div>
+    <div style="margin-bottom:8px"><label for="p">Contraseña</label><input id="p" type="password" value="demo-no-real"></div>
+    <a class="btn" href="index.html">Ingresar</a>
+    <div class="al g" style="margin:22px 0 0">Conexión cifrada (TLS) y contraseñas guardadas con hash.</div>
+    <div class="k" style="margin:18px 0 0;font-size:12.5px">Prototipo académico · Universidad Privada del Valle · datos ficticios</div>
+  </section>
+</div>
+</body>
+</html>

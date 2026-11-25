@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registrar donación · Banco de Alimentos</title>
+<link rel="stylesheet" href="bab.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0}</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="wm" href="index.html"><span class="wm-t">Banco de<br>Alimentos</span><span class="wm-s">de Bolivia</span></a>
+    <div class="hd-sub">Sistema de expedientes de donaciones · Bodega Cochabamba</div>
+    <div class="user"><span class="av">AD</span><span>Ana Demo<small>Coordinadora</small></span><a class="out" href="login.html">Salir</a></div>
+  </div>
+  <nav class="nav"><div class="nav-in">
+    <a href="index.html">Panel</a><a href="donantes.html">Donantes</a><a class="on" href="donaciones.html">Donaciones</a><a href="inventario.html">Inventario</a><a href="movimientos.html">Movimientos</a><a href="entregas.html">Entregas</a><a href="organizaciones.html">Organizaciones</a><a href="trazabilidad.html">Trazabilidad</a><a href="archivos.html">Archivos</a><a href="informes.html">Informes</a><a href="usuarios.html">Usuarios</a>
+  </div></nav>
+</header>
+<section class="band"><div class="in">
+  <div><div class="crumb"><a href="donaciones.html">Donaciones</a> / Nueva</div><h1>Registrar donación</h1><p>Anota lo que llegó a bodega, sus lotes y los archivos de respaldo.</p></div>
+  <span class="chip g" style="font-size:13px;padding:6px 14px">Código automático: DON-2026-0032</span>
+</div></section>
+<main class="wrap">
+  <div class="card mb">
+    <h2>Datos de la recepción</h2><div class="k">Los campos con la unidad o el peso son opcionales cuando no se midió</div>
+    <div class="fg">
+      <div><label for="d">Donante</label><select id="d"><option>Mercado Campesino Demo</option></select></div>
+      <div><label for="fr">Fecha de recepción</label><input id="fr" value="22/11/2026"></div>
+      <div><label for="cv">Convenio aplicable</label><select id="cv"><option>CONV-002 · versión 1</option></select></div>
+      <div><label for="pt">Peso total (kg, opcional)</label><input id="pt" value="280"></div>
+      <div class="w2"><label for="ob">Observaciones</label><input id="ob" value="Productos frescos, almacenar en cuarto frío"></div>
+    </div>
+  </div>
+  <div class="card mb">
+    <h2>Lotes recibidos</h2><div class="k">Cada lote es una unidad de inventario con su ubicación en bodega</div>
+    <div class="sc"><table>
+      <tr><th>Producto</th><th>Categoría</th><th>Cantidad</th><th>Unidad</th><th>Vencimiento</th><th>Conservación</th><th>Ubicación</th></tr>
+      <tr><td><input value="Papa" aria-label="Producto"></td><td><input value="Fresco" aria-label="Categoría"></td><td><input value="200" aria-label="Cantidad"></td><td><input value="kg" aria-label="Unidad"></td><td><input placeholder="Sin fecha" aria-label="Fecha de vencimiento"></td><td><input value="Ambiente" aria-label="Conservación"></td><td><input value="Z3-E4" aria-label="Ubicación"></td></tr>
+      <tr><td><input value="Zanahoria" aria-label="Producto"></td><td><input value="Fresco" aria-label="Categoría"></td><td><input value="80" aria-label="Cantidad"></td><td><input value="kg" aria-label="Unidad"></td><td><input placeholder="Sin fecha" aria-label="Fecha de vencimiento"></td><td><input value="Refrigerado" aria-label="Conservación"></td><td><input value="Z3-E2" aria-label="Ubicación"></td></tr>
+    </table></div>
+    <div style="margin-top:14px"><a class="btn-o btn-s" href="nuevadonacion.html">Agregar otro lote</a></div>
+  </div>
+  <div class="card mb">
+    <h2>Archivos de respaldo</h2><div class="k">Fotos de productos o etiquetas, acta de recepción y factura</div>
+    <div class="drop">Arrastra aquí los archivos o haz clic para elegirlos.<br>Las fotos deben mostrar solo productos o etiquetas, sin beneficiarios.</div>
+  </div>
+  <div class="acts"><a class="btn" href="donaciones.html">Guardar donación</a><a class="btn-o" href="donaciones.html" style="padding:11px 24px">Cancelar</a></div>
+</main>
+<footer class="ft">Prototipo académico · Universidad Privada del Valle · Base de datos III · Datos ficticios de ejemplo</footer>
+</body>
+</html>
