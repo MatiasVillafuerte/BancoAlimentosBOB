@@ -1,8 +1,8 @@
 # Contrato aprobado para la aplicación BAB
 
-Actualizado el 24 de noviembre de 2026. Este contrato reúne los cambios aceptados por Matias y orienta la siguiente etapa de desarrollo. La aplicación todavía no está implementada. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
+Actualizado el 25 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. Ya están implementados el inicio y cierre de sesión, consulta de sesión, cambio de contraseña, cuenta personal y contadores documentales. Las rutas operativas restantes siguen pendientes. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
 
-Se construirá una aplicación Next.js con React y TypeScript dentro de BancoAlimentos_Proyectos. El servidor accederá a MongoDB; las credenciales nunca llegarán al navegador. Se mantienen ocho colecciones de negocio y GridFS.
+La aplicación utiliza Next.js con React y TypeScript dentro de BancoAlimentos_Proyectos. El servidor accede a MongoDB; las credenciales de Atlas nunca llegan al navegador. Se mantienen ocho colecciones de negocio y GridFS. El acceso está documentado en [la guía de desarrollo](04-desarrollo-y-git.md).
 
 ## Estados y efectos sobre el inventario
 
@@ -132,6 +132,6 @@ Las rutas requieren sesión y permisos salvo el inicio de sesión.
 
 ## Validación pendiente en la implementación
 
-La migración prepara datos, índices y validadores; no implementa estas rutas, las sesiones, las alertas ni los permisos. Se probarán especialmente concurrencia de reservas, reintentos, subida fallida, cambio de versión durante revisión, rechazo y reenvío, cancelación, entrega parcial, cuentas desactivadas y proyección segura del autor.
+La migración prepara datos, índices y validadores. La primera etapa web incorpora sesiones y contadores de alertas; faltan las fichas y las acciones para resolverlas. Para las rutas operativas se probarán concurrencia de reservas, reintentos, subida fallida, cambio de versión durante revisión, rechazo y reenvío, cancelación y entrega parcial. La autenticación ya prueba cierre y vencimiento de sesiones, cuentas desactivadas, cambios de rol, limitación de intentos y exclusión de campos privados.
 
 Fuentes técnicas: [autenticación en Next.js](https://nextjs.org/docs/app/guides/authentication), [transacciones de MongoDB](https://www.mongodb.com/docs/drivers/node/current/crud/transactions/), [GridFS](https://www.mongodb.com/docs/manual/core/gridfs/) y [almacenamiento de contraseñas de OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).
