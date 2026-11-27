@@ -35,7 +35,8 @@ export async function ListaOperaciones({ tipo, searchParams }: { tipo: TipoConsu
   return <AppFrame usuario={usuario} pagina={tipo}>
     <div className="page-heading"><div><span className="eyebrow text-red">{usuario.rol === "administrador" ? "CONSULTA GENERAL" : "MIS REGISTROS"}</span>
       <h1>{titulos[tipo]}</h1><p>{descripciones[tipo]}</p></div>
-      <span className="live-label"><span className="status-dot" /> Datos de la base actual</span>
+      {tipo === "donaciones" ? <Link className="button" href="/donaciones/nueva">Registrar recepción <span aria-hidden="true">＋</span></Link> :
+        <span className="live-label"><span className="status-dot" /> Datos de la base actual</span>}
     </div>
     {error && <div className="operation-notice rose" role="alert">{error} <Link href={`/${tipo}`}>Restablecer filtros</Link></div>}
     <section className="panel-card operation-list" aria-label={titulos[tipo]}>

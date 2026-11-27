@@ -22,7 +22,7 @@ export function comprobarOrigen(request: Request) {
   return origenPermitido(request.headers.get("origin"), origenAplicacion());
 }
 
-export async function leerJson(request: Request) {
+export async function leerJson(request: Request, limiteBytes = 8192) {
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) throw new ErrorAcceso("datos");
   // Limitar también la lectura real; Content-Length puede faltar o ser falso.
   const reader = request.body?.getReader();
@@ -34,7 +34,7 @@ export async function leerJson(request: Request) {
       const { value, done } = await reader.read();
       if (done) break;
       total += value.byteLength;
-      if (total > 8192) { await reader.cancel(); throw new ErrorAcceso("datos"); }
+      if (total > limiteBytes) { await reader.cancel(); throw new ErrorAcceso("datos"); }
       trozos.push(value);
     }
     return JSON.parse(Buffer.concat(trozos).toString("utf8"));

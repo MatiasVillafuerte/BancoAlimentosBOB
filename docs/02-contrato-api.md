@@ -111,15 +111,18 @@ Las listas reciben `q` (hasta 80 caracteres), `pagina` (1 a 1000) y `estado`; la
 Devuelven 20 registros por página. Filtros inválidos devuelven 400; sin sesión, 401; una ficha
 inexistente o ajena a los permisos devuelve 404. Las respuestas usan `Cache-Control: no-store`.
 Las fichas devuelven campos públicos explícitos; nunca documentos completos de `voluntarios`.
-Los métodos de escritura de la siguiente tabla todavía son parte del alcance pendiente.
+La etapa 3 incorpora las altas de donantes, organizaciones, convenios y cuentas; edición de catálogos
+y cuentas; y recepción de donaciones con sus lotes y movimientos. Los permisos y cuerpos de estas
+solicitudes se detallan en [la guía de registros](06-registros-y-catalogos.md). Las otras escrituras
+de la tabla pertenecen a las etapas 4 y 5.
 
 | Ruta | Responsabilidad |
 | --- | --- |
 | POST /api/login, POST /api/logout | Autenticar mediante Argon2id y gestionar sesión. |
 | GET /api/panel | Indicadores y pendientes según rol. |
 | GET /api/alertas | Faltas documentales, revisión pendiente y observaciones visibles para la cuenta. |
-| GET/POST /api/donantes | Consultar y registrar donantes, incluido registro abreviado. |
-| POST /api/convenios | Crear una versión nueva y vincular su PDF. |
+| GET/POST /api/donantes, GET/PATCH /api/donantes/:id | Consultar, registrar y editar donantes, incluido registro abreviado. |
+| GET/POST /api/convenios, GET /api/convenios/:id | Consultar y crear una versión nueva; el PDF se vincula en etapa 5. |
 | GET/POST /api/donaciones | Consultar o registrar recepción real, lotes y movimientos una vez. |
 | GET /api/donaciones/:id | Expediente y proyección segura de sus responsables. |
 | GET /api/lotes, GET /api/lotes/:id | Inventario, reservas, zona, vencimiento e historial. |
@@ -133,14 +136,20 @@ Los métodos de escritura de la siguiente tabla todavía son parte del alcance p
 | POST /api/donaciones/:id/revision, POST /api/entregas/:id/revision | Solo administrador: aprobar o observar la versión que leyó. |
 | POST /api/donaciones/:id/reabrir, POST /api/entregas/:id/reabrir | Solo administrador: reabrir un expediente completado con motivo. |
 | GET/POST /api/movimientos | Historial y operaciones de merma, devolución o ajuste autorizadas. |
-| GET/POST /api/organizaciones | Instituciones receptoras. |
+| GET/POST /api/organizaciones, GET/PATCH /api/organizaciones/:id | Instituciones receptoras. |
 | GET /api/trazabilidad/:codigoEntrega | Todas las líneas hasta sus recepciones y convenios opcionales. |
 | GET/POST /api/archivos, GET /api/archivos/:id | Cargar, consultar y descargar con permisos. |
 | GET /api/informes/:tipo | Informes calculados; distinguir hechos físicos y aprobación administrativa. |
-| GET/POST /api/usuarios, PATCH /api/usuarios/:id | Administración de cuentas; jamás devolver hashes. |
+| GET/POST /api/usuarios, GET/PATCH /api/usuarios/:id | Administración de cuentas; jamás devolver hashes. |
 
 ## Validación pendiente en la implementación
 
-La migración prepara datos, índices y validadores. La web incorpora sesiones, contadores, listas y fichas de información; faltan las acciones para registrar o resolver operaciones. Las consultas verifican autoría, filtros, campos privados, referencias de archivos y conservación de datos históricos. Para las escrituras se probarán concurrencia de reservas, reintentos, subida fallida, cambio de versión durante revisión, rechazo y reenvío, cancelación y entrega parcial. La autenticación ya prueba cierre y vencimiento de sesiones, cuentas desactivadas, cambios de rol, limitación de intentos y exclusión de campos privados.
+La migración prepara datos, índices y validadores. La web incorpora sesiones, contadores, listas,
+fichas, catálogos, cuentas y recepción real. Las consultas verifican autoría, filtros, campos privados,
+referencias de archivos y conservación de datos históricos. La etapa 3 prueba recepción concurrente
+sin duplicados, reversión ante fallo, convenios y permisos con transacciones reales en una base temporal.
+Quedan para las etapas siguientes concurrencia de reservas, subida fallida, cambio de versión durante
+revisión, rechazo y reenvío, cancelación y entrega parcial. La autenticación prueba cierre y vencimiento
+de sesiones, cuentas desactivadas, cambios de rol, limitación de intentos y exclusión de campos privados.
 
 Fuentes técnicas: [autenticación en Next.js](https://nextjs.org/docs/app/guides/authentication), [transacciones de MongoDB](https://www.mongodb.com/docs/drivers/node/current/crud/transactions/), [GridFS](https://www.mongodb.com/docs/manual/core/gridfs/) y [almacenamiento de contraseñas de OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).

@@ -1,6 +1,6 @@
 # Desarrollo acceso y Git
 
-Actualizado el 26 de noviembre de 2026.
+Actualizado el 27 de noviembre de 2026.
 
 ## Lo que cambió
 
@@ -9,8 +9,9 @@ la interfaz React como el backend; no hay que iniciar otro servidor en `backend`
 Las maquetas de `frontend` se conservan para orientar las pantallas siguientes.
 
 El avance implementa login, logout, consulta de sesión, cambio de contraseña, cuenta personal,
-contadores documentales, listas y fichas reales. Las acciones para registrar o modificar operaciones
-siguen pendientes. Consulta [el plan de entrega](05-plan-entrega.md) para ver las etapas completas.
+contadores documentales, listas y fichas reales. La etapa 3 añade catálogos, versiones de convenios,
+recepción de donaciones y administración de cuentas. Consulta [la guía de registro](06-registros-y-catalogos.md)
+y [el plan de entrega](05-plan-entrega.md) para ver las etapas completas.
 
 ## Abrir el proyecto actual
 
@@ -77,7 +78,9 @@ El comando verifica la cuenta existente y amplía el validador de `voluntarios` 
 V2. Respalda el validador anterior en `.runtime/validador-voluntarios-anterior.ejson`.
 Solo crea el hash cuando la cuenta no lo tiene. Repetirlo no restablece la contraseña ni destruye sesiones.
 Necesita lectura, escritura y `collMod` en `bab_donaciones`; el uso cotidiano no necesita `collMod`.
-Las otras cuatro cuentas seguirán sin acceso hasta establecer sus contraseñas individualmente.
+Las otras cuatro cuentas siguen sin acceso hasta establecer sus contraseñas individualmente desde
+**Equipo → Editar → Contraseña inicial**. Activa también la cuenta si está inactiva. Una contraseña
+ya establecida se cambia desde **Mi cuenta**; el administrador no la sobrescribe con este formulario.
 
 No ejecutes `db/seed.js` ni vuelvas a aplicar la migración V2 para establecer contraseñas.
 
@@ -115,6 +118,11 @@ de tráfico del alojamiento. Subir código a GitHub no publica por sí solo la p
 | `GET /api/donaciones`, `GET /api/entregas` | Listas paginadas con búsqueda y estado. |
 | `GET /api/alertas` | Pendientes documentales, de revisión u observados. |
 | `GET /api/donaciones/:id`, `GET /api/entregas/:id` | Información de la operación, sus productos y responsables públicos. |
+| `GET/POST /api/donantes`, `GET/PATCH /api/donantes/:id` | Consultar, crear y editar donantes según rol. |
+| `GET/POST /api/organizaciones`, `GET/PATCH /api/organizaciones/:id` | Catálogo de organizaciones receptoras. |
+| `GET/POST /api/convenios`, `GET /api/convenios/:id` | Consultar y crear versiones de condiciones y vigencia; PDF en etapa 5. |
+| `POST /api/donaciones` | Recepción, lotes y movimientos atómicos, con autor de sesión e idempotencia. |
+| `GET/POST /api/usuarios`, `GET/PATCH /api/usuarios/:id` | Administración de cuentas y acceso inicial sin exponer hashes. |
 
 `por_documentar` no significa que los productos sigan físicamente en bodega. El panel cuenta expedientes;
 no modifica stock ni reservas. Los roles no administrativos ven registros con `registradaPor` igual a su cuenta.
@@ -131,6 +139,11 @@ npm run build
 Las pruebas de autenticación usan un almacén de prueba en memoria; las de migración utilizan datos
 y conexiones simuladas. No alteran Atlas. Las próximas rutas de inventario necesitarán pruebas propias
 de transacciones, concurrencia, entregas parciales y reintentos antes de habilitar sus escrituras.
+
+La etapa 3 incorpora además `npm run test:integration`: crea una base temporal de Atlas, instala allí
+los validadores V2, prueba las escrituras y retira sus colecciones al terminar. Requiere `.env.local`
+y permisos sobre esa base temporal; no modifica `bab_donaciones`. Véase la guía de registros para
+el alcance y los resultados de estas pruebas.
 
 ## Hacer un commit en esta rama
 

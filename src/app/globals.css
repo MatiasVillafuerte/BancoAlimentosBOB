@@ -94,6 +94,60 @@ input:disabled {
   background: #f6f3ef;
 }
 
+.registro-fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.registro-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; }
+.registro-ancho { grid-column: 1 / -1; }
+.registro-campo { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; min-width: 0; }
+.registro-campo input, .registro-campo select, .registro-campo textarea { width: 100%; min-width: 0; padding: 12px; border: 1px solid #cfc5bb; border-radius: 6px; background: #fff; color: var(--ink); font: inherit; font-weight: 400; }
+.registro-campo textarea { resize: vertical; }
+.registro-campo small, .registro-autor small, .registro-ayuda, .selector-paginas small { color: var(--muted); font-size: 12px; font-weight: 400; line-height: 1.6; }
+.registro-campo input:disabled, .registro-campo select:disabled, .registro-campo textarea:disabled { color: #655d56; background: #f7f5f2; opacity: 1; }
+.registro-check { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; margin: 12px 0; }
+.registro-check input { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 3px; accent-color: var(--red); }
+.registro-editor { margin-bottom: 24px; }
+.registro-encabezado, .registro-acciones, .catalogo-herramientas { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.registro-encabezado { margin-bottom: 28px; }
+.registro-encabezado h2 { margin: 8px 0 0; overflow-wrap: anywhere; }
+.registro-acciones { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+.registro-acciones > span { font-size: 12px; color: var(--muted); }
+.registro-ayuda { margin-top: 20px; }
+.registro-contexto { padding: 14px; background: #f7f5f2; border-radius: 8px; overflow-wrap: anywhere; }
+.registro-contexto p { font-size: 13px; margin-bottom: 0; }
+.registro-exito { padding: 16px; border-radius: 8px; background: #eaf3eb; color: #24583b; }
+.catalogo-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: 24px; flex-wrap: wrap; }
+.catalogo-tabs a { padding: 12px 16px; text-decoration: none; border-bottom: 3px solid transparent; color: var(--muted); font-size: 14px; }
+.catalogo-tabs a[aria-current] { color: var(--red); border-color: var(--red); font-weight: 700; }
+.catalogo-herramientas { margin: 0 0 24px; }
+.catalogo-herramientas p { color: var(--muted); font-size: 14px; }
+.catalogo-herramientas .button { flex-shrink: 0; }
+.catalogo-acciones { display: flex; gap: 12px; flex-wrap: wrap; }
+button.record-link { border: 0; background: transparent; padding: 4px 0; cursor: pointer; text-align: left; }
+.operations-table td { overflow-wrap: anywhere; }
+.selector-paginas { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.selector-paginas small { margin-right: auto; }
+.selector-paginas button { padding: 5px 10px; font-size: 12px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); }
+.recepcion-seccion { margin-bottom: 24px; }
+.registro-paso { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 26px; }
+.registro-paso > span { background: #f9e8e5; border-radius: 50%; color: var(--red); font-size: 15px; font-weight: 700; flex: 0 0 34px; height: 34px; display: grid; place-items: center; }
+.registro-paso h2 { margin: 2px 0 8px; }
+.registro-paso p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.registro-enlace { margin: 0; font-size: 13px; }
+.registro-enlace a { color: var(--red); }
+.registro-autor { display: flex; flex-direction: column; gap: 8px; padding: 12px; background: #f7f5f2; border-radius: 6px; }
+.registro-autor > span { font-size: 12px; color: var(--muted); }
+.lote-editor { border: 1px solid var(--line); border-radius: 8px; padding: 22px; margin: 0 0 24px; min-width: 0; }
+.lote-editor legend { padding: 0 8px; font-size: 15px; font-weight: 700; }
+.quitar-lote { margin-top: 18px; }
+.recepcion-acciones { margin-bottom: 32px; }
+@media (max-width: 700px) {
+  .registro-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .registro-encabezado, .registro-acciones, .catalogo-herramientas { flex-wrap: wrap; }
+  .catalogo-herramientas .button, .recepcion-acciones .button { width: 100%; }
+  .lote-editor { padding: 16px 12px; }
+  .catalogo-tabs { gap: 0; }
+  .catalogo-tabs a { padding: 12px 10px; font-size: 13px; }
+}
+
 .field {
   margin-bottom: 21px;
 }

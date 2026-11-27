@@ -1,6 +1,6 @@
 # Plan de entrega del proyecto BAB
 
-Actualizado el 26 de noviembre de 2026.
+Actualizado el 27 de noviembre de 2026.
 
 El proyecto se entrega por recorridos que se pueden ejecutar en la aplicación. Cada etapa reúne
 interfaz, backend, permisos, pruebas y documentación. La base migrada y las reglas aprobadas en
@@ -13,7 +13,7 @@ con botones que todavía no guardan o consultan datos reales.
 | --- | --- | --- | --- |
 | 1. Acceso y cuentas | Terminada | Iniciar sesión, consultar la cuenta, cambiar contraseña y salir. | Hash Argon2id, sesiones revocables, cuenta activa, limitación de intentos y pruebas desde el navegador. |
 | 2. Consulta de operaciones | Terminada | Abrir pendientes desde el panel; buscar donaciones y entregas; consultar lotes, convenios, responsables, revisión e historial. | Consultas reales a Atlas, filtros y paginación, acceso por autoría, exclusión de campos privados y conservación de los registros históricos. |
-| 3. Registro y catálogos | Pendiente | Administrar donantes y organizaciones; registrar una recepción con sus lotes; asociar una versión de convenio cuando corresponda; habilitar otras cuentas según rol. | Donante ocasional sin NIT ni contrato obligatorio; autor automático; recepción y movimientos atómicos; reintento sin duplicar; datos y versión del convenio correctos. |
+| 3. Registro y catálogos | Terminada | Administrar donantes y organizaciones; registrar una recepción con sus lotes; asociar una versión de convenio cuando corresponda; habilitar otras cuentas según rol. | Donante ocasional sin NIT ni contrato obligatorio; autor automático; recepción y movimientos atómicos; reintento sin duplicar; datos y versión del convenio correctos. |
 | 4. Inventario y distribución | Pendiente | Consultar las cuatro zonas; sugerir lotes por FEFO; programar, modificar, cancelar y confirmar entregas; registrar mermas y devoluciones. | Reservas concurrentes, saldo suficiente, lote apto, entrega parcial, liberación de remanentes y movimientos compensatorios con trazabilidad. |
 | 5. Evidencias y revisión | Pendiente | Subir, consultar y descargar fotografías y PDF, incluidos los convenios; reenviar correcciones; validar o solicitar cambios como administrador. | Archivo propio y tipo real admitido; fotografía mínima; revisión de la versión vigente; rechazo, reenvío y reapertura; cambios documentales sin repetir movimientos físicos. |
 | 6. Integración y entrega final | Pendiente | Recorrer una donación completa hasta su distribución e informe; instalar y presentar el prototipo con documentación coherente. | Pruebas integrales, permisos por rol, interfaz móvil, datos ficticios de demostración, manuales, instrucciones de instalación y revisión del modelo final. |
@@ -41,6 +41,22 @@ pertenecen a la etapa 5.
   operación y coincidencia de entidad e identificador; una referencia ajena no revela el nombre del archivo.
 - Ninguna consulta modifica las colecciones, aprueba expedientes o cambia existencias. No se requiere
   ejecutar una nueva migración en Compass o mongosh para utilizar esta etapa.
+
+## Avance de la etapa 3
+
+- Pantallas de catálogos, recepción y equipo; formularios conectados con validación en servidor.
+- Recepción con 1–30 lotes: cantidad, unidad, zona, conservación, vencimiento y peso opcional.
+- Donación, lotes y movimientos se confirman en una transacción. Los reintentos de la misma solicitud
+  no duplican registros; una clave reutilizada con otros datos devuelve conflicto.
+- Convenios con versiones conservadas, vigencia y selección por donante y fecha de recepción.
+- Administración de cuentas, contraseña inicial solo si no existe y revocación de sesiones al cambiar
+  rol o desactivar. No se sobrescribió la contraseña de la administradora del prototipo.
+- Edición de catálogos con control de versión y auditoría; desactivación sin borrar el historial.
+- Comprobación de escritorio y móvil. Pruebas de transacciones reales en una base temporal aislada,
+  retirada al terminar; los datos de demostración de `bab_donaciones` se conservaron.
+- No hace falta ejecutar otra migración. Los PDF, fotografías y aprobación se mantienen en etapa 5.
+
+Uso, permisos, API y campos técnicos: [guía de registros y catálogos](06-registros-y-catalogos.md).
 
 ## Forma de trabajo y Git
 

@@ -13,9 +13,14 @@ Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoD
 - Cuenta personal con nombre, correo, teléfono y rol.
 - Listas de donaciones, entregas y pendientes con búsqueda, estados y paginación.
 - Fichas de operaciones con lotes, cantidades, convenio, responsables, metadatos de archivos e historial.
+- Catálogos de donantes y organizaciones, con edición y disponibilidad para nuevas operaciones.
+- Versiones de convenios con condiciones, vigencia y vínculo opcional en la recepción.
+- Registro de recepción con hasta 30 lotes y sus movimientos de entrada, en una transacción idempotente.
+- Administración de cuentas: alta, contacto, rol, activación y contraseña inicial para cuentas sin acceso.
 
 El administrador ve los contadores generales. Las otras cuentas ven sus registros con autor confirmado.
-Los formularios de registro y modificación, inventario operativo, reservas, archivos y revisión administrativa siguen pendientes.
+El inventario operativo, las reservas y entregas, los archivos y la revisión administrativa siguen pendientes.
+La [guía de la etapa 3](docs/06-registros-y-catalogos.md) explica cómo registrar y qué permisos tiene cada rol.
 El contrato completo está en [docs/02-contrato-api.md](docs/02-contrato-api.md).
 Las etapas, criterios de cierre y contenido de la entrega final están en [el plan de entrega](docs/05-plan-entrega.md).
 
@@ -54,8 +59,10 @@ La guía de conexión, acceso y commits está en [docs/04-desarrollo-y-git.md](d
 | `src/app` | Páginas React y rutas de API de Next.js |
 | `src/lib/auth` | Contraseñas, sesiones, validación y acceso a usuarios |
 | `src/lib/operaciones` | Consultas autorizadas, filtros y datos públicos de operaciones |
+| `src/lib/registros` | Validación, catálogos, cuentas y transacciones de recepción |
 | `scripts/inicializar-admin.ts` | Activación idempotente de la cuenta inicial |
-| `tests` | Pruebas de autenticación, orígenes, filtros y protección de datos sin conectarse a Atlas |
+| `tests/*.test.ts` | Pruebas de autenticación, orígenes, consultas y validación sin Atlas |
+| `tests/integration` | Transacciones con validadores reales en una base temporal aislada |
 | `db/migraciones` | Migración V2 y sus pruebas |
 | `db/esquema-autenticacion.cjs` | Extensión opcional del validador de voluntarios |
 | `frontend` | Maquetas HTML originales como referencia |
@@ -70,6 +77,10 @@ npm run typecheck
 npm run build
 ```
 
+`npm run test:integration` usa la conexión de `.env.local` para crear una base temporal
+`bab_test_<identificador>`, con datos ficticios, y retira sus colecciones al terminar. Requiere
+permisos de creación, lectura y escritura en esa base; no escribe en `bab_donaciones`.
+
 El proyecto base se publicó primero en `main` (commit `4a611e6`).
 La primera implementación está en `feat/backend-auth`.
 Repositorio: [MatiasVillafuerte/BancoAlimentosBOB](https://github.com/MatiasVillafuerte/BancoAlimentosBOB).
@@ -77,7 +88,8 @@ Repositorio: [MatiasVillafuerte/BancoAlimentosBOB](https://github.com/MatiasVill
 ## Base migrada
 
 La migración V2 quedó verificada el 25 de noviembre de 2026 y conservó 49 documentos de negocio.
-Las contraseñas de otras cuentas y los PDF de tres convenios de ejemplo siguen pendientes.
+Los PDF de tres convenios de ejemplo siguen pendientes. Las cuentas sin contraseña se habilitan
+individualmente desde **Equipo → Editar**; esta etapa no cambia automáticamente sus credenciales.
 El script de autenticación amplía `voluntarios`; no vuelve a ejecutar la migración operativa.
 
 `db/seed.js` y los JSON son material de la versión previa. **No ejecutes el seed en la base migrada:
