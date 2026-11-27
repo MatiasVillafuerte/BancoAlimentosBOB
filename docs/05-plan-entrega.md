@@ -15,7 +15,7 @@ con botones que todavía no guardan o consultan datos reales.
 | 2. Consulta de operaciones | Terminada | Abrir pendientes desde el panel; buscar donaciones y entregas; consultar lotes, convenios, responsables, revisión e historial. | Consultas reales a Atlas, filtros y paginación, acceso por autoría, exclusión de campos privados y conservación de los registros históricos. |
 | 3. Registro y catálogos | Terminada | Administrar donantes y organizaciones; registrar una recepción con sus lotes; asociar una versión de convenio cuando corresponda; habilitar otras cuentas según rol. | Donante ocasional sin NIT ni contrato obligatorio; autor automático; recepción y movimientos atómicos; reintento sin duplicar; datos y versión del convenio correctos. |
 | 4. Inventario y distribución | Terminada | Consultar las cuatro zonas; sugerir lotes por FEFO; programar, modificar, cancelar y confirmar entregas; registrar mermas y devoluciones. | Reservas concurrentes, saldo suficiente, lote apto, entrega parcial, liberación de remanentes y movimientos compensatorios con trazabilidad. |
-| 5. Evidencias y revisión | Pendiente | Subir, consultar y descargar fotografías y PDF, incluidos los convenios; reenviar correcciones; validar o solicitar cambios como administrador. | Archivo propio y tipo real admitido; fotografía mínima; revisión de la versión vigente; rechazo, reenvío y reapertura; cambios documentales sin repetir movimientos físicos. |
+| 5. Evidencias y revisión | Terminada | Subir, consultar y descargar fotografías y PDF, incluidos los convenios; reenviar correcciones; validar o solicitar cambios como administrador. | Archivo propio y tipo real admitido; fotografía mínima; revisión de la versión vigente; rechazo, reenvío y reapertura; cambios documentales sin repetir movimientos físicos. |
 | 6. Integración y entrega final | Pendiente | Recorrer una donación completa hasta su distribución e informe; instalar y presentar el prototipo con documentación coherente. | Pruebas integrales, permisos por rol, interfaz móvil, datos ficticios de demostración, manuales, instrucciones de instalación y revisión del modelo final. |
 
 La administración completa de usuarios de la etapa 3 amplía la cuenta inicial de la etapa 1.
@@ -78,7 +78,27 @@ Uso, permisos, API y campos técnicos: [guía de registros y catálogos](06-regi
 - Sin nueva migración ni modificación de contraseñas. Las bases temporales de pruebas se retiraron.
 
 Uso, ejemplos, límites y campos añadidos: [guía de inventario y entregas](07-inventario-y-entregas.md).
-La siguiente etapa es **5. Evidencias y revisión administrativa**.
+## Avance de la etapa 5
+
+- Carga de JPEG, PNG, WebP y PDF originales en GridFS, con contenido validado, permisos y descarga
+  privada. Varias evidencias por operación y foto de lote opcional en recepciones.
+- Página del convenio con sus condiciones y un PDF original por versión, sin reemplazar contratos anteriores.
+- Envío explícito a revisión; aprobación u observación solo administrativa; corrección y reenvío;
+  reapertura con motivo y conservación de la revisión anterior en el historial.
+- Retiro de evidencias con motivo y archivo conservado. Limpieza explícita de temporales propios
+  sin referencias actuales ni históricas; revisión de candidatos sin escrituras por defecto.
+- 67 pruebas locales y 39 escenarios de integración aprobados: 14 de documentos, 15 de inventario
+  y 10 de registros. Compilación, TypeScript y ESLint correctos.
+- 46 comprobaciones HTTP de sesión y origen. Lectura de 36 fichas documentales según permisos,
+  con huella de datos antes/después sin cambios y sin archivos ficticios en la base del proyecto.
+- Revisión en navegador de la ficha de donación, formulario de evidencias, bloqueo de envío sin foto,
+  corrección descriptiva y página del convenio. El flujo de escritura y los conflictos se verificaron
+  con datos aislados mediante integración; la revisión móvil integral continúa en la etapa 6.
+- Sin nueva migración ni cambio de contraseñas. Las bases de prueba se retiraron.
+
+Uso, API, campos y límites: [guía de evidencias y revisión](08-evidencias-y-revision.md).
+La siguiente etapa es **6. Integración y entrega final**: trazabilidad, informes, recorrido completo,
+manuales y actualización consolidada del Word de diseño.
 
 ## Forma de trabajo y Git
 

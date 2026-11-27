@@ -1,7 +1,7 @@
 # Banco de Alimentos de Bolivia
 
 Proyecto final de Base de Datos III (Universidad Privada del Valle, Cochabamba).
-Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoDB Atlas y diseño de archivos en GridFS.
+Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoDB Atlas y archivos en GridFS.
 
 ## Funciones implementadas
 
@@ -12,7 +12,7 @@ Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoD
 - Resumen conectado a Atlas: donaciones, entregas y pendientes documentales.
 - Cuenta personal con nombre, correo, teléfono y rol.
 - Listas de donaciones, entregas y pendientes con búsqueda, estados y paginación.
-- Fichas de operaciones con lotes, cantidades, convenio, responsables, metadatos de archivos e historial.
+- Fichas de operaciones con lotes, cantidades, convenio, responsables, archivos e historial.
 - Catálogos de donantes y organizaciones, con edición y disponibilidad para nuevas operaciones.
 - Versiones de convenios con condiciones, vigencia y vínculo opcional en la recepción.
 - Registro de recepción con hasta 30 lotes y sus movimientos de entrada, en una transacción idempotente.
@@ -20,12 +20,16 @@ Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoD
 - Inventario por cuatro zonas, vencimientos y sugerencias FEFO para una fecha de entrega.
 - Programación, modificación y cancelación con reservas; confirmación de cantidades reales y entregas parciales.
 - Mermas, devoluciones y correcciones con origen, motivo, responsable e historial de saldos.
+- Fotografías y PDF originales en GridFS, consulta y descarga con permisos; varias evidencias por operación.
+- PDF inmutable por versión de convenio, carga validada y retiro de evidencias con historial.
+- Presentación, aprobación u observación administrativa, corrección y reapertura con motivo.
 
 El administrador ve todas las operaciones. Coordinación gestiona las entregas del equipo; voluntariado
 ve las propias, asignadas o que realizó. Las recepciones siguen limitadas al autor salvo administración.
-Las fotografías, PDF y revisión administrativa se incorporan en la etapa 5.
+La revisión exige al menos una fotografía propia y una decisión administrativa explícita.
 La [guía de la etapa 3](docs/06-registros-y-catalogos.md) explica cómo registrar y qué permisos tiene cada rol.
 La [guía de inventario y entregas](docs/07-inventario-y-entregas.md) explica reservas, salidas y movimientos.
+La [guía de evidencias y revisión](docs/08-evidencias-y-revision.md) explica archivos, correcciones y aprobación.
 El contrato completo está en [docs/02-contrato-api.md](docs/02-contrato-api.md).
 Las etapas, criterios de cierre y contenido de la entrega final están en [el plan de entrega](docs/05-plan-entrega.md).
 
@@ -66,8 +70,10 @@ La guía de conexión, acceso y commits está en [docs/04-desarrollo-y-git.md](d
 | `src/lib/operaciones` | Consultas autorizadas, filtros y datos públicos de operaciones |
 | `src/lib/registros` | Validación, catálogos, cuentas y transacciones de recepción |
 | `src/lib/inventario` | FEFO, saldos, reservas, entregas y movimientos de inventario |
+| `src/lib/documentos` | GridFS, validación de contenido, permisos y revisión documental |
 | `src/lib/transacciones.ts` | Transacción y autorización de escritura compartidas |
 | `scripts/inicializar-admin.ts` | Activación idempotente de la cuenta inicial |
+| `scripts/limpiar-archivos.ts` | Inspección y limpieza explícita de temporales propios sin referencias |
 | `tests/*.test.ts` | Pruebas de autenticación, orígenes, consultas y validación sin Atlas |
 | `tests/integration` | Transacciones con validadores reales en una base temporal aislada |
 | `db/migraciones` | Migración V2 y sus pruebas |

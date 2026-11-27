@@ -8,7 +8,7 @@ import { ErrorRegistro, diaBolivia, type Catalogo, type FichaCatalogo } from "./
 const proyecciones: Record<Catalogo, Document> = {
   donantes: { nombre: 1, tipo: 1, nit: 1, direccion: 1, contacto: 1, activo: 1, versionDatos: 1 },
   organizaciones: { nombre: 1, tipo: 1, direccion: 1, zona: 1, responsable: 1, poblacion: 1, activa: 1, versionDatos: 1 },
-  convenios: { codigo: 1, nombre: 1, donanteId: 1, version: 1, desde: 1, hasta: 1, condiciones: 1, periodicidad: 1, pdfId: 1 },
+  convenios: { codigo: 1, nombre: 1, donanteId: 1, version: 1, desde: 1, hasta: 1, condiciones: 1, periodicidad: 1, pdfId: 1, versionDatos: 1 },
   usuarios: { nombre: 1, email: 1, telefono: 1, rol: 1, activo: 1, versionDatos: 1,
     tieneAcceso: { $eq: [{ $type: "$passwordHash" }, "string"] } }
 };

@@ -1,6 +1,6 @@
 # Contrato aprobado para la aplicación BAB
 
-Actualizado el 27 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. La aplicación incluye acceso, consultas, catálogos, cuentas, recepción de donaciones, inventario, FEFO, reservas, entregas y movimientos. Las fotografías, PDF y revisión administrativa corresponden a la etapa 5. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
+Actualizado el 27 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. La aplicación incluye acceso, consultas, catálogos, cuentas, recepción de donaciones, inventario, FEFO, reservas, entregas, movimientos, fotografías, PDF y revisión administrativa. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
 
 La aplicación utiliza Next.js con React y TypeScript dentro de BancoAlimentos_Proyectos. El servidor accede a MongoDB; las credenciales de Atlas nunca llegan al navegador. Se mantienen ocho colecciones de negocio y GridFS. El acceso está documentado en [la guía de desarrollo](04-desarrollo-y-git.md).
 
@@ -19,7 +19,7 @@ Las sugerencias FEFO se calculan a partir de lotes aptos y cantidades libres. No
 | Donación o entrega completada | El administrador validó la información y las evidencias de esa versión. | Ninguno adicional. |
 | Entrega cancelada | Se cancela antes de realizarse y se conserva el expediente. | Libera reservas, no resta existencias. |
 
-Una operación con evidencia desde el comienzo puede pasar directamente a recibida o entregada al registrarse físicamente. Subir archivos antes de que ocurra una entrega no confirma una salida.
+El registro físico queda por_documentar. Incluso con evidencia previamente cargada, el responsable comprueba la documentación y pulsa Enviar a revisión para pasar a recibida o entregada. Subir archivos antes de que ocurra una entrega no confirma una salida.
 
 El circuito de corrección es observada → corregir y reenviar → recibida/entregada → nueva revisión → completada. No se aprueba automáticamente una corrección. Las operaciones completadas requieren reapertura administrativa con motivo para cambiar sus datos o evidencias; la aprobación previa se conserva en el historial.
 
@@ -84,9 +84,9 @@ Cada operación tiene varios archivos propios. Se exige al menos una foto de la 
 
 El servidor comprueba que la foto está cargada, que realmente es una imagen admitida, que pertenece a esa operación y que el usuario puede acceder a ella. La existencia de un identificador en archivos no basta. Una foto de recepción no completa la evidencia de una entrega.
 
-GridFS conserva metadata con entidad (“donaciones”, “entregas”, “convenios” u “organizaciones”), entidadId, tipo, subidoPor y descripción opcional. La relación es una operación a varios archivos. Un loteId opcional permite indicar qué lote muestra una foto de recepción. El tipo MIME se guarda en metadata.
+GridFS conserva metadata con entidad (“donaciones”, “entregas” o “convenios”), entidadId, tipo, subidoPor y descripción opcional. Las referencias antiguas de organizaciones se preservan, sin crear un flujo nuevo para esa entidad. La relación es una operación a varios archivos. Un loteId opcional permite indicar qué lote muestra una foto de recepción. El tipo MIME se verifica en servidor y se guarda en metadata.
 
-Los archivos se cargan fuera de la transacción de stock. Después se vinculan sus identificadores. Los fallos de carga o de aprobación no repiten movimientos. La limpieza elimina mediante GridFS únicamente archivos temporales sin referencias comprobadas.
+Los archivos se cargan fuera de la transacción de stock. Después una transacción vincula expediente y archivo completo. Los fallos de carga o de aprobación no repiten movimientos. La limpieza retira solo temporales propios sin referencias comprobadas; el retiro de una evidencia conserva sus bytes e historial. Se admiten JPEG, PNG, WebP y PDF de hasta 10 MiB, con 20 evidencias activas por operación. Las reglas de contenido, versiones, revisión y recuperación se detallan en la guía de la etapa 5.
 
 Un aporte ocasional conserva donante, recepción y lotes sin exigir convenioId, NIT ni PDF contractual. El contacto puede omitirse cuando no se dispone de él. Ser persona o empresa no determina por sí solo si una recepción tiene convenio.
 
@@ -115,8 +115,9 @@ La etapa 3 incorpora las altas de donantes, organizaciones, convenios y cuentas;
 y cuentas; y recepción de donaciones con sus lotes y movimientos. Los permisos y cuerpos de estas
 solicitudes se detallan en [la guía de registros](06-registros-y-catalogos.md). La etapa 4 incorpora
 inventario, FEFO, responsables, programación, confirmación, cancelación y movimientos, detallados en
-[la guía de inventario y entregas](07-inventario-y-entregas.md). Archivos y revisión pertenecen a etapa 5;
-trazabilidad consolidada e informes finales, a etapa 6.
+[la guía de inventario y entregas](07-inventario-y-entregas.md). Los archivos y revisión de la etapa 5
+están descritos en [su guía](08-evidencias-y-revision.md); trazabilidad consolidada e informes finales
+quedan previstos para la etapa 6.
 
 | Ruta | Responsabilidad |
 | --- | --- |
@@ -124,7 +125,7 @@ trazabilidad consolidada e informes finales, a etapa 6.
 | GET /api/panel | Indicadores y pendientes según rol. |
 | GET /api/alertas | Faltas documentales, revisión pendiente y observaciones visibles para la cuenta. |
 | GET/POST /api/donantes, GET/PATCH /api/donantes/:id | Consultar, registrar y editar donantes, incluido registro abreviado. |
-| GET/POST /api/convenios, GET /api/convenios/:id | Consultar y crear una versión nueva; el PDF se vincula en etapa 5. |
+| GET/POST /api/convenios, GET /api/convenios/:id | Consultar y crear una versión nueva; su PDF se incorpora mediante /api/archivos. |
 | GET/POST /api/donaciones | Consultar o registrar recepción real, lotes y movimientos una vez. |
 | GET /api/donaciones/:id | Expediente y proyección segura de sus responsables. |
 | GET /api/lotes, GET /api/lotes/:id | Inventario, reservas, zona, vencimiento e historial. |
@@ -132,17 +133,19 @@ trazabilidad consolidada e informes finales, a etapa 6.
 | GET /api/responsables | Cuentas activas para asignar una entrega; coordinación y administración. |
 | GET/POST /api/entregas | Consultar o programar una entrega con reservas. |
 | PATCH /api/entregas/:id | Cambiar una programación y recalcular reservas. |
-| POST /api/entregas/:id/confirmar | Registrar salida física una sola vez; estado documental según evidencia. |
+| POST /api/entregas/:id/confirmar | Registrar salida física una sola vez; queda por_documentar hasta el envío explícito a revisión. |
 | POST /api/entregas/:id/cancelar | Cancelar antes de la salida y liberar reservas. |
 | GET /api/entregas/:id | Expediente con autor, responsable, documentos e historial. |
 | POST /api/donaciones/:id/reenviar, POST /api/entregas/:id/reenviar | Comprobar documentación y presentar la versión corregida a revisión. |
 | POST /api/donaciones/:id/revision, POST /api/entregas/:id/revision | Solo administrador: aprobar o observar la versión que leyó. |
 | POST /api/donaciones/:id/reabrir, POST /api/entregas/:id/reabrir | Solo administrador: reabrir un expediente completado con motivo. |
+| PATCH /api/donaciones/:id/documentacion, PATCH /api/entregas/:id/documentacion | Corrección descriptiva con versión, motivo e historial. No cambia cantidades. |
 | GET/POST /api/movimientos | Historial y operaciones de merma, devolución o ajuste autorizadas. |
 | GET/POST /api/organizaciones, GET/PATCH /api/organizaciones/:id | Instituciones receptoras. |
-| GET /api/trazabilidad/:codigoEntrega | Todas las líneas hasta sus recepciones y convenios opcionales. |
+| GET /api/trazabilidad/:codigoEntrega (prevista, etapa 6) | Todas las líneas hasta sus recepciones y convenios opcionales. |
 | GET/POST /api/archivos, GET /api/archivos/:id | Cargar, consultar y descargar con permisos. |
-| GET /api/informes/:tipo | Informes calculados; distinguir hechos físicos y aprobación administrativa. |
+| POST /api/archivos/:id/retirar | Apartar una evidencia actual con motivo, sin borrar su historial. |
+| GET /api/informes/:tipo (prevista, etapa 6) | Informes calculados; distinguir hechos físicos y aprobación administrativa. |
 | GET/POST /api/usuarios, GET/PATCH /api/usuarios/:id | Administración de cuentas; jamás devolver hashes. |
 
 ## Validación y siguientes etapas
@@ -151,7 +154,8 @@ La migración prepara datos, índices y validadores. Las pruebas cubren autoría
 referencias de archivos, registros históricos, recepción concurrente, reversión ante fallo, convenios,
 reservas concurrentes, cancelación, entrega parcial y movimientos compensatorios. Las escrituras se
 prueban con transacciones y validadores reales en bases temporales; no en los datos del proyecto.
-Quedan para etapa 5 la subida fallida, cambio de versión durante revisión, rechazo, reenvío y reapertura.
+La etapa 5 añade pruebas de contenido real, cargas fallidas, cambios durante revisión, observación,
+reenvío, reapertura, PDF por convenio y limpieza de temporales con conservación de referencias.
 La autenticación prueba cierre y vencimiento de sesiones, cuentas desactivadas, cambios de rol,
 limitación de intentos y exclusión de campos privados.
 

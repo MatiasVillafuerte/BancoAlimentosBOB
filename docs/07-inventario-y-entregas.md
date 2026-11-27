@@ -165,5 +165,6 @@ La integración crea bases `bab_test_<id>` con validadores e índices V2, prueba
 y retira únicamente sus colecciones. Incluye sobreventa concurrente, reintentos, reversión ante fallo,
 entregas parciales, vencimiento, mermas que afectan reservas, devoluciones y ajustes con origen.
 
-La etapa 5 incorpora subida, consulta y descarga de fotos y PDF, y el circuito administrativo de
-revisión, observación, reenvío y reapertura. La etapa 6 consolida informes, manuales y Word de diseño.
+La [etapa 5](08-evidencias-y-revision.md) ya incorpora subida, consulta y descarga de fotos y PDF,
+y el circuito administrativo de revisión, observación, reenvío y reapertura.
+La etapa 6 consolida informes, manuales y Word de diseño.

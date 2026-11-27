@@ -1,10 +1,7 @@
 import { ETIQUETAS } from "@/lib/operaciones/modelo";
 import type { PersonaVista } from "@/lib/operaciones/modelo";
 
-export function fechaVisible(fecha: string | null, hora = false) {
-  if (!fecha) return "Sin registro";
-  return new Intl.DateTimeFormat("es-BO", { dateStyle: "medium", ...(hora ? { timeStyle: "short" as const } : {}), timeZone: "America/La_Paz" }).format(new Date(fecha));
-}
+export { fechaVisible } from "@/lib/formato";
 export function cantidadVisible(valor: number | null, unidad = "") {
   return valor === null ? "Sin registro" : new Intl.NumberFormat("es-BO", { maximumFractionDigits: 3 }).format(valor) + (unidad ? " " + unidad : "");
 }

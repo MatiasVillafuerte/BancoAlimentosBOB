@@ -6,6 +6,8 @@ import { ZONAS, type TipoOperacion } from "@/lib/operaciones/modelo";
 import { AppFrame } from "@/components/app-frame";
 import { puedeGestionar } from "@/lib/registros/modelo";
 import { AccionesEntrega } from "@/components/inventario/acciones-entrega";
+import { servicioDocumentos } from "@/lib/documentos/consultas";
+import { AccionesDocumentales, PanelArchivos } from "@/components/documentos/expediente";
 import { Dato, DatosPersona, EstadoOperacion, cantidadVisible, fechaVisible } from "./presentacion";
 
 const mensajes: Record<string, string> = {
@@ -17,6 +19,9 @@ const mensajes: Record<string, string> = {
   completada: "Administración validó la información y las evidencias de esta operación.",
   cancelada: "La entrega se canceló antes de realizarse. Sus reservas quedaron liberadas."
 };
+const acciones: Record<string, string> = { archivo_incorporado: "Archivo incorporado", archivo_retirado: "Evidencia retirada",
+  documentacion_presentada: "Documentación enviada a revisión", revision_aprobada: "Aprobación administrativa", revision_observada: "Corrección solicitada",
+  expediente_reabierto: "Expediente reabierto", documentacion_corregida: "Información corregida" };
 function Card({ titulo, children, wide = false }: { titulo: string; children: React.ReactNode; wide?: boolean }) {
   return <section className={`panel-card record-card${wide ? " record-wide" : ""}`}><h2>{titulo}</h2>{children}</section>;
 }
@@ -24,6 +29,10 @@ export async function FichaDeOperacion({ tipo, id }: { tipo: TipoOperacion; id: 
   const usuario = await exigirUsuario();
   const f = await obtenerFicha(usuario, tipo, id);
   if (!f) notFound();
+  const documentos = await (await servicioDocumentos()).detalle(usuario, tipo, id);
+  if (documentos.versionDatos !== f.versionDatos || documentos.estado !== f.estado) return <AppFrame usuario={usuario} pagina={tipo}>
+    <h1>El expediente se actualizó</h1><p>Otra persona modificó esta operación mientras se cargaba. Vuelve a abrirla para revisar la información actual.</p>
+    <Link className="button" href={`/${tipo}/${id}`} prefetch={false}>Recargar expediente</Link></AppFrame>;
   const donacion = tipo === "donaciones";
   const ahora = new Date(new Date().getTime() - 4 * 3600000).toISOString().slice(0, 16);
   return <AppFrame usuario={usuario} pagina={tipo}>
@@ -65,7 +74,8 @@ export async function FichaDeOperacion({ tipo, id }: { tipo: TipoOperacion; id: 
           <Dato nombre="Vigencia hasta">{f.convenio.hasta ? fechaVisible(f.convenio.hasta) : "Sin fecha registrada"}</Dato>
           <Dato nombre="Periodicidad pactada">{f.convenio.periodicidad}</Dato>
           <Dato nombre="PDF contractual">{f.convenio.pdfRegistrado ? "Referencia registrada" : "Pendiente de incorporar"}</Dato>
-        </dl><p className="record-note preserve-lines">{f.convenio.condiciones || "Sin condiciones registradas."}</p></> :
+        </dl><p className="record-note preserve-lines">{f.convenio.condiciones || "Sin condiciones registradas."}</p>
+          <Link className="record-link" href={`/convenios/${f.convenio.id}`}>Ver convenio y PDF →</Link></> :
           <p className="muted-copy">{f.convenioReferenciado ? "No se encontró un convenio válido para el donante de esta recepción." : "Esta recepción no tiene un convenio asociado. Los aportes ocasionales pueden registrarse sin contrato."}</p>}
       </Card>}
       <Card titulo={donacion ? "Productos y lotes recibidos" : "Cantidades por lote"} wide>
@@ -103,19 +113,20 @@ export async function FichaDeOperacion({ tipo, id }: { tipo: TipoOperacion; id: 
         <Dato nombre="Versión revisada">{cantidadVisible(f.revision.version)}</Dato>
         <Dato nombre="Observación administrativa"><span className="preserve-lines">{f.revision.observacion || "Sin observación registrada"}</span></Dato>
       </dl></Card>
-      <Card titulo="Documentos y fotografías">
-        <p className="muted-copy">{f.archivos.length} {f.archivos.length === 1 ? "archivo asociado" : "archivos asociados"} a esta {donacion ? "recepción" : "entrega"}.</p>
-        {f.archivos.length ? <ul className="record-files">{f.archivos.map(a => <li key={a.id}><strong>{a.nombre || "Archivo sin nombre"}</strong>
-          <span>{a.tipo || "Archivo"} · {fechaVisible(a.fecha)} · {cantidadVisible(a.bytes, "bytes")}</span>
-          {a.descripcion && <p>{a.descripcion}</p>}</li>)}</ul> : <div className="evidence-empty"><span aria-hidden="true">▧</span><p>No hay documentos ni fotografías vinculados.</p></div>}
-        {f.archivosNoDisponibles > 0 && <p className="record-note">{f.archivosNoDisponibles} referencias no están disponibles para esta operación.</p>}
-        <p className="record-note">La revisión requiere al menos una fotografía propia de la {donacion ? "recepción" : "entrega"} y la validación manual de administración.</p>
+      <Card titulo="Documentos y fotografías" wide>
+        <PanelArchivos key={`${f.versionDatos}-${f.estado}`} documento={documentos} lotes={f.lotes} />
+      </Card>
+      <Card titulo="Presentación y revisión del expediente" wide>
+        <AccionesDocumentales key={`${f.versionDatos}-${f.estado}`} documento={documentos} ficha={f} />
       </Card>
       <Card titulo="Observaciones e historial" wide>
         <p className="preserve-lines">{f.observaciones || "Sin observaciones adicionales."}</p>
         {f.historial.length ? <ol className="record-history">{f.historial.map((h, i) => <li key={i}>
-          <strong>{h.accion || "Acción registrada"}</strong><span>{fechaVisible(h.fecha, true)} · {h.persona?.nombre || "Responsable no disponible"}{h.version !== null ? ` · versión ${h.version}` : ""}</span>
-          {h.detalle && <p className="preserve-lines">{h.detalle}</p>}</li>)}</ol> : <p className="muted-copy">No hay acciones registradas en el historial de este expediente.</p>}
+          <strong>{acciones[h.accion || ""] || h.accion?.replaceAll("_", " ") || "Acción registrada"}</strong><span>{fechaVisible(h.fecha, true)} · {h.persona?.nombre || "Responsable no disponible"}{h.version !== null ? ` · versión ${h.version}` : ""}</span>
+          {h.detalle && <p className="preserve-lines">{h.detalle}</p>}
+          {h.archivoId && <a className="record-link" href={`/api/archivos/${h.archivoId}`} target="_blank" rel="noreferrer">Consultar archivo relacionado ↗</a>}
+          {h.revisionAnterior && <details><summary>Revisión anterior conservada</summary><p>{h.revisionAnterior.nombre || "Revisor no disponible"} · {fechaVisible(h.revisionAnterior.fecha, true)} · versión {h.revisionAnterior.version}</p>
+            {h.revisionAnterior.observacion && <p className="preserve-lines">{h.revisionAnterior.observacion}</p>}</details>}</li>)}</ol> : <p className="muted-copy">No hay acciones registradas en el historial de este expediente.</p>}
         {f.migradaEn && <p className="record-note">Registro importado del modelo anterior el {fechaVisible(f.migradaEn, true)}. Esta fecha corresponde a la migración, no a la creación de la operación.</p>}
       </Card>
     </div>

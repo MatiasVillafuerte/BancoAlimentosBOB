@@ -145,7 +145,7 @@ export function fichaPublica(registro: Document, tipo: TipoOperacion, refs: Refe
       contacto: { nombre: texto(contacto?.nombre), email: texto(contacto?.email), telefono: texto(contacto?.telefono),
         funcion: texto(contacto?.funcion), medio: texto(contacto?.medio) } } : null,
     convenioReferenciado: Boolean(idTexto(registro.convenioId)),
-    convenio: convenio ? { codigo: texto(convenio.codigo), nombre: texto(convenio.nombre), version: numero(convenio.version),
+    convenio: convenio ? { id: idTexto(convenio._id), codigo: texto(convenio.codigo), nombre: texto(convenio.nombre), version: numero(convenio.version),
       desde: fecha(convenio.desde), hasta: fecha(convenio.hasta), periodicidad: texto(convenio.periodicidad),
       condiciones: texto(convenio.condiciones), pdfRegistrado: Boolean(idTexto(convenio.pdfId)) } : null,
     autor: persona(registro.registradaPor), autorReferenciado: Boolean(idTexto(registro.registradaPor)),
@@ -176,7 +176,9 @@ export function fichaPublica(registro: Document, tipo: TipoOperacion, refs: Refe
     revision: { persona: persona(r.revisadaPor), fecha: fecha(r.revisadaEn), version: numero(r.versionRevisada),
       rolAlRevisar: texto(r.rolAlRevisar), observacion: texto(r.observacion) },
     historial: objetos(registro.historial).map(h => ({ accion: texto(h.accion), fecha: fecha(h.fecha),
-      persona: persona(h.usuarioId), detalle: texto(h.detalle), version: numero(h.versionDatos) }))
+      persona: persona(h.usuarioId), detalle: texto(h.detalle), version: numero(h.versionDatos), archivoId: idTexto(h.archivoId),
+      revisionAnterior: h.revisionAnterior ? { nombre: persona(h.revisionAnterior.revisadaPor)?.nombre,
+        fecha: fecha(h.revisionAnterior.revisadaEn), version: numero(h.revisionAnterior.versionRevisada), observacion: texto(h.revisionAnterior.observacion) } : null }))
   };
 }
 export type FichaOperacion = ReturnType<typeof fichaPublica>;

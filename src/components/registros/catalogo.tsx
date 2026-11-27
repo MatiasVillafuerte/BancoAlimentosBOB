@@ -49,6 +49,7 @@ export function CatalogoInteractivo({ tipo, usuario, resultado, q, activo }: {
               <span className={`badge ${r.activo ? "green" : ""}`}>{r.activo ? "Activo" : "Inactivo"}</span>}</td>
             <td><div className="catalogo-acciones"><button className="record-link" type="button" onClick={() => { setEditor({ ficha: r }); setMensaje(""); }}>
               {gestionar && tipo !== "convenios" ? "Editar" : "Ver información"}</button>
+              {tipo === "convenios" && <Link className="record-link" href={`/convenios/${r.id}`}>PDF y expediente</Link>}
               {gestionar && tipo === "convenios" && <button className="record-link" type="button" onClick={() => { setEditor({ ficha: r, nuevaVersion: true }); setMensaje(""); }}>Nueva versión</button>}</div></td>
           </tr>)}</tbody></table></div> : <div className="operation-empty"><h2>No hay registros con estos filtros</h2><p>Prueba con otro nombre o registra una nueva entrada.</p></div>}
       {resultado.paginas > 0 && <nav className="operation-pagination" aria-label="Páginas del catálogo"><span>Página {resultado.pagina} de {resultado.paginas}</span>

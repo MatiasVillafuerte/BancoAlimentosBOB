@@ -38,7 +38,7 @@ export async function obtenerFicha(usuario: UsuarioPublico, tipo: TipoOperacion,
   const idsArchivos = (registro.archivos || []).filter((i: unknown) => i instanceof ObjectId);
   const [personas, lotes, contraparte, convenio, archivos, salidas] = await Promise.all([
     personasDe(bd, [registro.registradaPor, registro.entregadaPor, registro.responsablePrevistoId,
-      registro.revision?.revisadaPor, ...(registro.historial || []).map((h: Document) => h.usuarioId)]),
+      registro.revision?.revisadaPor, ...(registro.historial || []).flatMap((h: Document) => [h.usuarioId, h.revisionAnterior?.revisadaPor])]),
     bd.collection("lotes").find(esDonacion ? { donacionId: registro._id } : { _id: { $in: idsLotes } },
       { projection: PROYECCION_LOTE }).sort({ codigo: 1 }).toArray(),
     contraparteId instanceof ObjectId ? bd.collection(esDonacion ? "donantes" : "organizaciones")

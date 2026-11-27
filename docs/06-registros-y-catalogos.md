@@ -4,7 +4,7 @@ Actualizado el 27 de noviembre de 2026.
 
 Esta etapa incorpora datos operativos reales desde los formularios. No requiere ejecutar scripts en
 Compass o mongosh: utiliza las ocho colecciones, validadores e índices de la migración V2.
-Las fotografías, PDF y revisión administrativa se implementarán en la etapa 5.
+Las fotografías, PDF y revisión administrativa están implementadas en la [etapa 5](08-evidencias-y-revision.md).
 
 ## Uso de la aplicación
 
@@ -171,5 +171,5 @@ snapshot y confirmación majority. La transacción guarda todos los documentos o
 La conexión de pruebas necesita permisos de creación, lectura y escritura sobre la base temporal.
 
 La etapa 4 incorpora inventario por zonas, FEFO, reservas, programación y confirmación de
-entregas, mermas y devoluciones: [guía de uso](07-inventario-y-entregas.md). El registro de fotos, PDF y aprobación administrativa permanece
-en la etapa 5. Los manuales finales y el modelo Word se consolidan en la etapa 6.
+entregas, mermas y devoluciones: [guía de uso](07-inventario-y-entregas.md). El registro de fotos, PDF y aprobación administrativa está
+disponible en la [etapa 5](08-evidencias-y-revision.md). Los manuales finales y el modelo Word se consolidan en la etapa 6.

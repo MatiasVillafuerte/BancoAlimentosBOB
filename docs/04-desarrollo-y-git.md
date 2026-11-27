@@ -120,7 +120,7 @@ de tráfico del alojamiento. Subir código a GitHub no publica por sí solo la p
 | `GET /api/donaciones/:id`, `GET /api/entregas/:id` | Información de la operación, sus productos y responsables públicos. |
 | `GET/POST /api/donantes`, `GET/PATCH /api/donantes/:id` | Consultar, crear y editar donantes según rol. |
 | `GET/POST /api/organizaciones`, `GET/PATCH /api/organizaciones/:id` | Catálogo de organizaciones receptoras. |
-| `GET/POST /api/convenios`, `GET /api/convenios/:id` | Consultar y crear versiones de condiciones y vigencia; PDF en etapa 5. |
+| `GET/POST /api/convenios`, `GET /api/convenios/:id` | Consultar y crear versiones de condiciones y vigencia; PDF mediante `/api/archivos`. |
 | `POST /api/donaciones` | Recepción, lotes y movimientos atómicos, con autor de sesión e idempotencia. |
 | `GET/POST /api/usuarios`, `GET/PATCH /api/usuarios/:id` | Administración de cuentas y acceso inicial sin exponer hashes. |
 
@@ -129,6 +129,10 @@ no modifica stock ni reservas. Las recepciones se limitan al autor salvo adminis
 consulta todas las entregas; voluntariado ve las propias, asignadas o realizadas por su cuenta.
 La etapa 4 añade `/inventario`, `/entregas/nueva`, las acciones de programación y confirmación,
 y los movimientos desde cada lote. Uso y rutas: [guía de inventario](07-inventario-y-entregas.md).
+La etapa 5 añade `/convenios/:id`, carga y descarga de archivos, corrección y revisión de expedientes.
+Uso, API y mantenimiento: [guía de evidencias y revisión](08-evidencias-y-revision.md).
+Para instalar las nuevas dependencias utiliza `npm ci` antes de iniciar con `npm run dev`.
+No vuelvas a ejecutar la migración ni `admin:init`: la cuenta que ya cambió su contraseña se conserva.
 
 ## Verificaciones
 
