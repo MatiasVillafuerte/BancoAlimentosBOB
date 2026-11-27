@@ -8,8 +8,9 @@ El proyecto base se publicó en `main` antes de crear `feat/backend-auth`. Next.
 la interfaz React como el backend; no hay que iniciar otro servidor en `backend`.
 Las maquetas de `frontend` se conservan para orientar las pantallas siguientes.
 
-Esta etapa implementa login, logout, consulta de sesión, cambio de contraseña, cuenta personal
-y contadores documentales reales. Las fichas y acciones operativas siguen pendientes.
+El avance implementa login, logout, consulta de sesión, cambio de contraseña, cuenta personal,
+contadores documentales, listas y fichas reales. Las acciones para registrar o modificar operaciones
+siguen pendientes. Consulta [el plan de entrega](05-plan-entrega.md) para ver las etapas completas.
 
 ## Abrir el proyecto actual
 
@@ -111,6 +112,9 @@ de tráfico del alojamiento. Subir código a GitHub no publica por sí solo la p
 | `GET /api/sesion` | Devuelve la cuenta pública o 401. |
 | `POST /api/cuenta/password` | Comprueba `passwordActual`, `passwordNueva` y `confirmacion`; rota las sesiones. |
 | `GET /api/panel` | Totales y pendientes según la cuenta autenticada. |
+| `GET /api/donaciones`, `GET /api/entregas` | Listas paginadas con búsqueda y estado. |
+| `GET /api/alertas` | Pendientes documentales, de revisión u observados. |
+| `GET /api/donaciones/:id`, `GET /api/entregas/:id` | Información de la operación, sus productos y responsables públicos. |
 
 `por_documentar` no significa que los productos sigan físicamente en bodega. El panel cuenta expedientes;
 no modifica stock ni reservas. Los roles no administrativos ven registros con `registradaPor` igual a su cuenta.

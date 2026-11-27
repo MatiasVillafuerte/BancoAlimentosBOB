@@ -11,10 +11,13 @@ Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoD
 - Verificación del rol y del estado activo en cada solicitud protegida.
 - Resumen conectado a Atlas: donaciones, entregas y pendientes documentales.
 - Cuenta personal con nombre, correo, teléfono y rol.
+- Listas de donaciones, entregas y pendientes con búsqueda, estados y paginación.
+- Fichas de operaciones con lotes, cantidades, convenio, responsables, metadatos de archivos e historial.
 
 El administrador ve los contadores generales. Las otras cuentas ven sus registros con autor confirmado.
-Los formularios de donaciones, inventario, reservas, entregas, archivos y revisión administrativa siguen pendientes.
+Los formularios de registro y modificación, inventario operativo, reservas, archivos y revisión administrativa siguen pendientes.
 El contrato completo está en [docs/02-contrato-api.md](docs/02-contrato-api.md).
+Las etapas, criterios de cierre y contenido de la entrega final están en [el plan de entrega](docs/05-plan-entrega.md).
 
 ## Ejecutar
 
@@ -50,8 +53,9 @@ La guía de conexión, acceso y commits está en [docs/04-desarrollo-y-git.md](d
 | --- | --- |
 | `src/app` | Páginas React y rutas de API de Next.js |
 | `src/lib/auth` | Contraseñas, sesiones, validación y acceso a usuarios |
+| `src/lib/operaciones` | Consultas autorizadas, filtros y datos públicos de operaciones |
 | `scripts/inicializar-admin.ts` | Activación idempotente de la cuenta inicial |
-| `tests` | Pruebas de autenticación sin conectarse a Atlas |
+| `tests` | Pruebas de autenticación, orígenes, filtros y protección de datos sin conectarse a Atlas |
 | `db/migraciones` | Migración V2 y sus pruebas |
 | `db/esquema-autenticacion.cjs` | Extensión opcional del validador de voluntarios |
 | `frontend` | Maquetas HTML originales como referencia |

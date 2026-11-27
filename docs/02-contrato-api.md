@@ -1,6 +1,6 @@
 # Contrato aprobado para la aplicación BAB
 
-Actualizado el 25 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. Ya están implementados el inicio y cierre de sesión, consulta de sesión, cambio de contraseña, cuenta personal y contadores documentales. Las rutas operativas restantes siguen pendientes. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
+Actualizado el 26 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. Ya están implementados el inicio y cierre de sesión, consulta de sesión, cambio de contraseña, cuenta personal, contadores documentales, listas de donaciones/entregas/alertas y fichas de operaciones. Las escrituras operativas y el manejo de archivos siguen pendientes. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
 
 La aplicación utiliza Next.js con React y TypeScript dentro de BancoAlimentos_Proyectos. El servidor accede a MongoDB; las credenciales de Atlas nunca llegan al navegador. Se mantienen ocho colecciones de negocio y GridFS. El acceso está documentado en [la guía de desarrollo](04-desarrollo-y-git.md).
 
@@ -104,6 +104,15 @@ No se suman cajas, bolsas y kilos como una sola unidad. Sin peso medido, se mues
 
 Las rutas requieren sesión y permisos salvo el inicio de sesión.
 
+Ya están disponibles `GET /api/alertas`, `GET /api/donaciones`, `GET /api/entregas` y
+`GET /api/donaciones/:id`, `GET /api/entregas/:id`, además del acceso y el panel.
+Las listas reciben `q` (hasta 80 caracteres), `pagina` (1 a 1000) y `estado`; las alertas usan
+`grupo` (`por_documentar`, `por_revisar`, `observada`) en lugar de `estado`.
+Devuelven 20 registros por página. Filtros inválidos devuelven 400; sin sesión, 401; una ficha
+inexistente o ajena a los permisos devuelve 404. Las respuestas usan `Cache-Control: no-store`.
+Las fichas devuelven campos públicos explícitos; nunca documentos completos de `voluntarios`.
+Los métodos de escritura de la siguiente tabla todavía son parte del alcance pendiente.
+
 | Ruta | Responsabilidad |
 | --- | --- |
 | POST /api/login, POST /api/logout | Autenticar mediante Argon2id y gestionar sesión. |
@@ -132,6 +141,6 @@ Las rutas requieren sesión y permisos salvo el inicio de sesión.
 
 ## Validación pendiente en la implementación
 
-La migración prepara datos, índices y validadores. La primera etapa web incorpora sesiones y contadores de alertas; faltan las fichas y las acciones para resolverlas. Para las rutas operativas se probarán concurrencia de reservas, reintentos, subida fallida, cambio de versión durante revisión, rechazo y reenvío, cancelación y entrega parcial. La autenticación ya prueba cierre y vencimiento de sesiones, cuentas desactivadas, cambios de rol, limitación de intentos y exclusión de campos privados.
+La migración prepara datos, índices y validadores. La web incorpora sesiones, contadores, listas y fichas de información; faltan las acciones para registrar o resolver operaciones. Las consultas verifican autoría, filtros, campos privados, referencias de archivos y conservación de datos históricos. Para las escrituras se probarán concurrencia de reservas, reintentos, subida fallida, cambio de versión durante revisión, rechazo y reenvío, cancelación y entrega parcial. La autenticación ya prueba cierre y vencimiento de sesiones, cuentas desactivadas, cambios de rol, limitación de intentos y exclusión de campos privados.
 
 Fuentes técnicas: [autenticación en Next.js](https://nextjs.org/docs/app/guides/authentication), [transacciones de MongoDB](https://www.mongodb.com/docs/drivers/node/current/crud/transactions/), [GridFS](https://www.mongodb.com/docs/manual/core/gridfs/) y [almacenamiento de contraseñas de OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).

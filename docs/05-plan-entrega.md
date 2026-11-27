@@ -1,0 +1,86 @@
+# Plan de entrega del proyecto BAB
+
+Actualizado el 26 de noviembre de 2026.
+
+El proyecto se entrega por recorridos que se pueden ejecutar en la aplicación. Cada etapa reúne
+interfaz, backend, permisos, pruebas y documentación. La base migrada y las reglas aprobadas en
+[el contrato funcional](02-contrato-api.md) son el punto de partida. No se simulan acciones terminadas
+con botones que todavía no guardan o consultan datos reales.
+
+## Etapas y criterios de cierre
+
+| Etapa | Estado | Resultado para el usuario | Cómo se comprueba |
+| --- | --- | --- | --- |
+| 1. Acceso y cuentas | Terminada | Iniciar sesión, consultar la cuenta, cambiar contraseña y salir. | Hash Argon2id, sesiones revocables, cuenta activa, limitación de intentos y pruebas desde el navegador. |
+| 2. Consulta de operaciones | Terminada | Abrir pendientes desde el panel; buscar donaciones y entregas; consultar lotes, convenios, responsables, revisión e historial. | Consultas reales a Atlas, filtros y paginación, acceso por autoría, exclusión de campos privados y conservación de los registros históricos. |
+| 3. Registro y catálogos | Pendiente | Administrar donantes y organizaciones; registrar una recepción con sus lotes; asociar una versión de convenio cuando corresponda; habilitar otras cuentas según rol. | Donante ocasional sin NIT ni contrato obligatorio; autor automático; recepción y movimientos atómicos; reintento sin duplicar; datos y versión del convenio correctos. |
+| 4. Inventario y distribución | Pendiente | Consultar las cuatro zonas; sugerir lotes por FEFO; programar, modificar, cancelar y confirmar entregas; registrar mermas y devoluciones. | Reservas concurrentes, saldo suficiente, lote apto, entrega parcial, liberación de remanentes y movimientos compensatorios con trazabilidad. |
+| 5. Evidencias y revisión | Pendiente | Subir, consultar y descargar fotografías y PDF, incluidos los convenios; reenviar correcciones; validar o solicitar cambios como administrador. | Archivo propio y tipo real admitido; fotografía mínima; revisión de la versión vigente; rechazo, reenvío y reapertura; cambios documentales sin repetir movimientos físicos. |
+| 6. Integración y entrega final | Pendiente | Recorrer una donación completa hasta su distribución e informe; instalar y presentar el prototipo con documentación coherente. | Pruebas integrales, permisos por rol, interfaz móvil, datos ficticios de demostración, manuales, instrucciones de instalación y revisión del modelo final. |
+
+La administración completa de usuarios de la etapa 3 amplía la cuenta inicial de la etapa 1.
+Los datos de convenios se incorporan en la etapa 3 y su manejo de PDF se integra en la etapa 5.
+La consulta de archivos de la etapa 2 muestra solamente metadatos; carga, descarga y previsualización
+pertenecen a la etapa 5.
+
+## Avance de la etapa 2
+
+- Nuevas pantallas: `/donaciones`, `/entregas`, `/alertas` y sus fichas de información.
+- Los contadores y las filas de seguimiento del panel abren listas filtradas.
+- Búsqueda literal por código y nombre del donante u organización, estados válidos y páginas de 20 registros.
+- Administración consulta todas las operaciones. Coordinación y voluntariado consultan las que tienen
+  `registradaPor` igual a su cuenta, tanto en las listas como al solicitar directamente una ficha.
+- Las entregas históricas sin autor confirmado permanecen visibles para administración. Su responsable
+  conocido se muestra aparte; no se inventa quién creó el registro.
+- Las fechas se presentan en la zona horaria de Bolivia. Un peso o una cantidad programada desconocidos
+  se muestran como **Sin registro**, y un cero conocido se conserva como cero.
+- Las programaciones históricas conservan campos legados de beneficiarios y peso. Mientras no exista
+  `fechaEntrega`, esos valores no se presentan como atenciones ni kilos ya entregados.
+- La ficha diferencia cantidad recibida, saldo físico, reserva y cantidad libre. No suma unidades incompatibles.
+- El convenio se busca por identificador y donante. Los metadatos de archivos requieren vínculo con la
+  operación y coincidencia de entidad e identificador; una referencia ajena no revela el nombre del archivo.
+- Ninguna consulta modifica las colecciones, aprueba expedientes o cambia existencias. No se requiere
+  ejecutar una nueva migración en Compass o mongosh para utilizar esta etapa.
+
+## Forma de trabajo y Git
+
+1. Leer las reglas aprobadas y contrastarlas con el modelo y los datos actuales.
+2. Definir un recorrido completo y los resultados que debe producir.
+3. Implementar validación y permisos junto con las consultas o transacciones del backend.
+4. Conectar las pantallas a esas funciones, incluyendo casos vacíos, errores y datos históricos incompletos.
+5. Probar los casos críticos del recorrido; revisar la navegación y la presentación.
+6. Actualizar el contrato, el estado de este plan y las instrucciones de uso.
+7. Guardar un commit descriptivo y publicar el avance en la rama de desarrollo.
+
+`main` conserva el proyecto base. Los avances actuales están en `feat/backend-auth`; pese al nombre,
+esta rama contiene la integración de la aplicación en curso. Los commits separan cada avance.
+La integración final hacia `main` se revisará mediante un Pull Request. No se fusiona automáticamente
+al terminar una etapa.
+
+## Contenido de la entrega final
+
+| Entregable | Contenido previsto |
+| --- | --- |
+| Aplicación | Frontend React y backend Next.js, con MongoDB Atlas y archivos en GridFS. |
+| Modelo de datos | Word de diseño actualizado, diccionario de campos, relaciones y diagrama editable coherentes con la implementación. |
+| Perfil académico | Problema hipotético y limitaciones de la información disponible sobre BAB; objetivos y alcance alineados con el sistema realmente construido. |
+| Manual de usuario | Guía de acceso, recepción, inventario, entrega, evidencia y revisión administrativa con ejemplos. |
+| Manual técnico | Instalación, variables privadas, estructura del código, API, permisos, respaldo y recuperación. |
+| Pruebas y demostración | Resultados de pruebas y un recorrido reproducible con datos ficticios, sin publicar credenciales ni respaldos privados. |
+| Repositorio | Historial de commits, instrucciones de ejecución y versión final identificable. |
+
+Publicar el repositorio en GitHub no aloja la aplicación web. Un despliegue en Internet se prepara
+por separado con URL HTTPS, variables privadas y configuración de Atlas del entorno elegido.
+
+## Recorrido de aceptación final
+
+Un usuario inicia sesión, registra una donación ocasional y sus lotes, adjunta evidencias y presenta
+el expediente. El administrador puede solicitar una corrección y luego aprobar la versión corregida.
+Después se programa una entrega que reserva cantidades, se impide una segunda reserva que exceda
+el saldo libre y se confirma una entrega parcial. La cantidad realmente entregada descuenta existencias
+una sola vez; la parte no utilizada de la reserva se libera. Se documenta y valida la entrega, y se consulta
+su trazabilidad hasta la donación y su convenio opcional.
+
+El informe distingue operaciones físicas de expedientes aprobados, y conserva separados los kilos,
+las unidades y las atenciones. Completar este recorrido, sus errores previstos y la documentación
+marca el cierre del prototipo.

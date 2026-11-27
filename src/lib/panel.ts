@@ -1,11 +1,11 @@
 import "server-only";
-import { ObjectId } from "mongodb";
 import { obtenerBase } from "./db";
 import type { UsuarioPublico } from "./auth/types";
+import { alcanceOperaciones } from "./operaciones/modelo";
 
 export async function consultarPanel(usuario: UsuarioPublico) {
   const bd = await obtenerBase();
-  const filtro = usuario.rol === "administrador" ? {} : { registradaPor: new ObjectId(usuario.id) };
+  const filtro = alcanceOperaciones(usuario);
   const [donaciones, entregas, porDocumentarD, porDocumentarE, porRevisarD, porRevisarE, observadasD, observadasE] = await Promise.all([
     bd.collection("donaciones").countDocuments(filtro),
     bd.collection("entregas").countDocuments(filtro),
