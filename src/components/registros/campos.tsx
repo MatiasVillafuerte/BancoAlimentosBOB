@@ -12,37 +12,41 @@ export function Area({ label, name, defaultValue, required = false, maxLength = 
   return <label className="registro-campo registro-ancho"><span>{label}{required && " *"}</span>
     <textarea name={name} rows={4} defaultValue={defaultValue} required={required} maxLength={maxLength} /></label>;
 }
-export function SelectorDonante({ valor, onChange, nombreInicial }: { valor: string; onChange: (valor: string) => void; nombreInicial?: string }) {
+export function SelectorDonante(props: { valor: string; onChange: (valor: string) => void; nombreInicial?: string }) {
+  return <SelectorContraparte {...props} tipo="donantes" />;
+}
+export function SelectorContraparte({ valor, onChange, nombreInicial, tipo }: { valor: string; onChange: (valor: string) => void; nombreInicial?: string; tipo: "donantes" | "organizaciones" }) {
+  const etiqueta = tipo === "donantes" ? "Donante" : "Organización";
   const [q, setQ] = useState("");
   const [pagina, setPagina] = useState(1);
   const [resultado, setResultado] = useState<{ registros: FichaCatalogo[]; total: number; paginas: number }>({ registros: [], total: 0, paginas: 0 });
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(true);
-  const [seleccion, setSeleccion] = useState({ id: valor, nombre: nombreInicial || "Donante seleccionado" });
+  const [seleccion, setSeleccion] = useState({ id: valor, nombre: nombreInicial || "Registro seleccionado" });
   useEffect(() => {
     const abort = new AbortController();
     const timer = setTimeout(async () => {
       setCargando(true); setError("");
       try {
-        const res = await fetch(`/api/donantes?activo=si&q=${encodeURIComponent(q)}&pagina=${pagina}`, { signal: abort.signal });
+        const res = await fetch(`/api/${tipo}?activo=si&q=${encodeURIComponent(q)}&pagina=${pagina}`, { signal: abort.signal });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "No pudimos consultar los donantes.");
+        if (!res.ok) throw new Error(data.error || "No pudimos consultar el catálogo.");
         setResultado(data);
-      } catch (e) { if (!abort.signal.aborted) setError(e instanceof Error ? e.message : "No pudimos cargar los donantes."); }
+      } catch (e) { if (!abort.signal.aborted) setError(e instanceof Error ? e.message : "No pudimos cargar el catálogo."); }
       finally { if (!abort.signal.aborted) setCargando(false); }
     }, 200);
     return () => { clearTimeout(timer); abort.abort(); };
-  }, [q, pagina]);
+  }, [q, pagina, tipo]);
   return <div className="selector-donante registro-ancho">
-    <div className="registro-grid"><Campo label="Buscar donante activo" type="search" value={q} maxLength={80}
+    <div className="registro-grid"><Campo label={`Buscar ${etiqueta.toLowerCase()}`} type="search" value={q} maxLength={80}
       placeholder="Escribe parte del nombre" onChange={e => { setQ(e.target.value); setPagina(1); }} />
-      <label className="registro-campo"><span>Donante *</span><select required value={valor} onChange={e => {
+      <label className="registro-campo"><span>{etiqueta} *</span><select required value={valor} onChange={e => {
         const id = e.target.value; setSeleccion({ id, nombre: resultado.registros.find(r => r.id === id)?.nombre || "" }); onChange(id);
-      }}><option value="">Selecciona una persona o entidad</option>
-        {valor && !resultado.registros.some(r => r.id === valor) && <option value={valor}>{seleccion.id === valor ? seleccion.nombre : nombreInicial || "Donante seleccionado"}</option>}
+      }}><option value="">Selecciona un registro activo</option>
+        {valor && !resultado.registros.some(r => r.id === valor) && <option value={valor}>{seleccion.id === valor ? seleccion.nombre : nombreInicial || "Registro seleccionado"}</option>}
         {resultado.registros.map(d => <option key={d.id} value={d.id}>{d.nombre} · {d.tipo}</option>)}
       </select></label></div>
-    <div className="selector-paginas"><small role="status">{cargando ? "Buscando…" : `${resultado.total} donantes activos · página ${pagina}`}</small>
+    <div className="selector-paginas"><small role="status">{cargando ? "Buscando…" : `${resultado.total} registros activos · página ${pagina}`}</small>
       <button type="button" disabled={pagina <= 1 || cargando} onClick={() => setPagina(p => p - 1)}>Anterior</button>
       <button type="button" disabled={pagina >= resultado.paginas || cargando} onClick={() => setPagina(p => p + 1)}>Siguiente</button></div>
     {error && <p className="form-error" role="alert">{error}</p>}
@@ -58,11 +62,11 @@ export function useGuardar() {
   const bloqueado = useRef(false);
   const reintento = useRef<{ url: string; method: string; body: string } | null>(null);
   const [incierto, setIncierto] = useState(false);
-  async function guardar(url: string, datos: object, editar = false) {
+  async function guardar(url: string, datos: object, editar = false, claveEnEdicion = false) {
     if (bloqueado.current) return null;
     bloqueado.current = true; setPendiente(true); setError("");
     clave.current ??= crypto.randomUUID();
-    const envio = reintento.current || { url, method: editar ? "PATCH" : "POST", body: JSON.stringify({ ...datos, ...(editar ? {} : { claveOperacion: clave.current }) }) };
+    const envio = reintento.current || { url, method: editar ? "PATCH" : "POST", body: JSON.stringify({ ...datos, ...(editar && !claveEnEdicion ? {} : { claveOperacion: clave.current }) }) };
     try {
       const res = await fetch(envio.url, { method: envio.method, headers: { "Content-Type": "application/json" }, body: envio.body });
       const data = await res.json();

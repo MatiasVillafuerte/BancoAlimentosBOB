@@ -34,19 +34,24 @@ export function leerFiltros(params: URLSearchParams, tipo: TipoConsulta): Filtro
   return { q, estado, grupo, pagina: Number(pagina) };
 }
 
-export function alcanceOperaciones(usuario: UsuarioPublico): Document {
+export function alcanceOperaciones(usuario: UsuarioPublico, tipo: TipoOperacion = "donaciones"): Document {
+  if (tipo === "entregas") return usuario.rol !== "voluntario" ? {} : { $or: [
+    { registradaPor: new ObjectId(usuario.id) }, { responsablePrevistoId: new ObjectId(usuario.id) },
+    { entregadaPor: new ObjectId(usuario.id), fechaEntrega: { $type: "date" } }
+  ] };
   return usuario.rol === "administrador" ? {} : { registradaPor: new ObjectId(usuario.id) };
 }
 export function filtroOperacion(usuario: UsuarioPublico, tipo: TipoOperacion, filtros: FiltrosConsulta, alerta = false): Document {
-  const filtro: Document = alcanceOperaciones(usuario);
+  const filtro: Document = alcanceOperaciones(usuario, tipo);
   if (alerta) {
     const revision = tipo === "donaciones" ? "recibida" : "entregada";
     filtro.estado = filtros.grupo === "por_revisar" ? revision : filtros.grupo || { $in: ["por_documentar", revision, "observada"] };
   } else if (filtros.estado) filtro.estado = filtros.estado;
   if (filtros.q) {
     const literal = filtros.q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    filtro.$or = [{ codigo: { $regex: literal, $options: "i" } },
+    const busqueda = [{ codigo: { $regex: literal, $options: "i" } },
       { [tipo === "donaciones" ? "donante.nombre" : "organizacion.nombre"]: { $regex: literal, $options: "i" } }];
+    if (filtro.$or) filtro.$and = [{ $or: busqueda }]; else filtro.$or = busqueda;
   }
   return filtro;
 }
@@ -57,7 +62,7 @@ export const PROYECCION_OPERACION = {
   fechaRecepcion: 1, fechaProgramada: 1, fechaEntrega: 1, convenioId: 1, archivos: 1,
   observaciones: 1, versionDatos: 1, revision: 1, historial: 1, "migracionV2.fecha": 1,
   responsablePrevistoId: 1, entregadaPor: 1, recibidoPor: 1, lugar: 1,
-  beneficiariosPrevistos: 1, beneficiariosAtendidos: 1, pesoTotalKg: 1, items: 1
+  beneficiariosPrevistos: 1, beneficiariosAtendidos: 1, pesoTotalKg: 1, items: 1, requiereReasignacion: 1
 };
 export const PROYECCION_PERSONA = { _id: 1, nombre: 1, email: 1, telefono: 1, rol: 1, activo: 1 };
 export const PROYECCION_LOTE = {
@@ -70,7 +75,7 @@ export function pipelineListado(usuario: UsuarioPublico, tipo: TipoConsulta, fil
   function origen(coleccion: TipoOperacion): Document[] {
     return [
       { $match: filtroOperacion(usuario, coleccion, filtros, tipo === "alertas") },
-      { $project: { _id: 1, codigo: 1, estado: 1, registradaPor: 1,
+      { $project: { _id: 1, codigo: 1, estado: 1, registradaPor: 1, requiereReasignacion: 1, fechaProgramada: 1,
         contraparte: coleccion === "donaciones" ? "$donante.nombre" : "$organizacion.nombre",
         tipo: { $literal: coleccion },
         fecha: coleccion === "donaciones" ? "$fechaRecepcion" : { $ifNull: ["$fechaEntrega", "$fechaProgramada"] }
@@ -102,13 +107,14 @@ export function filaPublica(registro: Document, personas: Map<string, Document>)
   return { id: idTexto(registro._id)!, tipo: registro.tipo as TipoOperacion, codigo: texto(registro.codigo) || "Sin código",
     estado: texto(registro.estado) || "", contraparte: texto(registro.contraparte) || "Sin registro", fecha: fecha(registro.fecha),
     autor: autor ? { id: idTexto(autor._id), nombre: texto(autor.nombre) } : null,
-    autorReferenciado: Boolean(idTexto(registro.registradaPor)) };
+    autorReferenciado: Boolean(idTexto(registro.registradaPor)), requiereReasignacion: registro.requiereReasignacion === true,
+    atrasada: registro.estado === "programada" && registro.fechaProgramada instanceof Date && registro.fechaProgramada < new Date() };
 }
 export type FilaOperacion = ReturnType<typeof filaPublica>;
 
 export interface ReferenciasFicha {
   personas: Map<string, Document>; lotes: Document[]; contraparte: Document | null;
-  convenio: Document | null; archivos: Document[];
+  convenio: Document | null; archivos: Document[]; salidas?: Document[];
 }
 export function fichaPublica(registro: Document, tipo: TipoOperacion, refs: ReferenciasFicha) {
   const persona = (id: unknown) => personaPublica(refs.personas.get(idTexto(id) || ""));
@@ -148,6 +154,8 @@ export function fichaPublica(registro: Document, tipo: TipoOperacion, refs: Refe
     fechaProgramada: fecha(registro.fechaProgramada), fechaEntrega: fecha(registro.fechaEntrega),
     versionDatos: numero(registro.versionDatos), migradaEn: fecha(registro.migracionV2?.fecha),
     observaciones: texto(registro.observaciones), lugar: texto(registro.lugar), recibidoPor: texto(registro.recibidoPor),
+    requiereReasignacion: registro.requiereReasignacion === true,
+    atrasada: registro.estado === "programada" && registro.fechaProgramada instanceof Date && registro.fechaProgramada < new Date(),
     // El modelo anterior conservaba cifras previstas en campos con nombre de ejecución.
     // Una programación sin fechaEntrega no acredita atenciones ni peso entregado.
     beneficiariosPrevistos: numero(registro.beneficiariosPrevistos),
@@ -156,6 +164,14 @@ export function fichaPublica(registro: Document, tipo: TipoOperacion, refs: Refe
     lineasEntrega: objetos(registro.items).map(i => ({ loteId: idTexto(i.loteId),
       lote: lotesPorId.get(idTexto(i.loteId) || "") || null, unidad: texto(i.unidad),
       programada: numero(i.cantidadProgramada), reservada: numero(i.cantidadReservada), entregada: numero(i.cantidadEntregada) })),
+    salidas: (refs.salidas || []).filter(s => idTexto(s.entregaId) === idTexto(registro._id) && s.tipo === "entrega").map(s => {
+      const relacionados = objetos(s.relacionados).filter(m => idTexto(m.origenId) === idTexto(s._id) && idTexto(m.loteId) === idTexto(s.loteId));
+      const redondear = (n: number) => Math.round(n * 1000) / 1000;
+      const correccion = relacionados.reduce((n, m) => n + (m.tipo === "ajusteEntrada" ? -1 : m.tipo === "ajusteSalida" ? 1 : 0) * (numero(m.cantidad) || 0), 0);
+      const devuelta = redondear(relacionados.filter(m => m.tipo === "devolucionEntrada").reduce((n, m) => n + (numero(m.cantidad) || 0), 0));
+      const original = numero(s.cantidad) || 0, corregida = redondear(original + correccion);
+      return { movimientoId: idTexto(s._id)!, loteId: idTexto(s.loteId)!, unidad: texto(s.unidad) || "", original, corregida, devuelta, neta: redondear(corregida - devuelta) };
+    }),
     archivos, archivosNoDisponibles: idsArchivos.size - archivos.length,
     revision: { persona: persona(r.revisadaPor), fecha: fecha(r.revisadaEn), version: numero(r.versionRevisada),
       rolAlRevisar: texto(r.rolAlRevisar), observacion: texto(r.observacion) },

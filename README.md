@@ -17,10 +17,15 @@ Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoD
 - Versiones de convenios con condiciones, vigencia y vínculo opcional en la recepción.
 - Registro de recepción con hasta 30 lotes y sus movimientos de entrada, en una transacción idempotente.
 - Administración de cuentas: alta, contacto, rol, activación y contraseña inicial para cuentas sin acceso.
+- Inventario por cuatro zonas, vencimientos y sugerencias FEFO para una fecha de entrega.
+- Programación, modificación y cancelación con reservas; confirmación de cantidades reales y entregas parciales.
+- Mermas, devoluciones y correcciones con origen, motivo, responsable e historial de saldos.
 
-El administrador ve los contadores generales. Las otras cuentas ven sus registros con autor confirmado.
-El inventario operativo, las reservas y entregas, los archivos y la revisión administrativa siguen pendientes.
+El administrador ve todas las operaciones. Coordinación gestiona las entregas del equipo; voluntariado
+ve las propias, asignadas o que realizó. Las recepciones siguen limitadas al autor salvo administración.
+Las fotografías, PDF y revisión administrativa se incorporan en la etapa 5.
 La [guía de la etapa 3](docs/06-registros-y-catalogos.md) explica cómo registrar y qué permisos tiene cada rol.
+La [guía de inventario y entregas](docs/07-inventario-y-entregas.md) explica reservas, salidas y movimientos.
 El contrato completo está en [docs/02-contrato-api.md](docs/02-contrato-api.md).
 Las etapas, criterios de cierre y contenido de la entrega final están en [el plan de entrega](docs/05-plan-entrega.md).
 
@@ -60,6 +65,8 @@ La guía de conexión, acceso y commits está en [docs/04-desarrollo-y-git.md](d
 | `src/lib/auth` | Contraseñas, sesiones, validación y acceso a usuarios |
 | `src/lib/operaciones` | Consultas autorizadas, filtros y datos públicos de operaciones |
 | `src/lib/registros` | Validación, catálogos, cuentas y transacciones de recepción |
+| `src/lib/inventario` | FEFO, saldos, reservas, entregas y movimientos de inventario |
+| `src/lib/transacciones.ts` | Transacción y autorización de escritura compartidas |
 | `scripts/inicializar-admin.ts` | Activación idempotente de la cuenta inicial |
 | `tests/*.test.ts` | Pruebas de autenticación, orígenes, consultas y validación sin Atlas |
 | `tests/integration` | Transacciones con validadores reales en una base temporal aislada |

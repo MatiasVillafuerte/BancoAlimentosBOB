@@ -125,7 +125,10 @@ de tráfico del alojamiento. Subir código a GitHub no publica por sí solo la p
 | `GET/POST /api/usuarios`, `GET/PATCH /api/usuarios/:id` | Administración de cuentas y acceso inicial sin exponer hashes. |
 
 `por_documentar` no significa que los productos sigan físicamente en bodega. El panel cuenta expedientes;
-no modifica stock ni reservas. Los roles no administrativos ven registros con `registradaPor` igual a su cuenta.
+no modifica stock ni reservas. Las recepciones se limitan al autor salvo administración. Coordinación
+consulta todas las entregas; voluntariado ve las propias, asignadas o realizadas por su cuenta.
+La etapa 4 añade `/inventario`, `/entregas/nueva`, las acciones de programación y confirmación,
+y los movimientos desde cada lote. Uso y rutas: [guía de inventario](07-inventario-y-entregas.md).
 
 ## Verificaciones
 
@@ -137,8 +140,8 @@ npm run build
 ```
 
 Las pruebas de autenticación usan un almacén de prueba en memoria; las de migración utilizan datos
-y conexiones simuladas. No alteran Atlas. Las próximas rutas de inventario necesitarán pruebas propias
-de transacciones, concurrencia, entregas parciales y reintentos antes de habilitar sus escrituras.
+y conexiones simuladas. No alteran Atlas. Las rutas de inventario tienen pruebas de transacciones,
+concurrencia, entregas parciales, devoluciones, mermas y reintentos en la suite de integración.
 
 La etapa 3 incorpora además `npm run test:integration`: crea una base temporal de Atlas, instala allí
 los validadores V2, prueba las escrituras y retira sus colecciones al terminar. Requiere `.env.local`

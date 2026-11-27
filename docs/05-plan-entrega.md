@@ -14,7 +14,7 @@ con botones que todavía no guardan o consultan datos reales.
 | 1. Acceso y cuentas | Terminada | Iniciar sesión, consultar la cuenta, cambiar contraseña y salir. | Hash Argon2id, sesiones revocables, cuenta activa, limitación de intentos y pruebas desde el navegador. |
 | 2. Consulta de operaciones | Terminada | Abrir pendientes desde el panel; buscar donaciones y entregas; consultar lotes, convenios, responsables, revisión e historial. | Consultas reales a Atlas, filtros y paginación, acceso por autoría, exclusión de campos privados y conservación de los registros históricos. |
 | 3. Registro y catálogos | Terminada | Administrar donantes y organizaciones; registrar una recepción con sus lotes; asociar una versión de convenio cuando corresponda; habilitar otras cuentas según rol. | Donante ocasional sin NIT ni contrato obligatorio; autor automático; recepción y movimientos atómicos; reintento sin duplicar; datos y versión del convenio correctos. |
-| 4. Inventario y distribución | Pendiente | Consultar las cuatro zonas; sugerir lotes por FEFO; programar, modificar, cancelar y confirmar entregas; registrar mermas y devoluciones. | Reservas concurrentes, saldo suficiente, lote apto, entrega parcial, liberación de remanentes y movimientos compensatorios con trazabilidad. |
+| 4. Inventario y distribución | Terminada | Consultar las cuatro zonas; sugerir lotes por FEFO; programar, modificar, cancelar y confirmar entregas; registrar mermas y devoluciones. | Reservas concurrentes, saldo suficiente, lote apto, entrega parcial, liberación de remanentes y movimientos compensatorios con trazabilidad. |
 | 5. Evidencias y revisión | Pendiente | Subir, consultar y descargar fotografías y PDF, incluidos los convenios; reenviar correcciones; validar o solicitar cambios como administrador. | Archivo propio y tipo real admitido; fotografía mínima; revisión de la versión vigente; rechazo, reenvío y reapertura; cambios documentales sin repetir movimientos físicos. |
 | 6. Integración y entrega final | Pendiente | Recorrer una donación completa hasta su distribución e informe; instalar y presentar el prototipo con documentación coherente. | Pruebas integrales, permisos por rol, interfaz móvil, datos ficticios de demostración, manuales, instrucciones de instalación y revisión del modelo final. |
 
@@ -28,10 +28,11 @@ pertenecen a la etapa 5.
 - Nuevas pantallas: `/donaciones`, `/entregas`, `/alertas` y sus fichas de información.
 - Los contadores y las filas de seguimiento del panel abren listas filtradas.
 - Búsqueda literal por código y nombre del donante u organización, estados válidos y páginas de 20 registros.
-- Administración consulta todas las operaciones. Coordinación y voluntariado consultan las que tienen
-  `registradaPor` igual a su cuenta, tanto en las listas como al solicitar directamente una ficha.
-- Las entregas históricas sin autor confirmado permanecen visibles para administración. Su responsable
-  conocido se muestra aparte; no se inventa quién creó el registro.
+- Administración consulta todas las operaciones. Las recepciones de otros roles se limitan a su autoría.
+  Desde la etapa 4, coordinación gestiona todas las entregas; voluntariado consulta las propias,
+  asignadas o que realizó. Las listas, fichas y contadores aplican el mismo alcance.
+- Las entregas históricas sin autor confirmado conservan a su responsable conocido por separado;
+  no se inventa quién creó el registro. Sus permisos de consulta siguen el alcance anterior.
 - Las fechas se presentan en la zona horaria de Bolivia. Un peso o una cantidad programada desconocidos
   se muestran como **Sin registro**, y un cero conocido se conserva como cero.
 - Las programaciones históricas conservan campos legados de beneficiarios y peso. Mientras no exista
@@ -57,6 +58,27 @@ pertenecen a la etapa 5.
 - No hace falta ejecutar otra migración. Los PDF, fotografías y aprobación se mantienen en etapa 5.
 
 Uso, permisos, API y campos técnicos: [guía de registros y catálogos](06-registros-y-catalogos.md).
+
+## Avance de la etapa 4
+
+- Inventario por zona, estado, producto y vencimiento; FEFO con fecha prevista, sin crear reservas
+  hasta guardar la programación. Los lotes sin vencimiento registrado se identifican y quedan al final.
+- Programación con organización y responsable activos; modificación con motivo, cancelación y
+  confirmación real parcial. Las reservas se actualizan dentro de la misma transacción.
+- Los saldos distinguen físico, reservado y libre. Confirmar descuenta una vez y libera el sobrante.
+  No convierte automáticamente la entrega en completada: queda por documentar.
+- Mermas con reducción explícita de reservas afectadas; la entrega requiere reasignación antes de
+  confirmarse. Devoluciones vinculadas al origen y control acumulado de cantidades.
+- Ajustes reservados a administración, con original conservado y trazabilidad. Una corrección cambia
+  la versión documental; un expediente completado exige reapertura antes de corregir cantidades.
+- 59 pruebas locales y 25 escenarios de integración (15 de inventario y 10 de registros) aprobados.
+  Compilación, TypeScript y ESLint correctos; 30 comprobaciones HTTP de sesión y origen.
+- 75 comprobaciones de lectura sobre los datos actuales: ocho lotes conciliados y datos de negocio
+  conservados. Revisión visual del inventario y sus sugerencias FEFO en escritorio.
+- Sin nueva migración ni modificación de contraseñas. Las bases temporales de pruebas se retiraron.
+
+Uso, ejemplos, límites y campos añadidos: [guía de inventario y entregas](07-inventario-y-entregas.md).
+La siguiente etapa es **5. Evidencias y revisión administrativa**.
 
 ## Forma de trabajo y Git
 

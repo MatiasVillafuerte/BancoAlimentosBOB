@@ -29,14 +29,14 @@ export type ListadoOperaciones = Awaited<ReturnType<typeof listarOperaciones>>;
 export async function obtenerFicha(usuario: UsuarioPublico, tipo: TipoOperacion, id: string) {
   if (!/^[a-f\d]{24}$/i.test(id)) return null;
   const bd = await obtenerBase();
-  const registro = await bd.collection(tipo).findOne({ _id: new ObjectId(id), ...alcanceOperaciones(usuario) },
+  const registro = await bd.collection(tipo).findOne({ _id: new ObjectId(id), ...alcanceOperaciones(usuario, tipo) },
     { projection: PROYECCION_OPERACION });
   if (!registro) return null;
   const esDonacion = tipo === "donaciones";
   const contraparteId = esDonacion ? registro.donante?.donanteId : registro.organizacion?.organizacionId;
   const idsLotes = (registro.items || []).map((i: Document) => i.loteId).filter((i: unknown) => i instanceof ObjectId);
   const idsArchivos = (registro.archivos || []).filter((i: unknown) => i instanceof ObjectId);
-  const [personas, lotes, contraparte, convenio, archivos] = await Promise.all([
+  const [personas, lotes, contraparte, convenio, archivos, salidas] = await Promise.all([
     personasDe(bd, [registro.registradaPor, registro.entregadaPor, registro.responsablePrevistoId,
       registro.revision?.revisadaPor, ...(registro.historial || []).map((h: Document) => h.usuarioId)]),
     bd.collection("lotes").find(esDonacion ? { donacionId: registro._id } : { _id: { $in: idsLotes } },
@@ -51,7 +51,13 @@ export async function obtenerFicha(usuario: UsuarioPublico, tipo: TipoOperacion,
     idsArchivos.length ? bd.collection("fs.files").find({ _id: { $in: idsArchivos },
       "metadata.entidad": tipo, "metadata.entidadId": registro._id }, { projection: { _id: 1, filename: 1,
         length: 1, uploadDate: 1, "metadata.entidad": 1, "metadata.entidadId": 1,
-        "metadata.tipo": 1, "metadata.mimeType": 1, "metadata.descripcion": 1 } }).sort({ uploadDate: -1 }).toArray() : []
+        "metadata.tipo": 1, "metadata.mimeType": 1, "metadata.descripcion": 1 } }).sort({ uploadDate: -1 }).toArray() : [],
+    esDonacion ? [] : bd.collection("movimientos").aggregate([
+      { $match: { entregaId: registro._id, tipo: "entrega" } },
+      { $lookup: { from: "movimientos", localField: "_id", foreignField: "origenId", pipeline: [
+        { $project: { origenId: 1, loteId: 1, cantidad: 1, tipo: 1 } }], as: "relacionados" } },
+      { $project: { entregaId: 1, loteId: 1, cantidad: 1, tipo: 1, unidad: 1, relacionados: 1 } }
+    ]).toArray()
   ]);
-  return fichaPublica(registro, tipo, { personas, lotes, contraparte, convenio, archivos });
+  return fichaPublica(registro, tipo, { personas, lotes, contraparte, convenio, archivos, salidas });
 }

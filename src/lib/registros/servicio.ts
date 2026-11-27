@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { ObjectId, type ClientSession, type Db, type Document, type MongoClient } from "mongodb";
 import { crearHash } from "../auth/password";
 import type { UsuarioPublico } from "../auth/types";
+import { autorizarEscritura, ejecutarTransaccion } from "../transacciones";
 import { convenioAplicable, convenioSchema, diaBolivia, donanteSchema, editarDonanteSchema, editarOrganizacionSchema,
   editarUsuarioSchema, ErrorRegistro, finDia, horaBolivia, idSchema, inicioDia, organizacionSchema,
   recepcionSchema, usuarioSchema, validar, type Catalogo } from "./modelo";
@@ -32,18 +33,10 @@ export class ServicioRegistros {
   constructor(private readonly cliente: MongoClient, private readonly bd: Db, private readonly reloj = () => new Date()) {}
 
   private async transaccion<T>(accion: (session: ClientSession) => Promise<T>): Promise<T> {
-    return this.cliente.withSession(session => session.withTransaction(() => accion(session), {
-      readConcern: { level: "snapshot" }, writeConcern: { w: "majority" }, readPreference: "primary", maxCommitTimeMS: 10000,
-      timeoutMS: 20000
-    }));
+    return ejecutarTransaccion(this.cliente, accion);
   }
   private async autor(usuario: UsuarioPublico, session: ClientSession, permiso: "recepcion" | "gestion" | "usuarios") {
-    const roles = permiso === "usuarios" ? ["administrador"] : permiso === "gestion" ? ["administrador", "coordinador"] :
-      ["administrador", "coordinador", "voluntario"];
-    // La escritura condicionada serializa la autorización con las bajas/cambios de rol.
-    const resultado = await this.bd.collection("voluntarios").updateOne({ _id: new ObjectId(usuario.id), activo: true,
-      rol: { $in: roles, $eq: usuario.rol } }, { $inc: { versionAcciones: 1 } }, { session });
-    if (!resultado.matchedCount) throw new ErrorRegistro("Tu cuenta ya no tiene permiso para realizar esta acción. Actualiza la página.", 403);
+    await autorizarEscritura(this.bd, usuario, session, permiso);
   }
   private auditoria(usuario: UsuarioPublico, accion: string, fecha: Date) {
     return { modeloVersion: 2, registradaPor: new ObjectId(usuario.id), registradaEn: fecha, versionDatos: 1,

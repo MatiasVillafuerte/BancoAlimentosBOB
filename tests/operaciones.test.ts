@@ -30,14 +30,20 @@ test("la búsqueda interpreta los caracteres especiales como texto y no como una
   assert.equal(f.registradaPor.toHexString(), usuario.id);
 });
 
-test("administración consulta todos y los otros roles solo su autoría confirmada", () => {
+test("las recepciones conservan autoría; las entregas admiten gestión de equipo y asignación", () => {
   assert.deepEqual(alcanceOperaciones({ ...usuario, rol: "administrador" }), {});
   for (const rol of ["voluntario", "coordinador"] as const) {
     assert.equal(alcanceOperaciones({ ...usuario, rol }).registradaPor.toHexString(), usuario.id);
   }
   const entrega = filtroOperacion(usuario, "entregas", filtros);
-  assert.equal("entregadaPor" in entrega, false);
-  assert.equal("responsablePrevistoId" in entrega, false);
+  assert.equal(entrega.$or[0].registradaPor.toHexString(), usuario.id);
+  assert.equal(entrega.$or[1].responsablePrevistoId.toHexString(), usuario.id);
+  assert.equal(entrega.$or[2].entregadaPor.toHexString(), usuario.id);
+  assert.deepEqual(entrega.$or[2].fechaEntrega, { $type: "date" });
+  assert.deepEqual(alcanceOperaciones({ ...usuario, rol: "coordinador" }, "entregas"), {});
+  const buscada = filtroOperacion(usuario, "entregas", { ...filtros, q: "Comedor" });
+  assert.deepEqual(buscada.$or, entrega.$or);
+  assert.equal(buscada.$and[0].$or[1]["organizacion.nombre"].$regex, "Comedor");
 });
 
 test("cada mitad de las alertas conserva permisos y distingue recibida de entregada", () => {
@@ -46,7 +52,7 @@ test("cada mitad de las alertas conserva permisos y distingue recibida de entreg
   const donaciones = pipeline[0].$match;
   const entregas = pipeline.find(p => p.$unionWith)?.$unionWith.pipeline[0].$match;
   assert.equal(donaciones.registradaPor.toHexString(), usuario.id);
-  assert.equal(entregas.registradaPor.toHexString(), usuario.id);
+  assert.equal(entregas.$or[0].registradaPor.toHexString(), usuario.id);
   assert.equal(donaciones.estado, "recibida");
   assert.equal(entregas.estado, "entregada");
   for (const tipo of ["donaciones", "entregas"] as const) {

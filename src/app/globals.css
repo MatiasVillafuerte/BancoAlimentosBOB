@@ -1365,6 +1365,55 @@ button.record-link { border: 0; background: transparent; padding: 4px 0; cursor:
   }
 }
 
+.inventario-filtros {
+  grid-template-columns: minmax(180px, 2fr) minmax(140px, 1fr) minmax(180px, 1fr) auto;
+}
+.selector-lotes {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px;
+}
+.cantidad-input {
+  width: 130px;
+  max-width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d1c7ba;
+  border-radius: 7px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+}
+.button-small {
+  min-height: 36px;
+  padding: 8px 13px;
+  font-size: 12px;
+}
+.acciones-entrega {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.acciones-entrega + form {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.reducciones-reserva {
+  margin: 20px 0;
+  padding: 18px;
+  background: #fbf6ed;
+  border-radius: 8px;
+}
+.reducciones-reserva summary { cursor: pointer; font-weight: 600; }
+.reducciones-reserva .registro-campo { margin: 16px 0; }
+@media(max-width:1100px) {
+  .inventario-filtros { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+}
+@media(max-width:760px) {
+  .inventario-filtros { grid-template-columns: minmax(0,1fr); }
+  .selector-lotes { padding: 12px; }
+  .acciones-entrega { flex-direction: column; }
+}
 @media(prefers-reduced-motion:reduce) {
   * {
     transition: none!important;

@@ -170,6 +170,6 @@ snapshot y confirmación majority. La transacción guarda todos los documentos o
 únicamente sus colecciones al terminar. No usa `seed.js` ni escribe datos de prueba en `bab_donaciones`.
 La conexión de pruebas necesita permisos de creación, lectura y escritura sobre la base temporal.
 
-La siguiente etapa incorpora inventario por zonas, FEFO, reservas, programación y confirmación de
-entregas, mermas y devoluciones. El registro de fotos, PDF y aprobación administrativa permanece
+La etapa 4 incorpora inventario por zonas, FEFO, reservas, programación y confirmación de
+entregas, mermas y devoluciones: [guía de uso](07-inventario-y-entregas.md). El registro de fotos, PDF y aprobación administrativa permanece
 en la etapa 5. Los manuales finales y el modelo Word se consolidan en la etapa 6.

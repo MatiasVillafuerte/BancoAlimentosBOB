@@ -4,8 +4,8 @@ import { LogoutButton } from "./logout-button";
 import type { UsuarioPublico } from "@/lib/auth/types";
 
 export const rolVisible = { administrador: "Administración", coordinador: "Coordinación", voluntario: "Voluntariado" };
-const paginas = { panel: "Resumen", donaciones: "Donaciones", entregas: "Entregas", alertas: "Pendientes", catalogos: "Catálogos", usuarios: "Equipo", cuenta: "Mi cuenta" };
-const iconos = { panel: "▦", donaciones: "↓", entregas: "↑", alertas: "!", catalogos: "▤", usuarios: "♧", cuenta: "○" };
+const paginas = { panel: "Resumen", donaciones: "Donaciones", inventario: "Inventario", entregas: "Entregas", alertas: "Pendientes", catalogos: "Catálogos", usuarios: "Equipo", cuenta: "Mi cuenta" };
+const iconos = { panel: "▦", donaciones: "↓", inventario: "▣", entregas: "↑", alertas: "!", catalogos: "▤", usuarios: "♧", cuenta: "○" };
 export function AppFrame({ usuario, pagina, children }: { usuario: UsuarioPublico; pagina: keyof typeof paginas; children: React.ReactNode }) {
   return <div className="app-layout">
     <a className="skip-link" href="#contenido">Ir al contenido</a>

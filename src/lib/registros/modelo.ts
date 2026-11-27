@@ -19,7 +19,7 @@ const fechaDia = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Revisa la fecha.").ref
   const f = new Date(v + "T12:00:00Z");
   return Number.isFinite(f.getTime()) && f.toISOString().slice(0, 10) === v;
 }, "La fecha no existe.");
-const instanteLocal = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/).refine(v => {
+export const instanteLocal = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/).refine(v => {
   const [dia, hora] = v.split("T");
   return fechaDia.safeParse(dia).success && /^([01]\d|2[0-3]):[0-5]\d$/.test(hora);
 }, "La fecha y hora no son válidas.");

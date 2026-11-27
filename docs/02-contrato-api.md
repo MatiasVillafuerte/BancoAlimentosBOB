@@ -1,6 +1,6 @@
 # Contrato aprobado para la aplicación BAB
 
-Actualizado el 26 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. Ya están implementados el inicio y cierre de sesión, consulta de sesión, cambio de contraseña, cuenta personal, contadores documentales, listas de donaciones/entregas/alertas y fichas de operaciones. Las escrituras operativas y el manejo de archivos siguen pendientes. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
+Actualizado el 27 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. La aplicación incluye acceso, consultas, catálogos, cuentas, recepción de donaciones, inventario, FEFO, reservas, entregas y movimientos. Las fotografías, PDF y revisión administrativa corresponden a la etapa 5. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
 
 La aplicación utiliza Next.js con React y TypeScript dentro de BancoAlimentos_Proyectos. El servidor accede a MongoDB; las credenciales de Atlas nunca llegan al navegador. Se mantienen ocho colecciones de negocio y GridFS. El acceso está documentado en [la guía de desarrollo](04-desarrollo-y-git.md).
 
@@ -113,8 +113,10 @@ inexistente o ajena a los permisos devuelve 404. Las respuestas usan `Cache-Cont
 Las fichas devuelven campos públicos explícitos; nunca documentos completos de `voluntarios`.
 La etapa 3 incorpora las altas de donantes, organizaciones, convenios y cuentas; edición de catálogos
 y cuentas; y recepción de donaciones con sus lotes y movimientos. Los permisos y cuerpos de estas
-solicitudes se detallan en [la guía de registros](06-registros-y-catalogos.md). Las otras escrituras
-de la tabla pertenecen a las etapas 4 y 5.
+solicitudes se detallan en [la guía de registros](06-registros-y-catalogos.md). La etapa 4 incorpora
+inventario, FEFO, responsables, programación, confirmación, cancelación y movimientos, detallados en
+[la guía de inventario y entregas](07-inventario-y-entregas.md). Archivos y revisión pertenecen a etapa 5;
+trazabilidad consolidada e informes finales, a etapa 6.
 
 | Ruta | Responsabilidad |
 | --- | --- |
@@ -127,6 +129,7 @@ de la tabla pertenecen a las etapas 4 y 5.
 | GET /api/donaciones/:id | Expediente y proyección segura de sus responsables. |
 | GET /api/lotes, GET /api/lotes/:id | Inventario, reservas, zona, vencimiento e historial. |
 | GET /api/sugerencias-fefo | Prioridades calculadas sin crear entregas ni reservas. |
+| GET /api/responsables | Cuentas activas para asignar una entrega; coordinación y administración. |
 | GET/POST /api/entregas | Consultar o programar una entrega con reservas. |
 | PATCH /api/entregas/:id | Cambiar una programación y recalcular reservas. |
 | POST /api/entregas/:id/confirmar | Registrar salida física una sola vez; estado documental según evidencia. |
@@ -142,14 +145,26 @@ de la tabla pertenecen a las etapas 4 y 5.
 | GET /api/informes/:tipo | Informes calculados; distinguir hechos físicos y aprobación administrativa. |
 | GET/POST /api/usuarios, GET/PATCH /api/usuarios/:id | Administración de cuentas; jamás devolver hashes. |
 
-## Validación pendiente en la implementación
+## Validación y siguientes etapas
 
-La migración prepara datos, índices y validadores. La web incorpora sesiones, contadores, listas,
-fichas, catálogos, cuentas y recepción real. Las consultas verifican autoría, filtros, campos privados,
-referencias de archivos y conservación de datos históricos. La etapa 3 prueba recepción concurrente
-sin duplicados, reversión ante fallo, convenios y permisos con transacciones reales en una base temporal.
-Quedan para las etapas siguientes concurrencia de reservas, subida fallida, cambio de versión durante
-revisión, rechazo y reenvío, cancelación y entrega parcial. La autenticación prueba cierre y vencimiento
-de sesiones, cuentas desactivadas, cambios de rol, limitación de intentos y exclusión de campos privados.
+La migración prepara datos, índices y validadores. Las pruebas cubren autoría, filtros, campos privados,
+referencias de archivos, registros históricos, recepción concurrente, reversión ante fallo, convenios,
+reservas concurrentes, cancelación, entrega parcial y movimientos compensatorios. Las escrituras se
+prueban con transacciones y validadores reales en bases temporales; no en los datos del proyecto.
+Quedan para etapa 5 la subida fallida, cambio de versión durante revisión, rechazo, reenvío y reapertura.
+La autenticación prueba cierre y vencimiento de sesiones, cuentas desactivadas, cambios de rol,
+limitación de intentos y exclusión de campos privados.
+
+Coordinación y administración gestionan todas las entregas. Voluntariado consulta y confirma entregas
+registradas por su cuenta o asignadas a ella; conserva consulta de las que entregó físicamente.
+El campo histórico `entregadaPor` solo habilita este último acceso si existe `fechaEntrega`.
+Las recepciones conservan acceso por autor salvo administración. El inventario es visible al equipo,
+pero sus enlaces a expedientes respetan esos permisos.
+
+Una corrección de cantidades de recepción o entrega aumenta `versionDatos`, conserva el original
+y agrega el motivo al historial. Un expediente listo para revisar vuelve a `por_documentar`; uno
+observado conserva la observación hasta reenviarse. Si está completado, la corrección se rechaza
+hasta su reapertura administrativa. Una devolución física posterior es un movimiento distinto,
+sin cambiar lo que certificaba la entrega original.
 
 Fuentes técnicas: [autenticación en Next.js](https://nextjs.org/docs/app/guides/authentication), [transacciones de MongoDB](https://www.mongodb.com/docs/drivers/node/current/crud/transactions/), [GridFS](https://www.mongodb.com/docs/manual/core/gridfs/) y [almacenamiento de contraseñas de OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).

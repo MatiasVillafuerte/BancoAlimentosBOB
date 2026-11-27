@@ -3,6 +3,7 @@ import { exigirUsuario } from "@/lib/auth/http";
 import { listarOperaciones } from "@/lib/operaciones/consultas";
 import { ErrorConsulta, leerFiltros, ETIQUETAS, ESTADOS, GRUPOS, type TipoConsulta, type FiltrosConsulta } from "@/lib/operaciones/modelo";
 import { AppFrame } from "@/components/app-frame";
+import { puedeGestionar } from "@/lib/registros/modelo";
 import { EstadoOperacion, fechaVisible } from "./presentacion";
 
 export type ParametrosPagina = Promise<Record<string, string | string[] | undefined>>;
@@ -32,10 +33,14 @@ export async function ListaOperaciones({ tipo, searchParams }: { tipo: TipoConsu
   catch (e) { if (e instanceof ErrorConsulta) error = e.message; else throw e; }
   const resultado = error ? null : await listarOperaciones(usuario, tipo, filtros);
   const estados = tipo === "alertas" ? GRUPOS : ESTADOS[tipo];
+  const alcance = usuario.rol === "administrador" ? "Todos los responsables" : tipo === "donaciones" ? "Registrados por tu cuenta" :
+    tipo === "entregas" ? puedeGestionar(usuario.rol) ? "Entregas de todo el equipo" : "Entregas propias, asignadas o realizadas por ti" :
+      puedeGestionar(usuario.rol) ? "Tus recepciones y las entregas del equipo" : "Tus recepciones y las entregas en las que participas";
   return <AppFrame usuario={usuario} pagina={tipo}>
-    <div className="page-heading"><div><span className="eyebrow text-red">{usuario.rol === "administrador" ? "CONSULTA GENERAL" : "MIS REGISTROS"}</span>
+    <div className="page-heading"><div><span className="eyebrow text-red">CONSULTA DE OPERACIONES</span>
       <h1>{titulos[tipo]}</h1><p>{descripciones[tipo]}</p></div>
       {tipo === "donaciones" ? <Link className="button" href="/donaciones/nueva">Registrar recepción <span aria-hidden="true">＋</span></Link> :
+        tipo === "entregas" && puedeGestionar(usuario.rol) ? <Link className="button" href="/entregas/nueva">Programar entrega <span aria-hidden="true">＋</span></Link> :
         <span className="live-label"><span className="status-dot" /> Datos de la base actual</span>}
     </div>
     {error && <div className="operation-notice rose" role="alert">{error} <Link href={`/${tipo}`}>Restablecer filtros</Link></div>}
@@ -50,13 +55,13 @@ export async function ListaOperaciones({ tipo, searchParams }: { tipo: TipoConsu
         <button type="submit" className="button">Buscar</button><Link className="clear-filters" href={`/${tipo}`}>Limpiar</Link>
       </form>
       {resultado && <><div className="list-summary"><strong>{resultado.total} {resultado.total === 1 ? "registro" : "registros"}</strong>
-        <span>{usuario.rol === "administrador" ? "Todos los responsables" : "Registrados por tu cuenta"}</span></div>
+        <span>{alcance}</span></div>
         {resultado.registros.length ? <div className="table-scroll" role="region" aria-label="Resultados de operaciones" tabIndex={0}><table className="operations-table">
           <thead><tr><th scope="col">Operación / fecha</th><th scope="col">{tipo === "donaciones" ? "Donante" : tipo === "entregas" ? "Organización" : "Donante / organización"}</th>
             <th scope="col">Estado</th><th scope="col">Registrada por</th><th scope="col"><span className="sr-only">Información</span></th></tr></thead>
           <tbody>{resultado.registros.map(r => <tr key={`${r.tipo}-${r.id}`}>
             <td><strong>{r.codigo}</strong><small>{r.tipo === "donaciones" ? "Recepción" : "Entrega"} · {fechaVisible(r.fecha)}</small></td>
-            <td>{r.contraparte}</td><td><EstadoOperacion estado={r.estado} /></td>
+            <td>{r.contraparte}</td><td><EstadoOperacion estado={r.estado} />{r.requiereReasignacion && <small className="text-red">Requiere reasignación</small>}{r.atrasada && <small>Fecha prevista superada</small>}</td>
             <td>{r.autor?.nombre || (r.autorReferenciado ? "Cuenta no disponible" : "Autor no confirmado")}</td>
             <td><Link className="record-link" href={`/${r.tipo}/${r.id}`} aria-label={`Ver ${r.codigo}`}>Información <span aria-hidden="true">→</span></Link></td>
           </tr>)}</tbody>
