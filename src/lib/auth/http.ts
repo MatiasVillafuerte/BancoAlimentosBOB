@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import { ErrorAcceso, ServicioAutenticacion } from "./core";
 import { AlmacenMongo } from "./mongo-store";
+import { origenPermitido } from "./origin";
 
 export const COOKIE_SESION = "bab_session";
 export const auth = new ServicioAutenticacion(new AlmacenMongo());
@@ -18,7 +19,7 @@ export function origenAplicacion() {
 }
 
 export function comprobarOrigen(request: Request) {
-  return request.headers.get("origin") === origenAplicacion().origin;
+  return origenPermitido(request.headers.get("origin"), origenAplicacion());
 }
 
 export async function leerJson(request: Request) {

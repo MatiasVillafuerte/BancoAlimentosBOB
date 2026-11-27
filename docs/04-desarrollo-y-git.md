@@ -1,6 +1,6 @@
 # Desarrollo acceso y Git
 
-Actualizado el 25 de noviembre de 2026.
+Actualizado el 26 de noviembre de 2026.
 
 ## Lo que cambió
 
@@ -21,8 +21,15 @@ git branch --show-current
 npm run dev
 ```
 
-La rama debe ser `feat/backend-auth`. Abre http://localhost:3000. Utiliza el origen que figure en
-`APP_URL`; `localhost` y `127.0.0.1` son orígenes distintos. Detén el servidor con Ctrl+C.
+La rama debe ser `feat/backend-auth`. Abre http://localhost:3000. También se admite
+http://127.0.0.1:3000, la dirección que muestra Next.js en la terminal. Cuando `APP_URL` apunta al
+equipo local, ambas direcciones son válidas con el mismo protocolo y puerto configurados.
+En un despliegue público se exige exactamente el origen de `APP_URL`. Detén el servidor con Ctrl+C.
+
+Compass y la aplicación se conectan a Atlas por separado; no hace falta abrir Compass para iniciar
+sesión. Si aparece **Origen de solicitud no permitido**, revisa la dirección del navegador:
+no debe tener otro puerto (por ejemplo, 3001). Si 3000 está ocupado, detén el servidor anterior
+antes de volver a ejecutar `npm run dev`.
 
 En otro equipo, descarga la rama e instala las versiones fijadas:
 
