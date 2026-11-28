@@ -23,6 +23,8 @@ Prototipo académico con datos ficticios: React y Next.js con TypeScript, MongoD
 - Fotografías y PDF originales en GridFS, consulta y descarga con permisos; varias evidencias por operación.
 - PDF inmutable por versión de convenio, carga validada y retiro de evidencias con historial.
 - Presentación, aprobación u observación administrativa, corrección y reapertura con motivo.
+- Informes por fechas con operaciones físicas, validación vigente y cantidades por producto/unidad.
+- Trazabilidad de cada entrega hasta los lotes, recepciones y convenios permitidos para la cuenta.
 
 El administrador ve todas las operaciones. Coordinación gestiona las entregas del equipo; voluntariado
 ve las propias, asignadas o que realizó. Las recepciones siguen limitadas al autor salvo administración.
@@ -30,6 +32,11 @@ La revisión exige al menos una fotografía propia y una decisión administrativ
 La [guía de la etapa 3](docs/06-registros-y-catalogos.md) explica cómo registrar y qué permisos tiene cada rol.
 La [guía de inventario y entregas](docs/07-inventario-y-entregas.md) explica reservas, salidas y movimientos.
 La [guía de evidencias y revisión](docs/08-evidencias-y-revision.md) explica archivos, correcciones y aprobación.
+La [guía de informes](docs/09-informes-y-trazabilidad.md) explica fechas, coberturas y cantidades netas.
+La entrega incluye [manual de usuario](docs/10-manual-usuario.md), [manual técnico](docs/11-manual-tecnico.md),
+[demostración reproducible](docs/12-demostracion.md), [diseño Word](docs/modelo/Diseno_BD_BAB.docx),
+[diccionario](docs/modelo/diccionario.md) y [diagrama editable](docs/modelo/relaciones.drawio).
+La [verificación final](docs/13-verificacion-final.md) reúne los resultados de pruebas y los límites de esta entrega.
 El contrato completo está en [docs/02-contrato-api.md](docs/02-contrato-api.md).
 Las etapas, criterios de cierre y contenido de la entrega final están en [el plan de entrega](docs/05-plan-entrega.md).
 
@@ -39,7 +46,7 @@ Requisito: Node.js 22.13 o posterior; verificado con Node.js 24.13.1.
 
 ```powershell
 npm ci
-Copy-Item .env.example .env.local
+if (!(Test-Path -LiteralPath '.env.local')) { Copy-Item -LiteralPath '.env.example' -Destination '.env.local' }
 ```
 
 Completa `.env.local` con la conexión privada y conserva `MONGODB_DB=bab_donaciones`.
@@ -71,6 +78,7 @@ La guía de conexión, acceso y commits está en [docs/04-desarrollo-y-git.md](d
 | `src/lib/registros` | Validación, catálogos, cuentas y transacciones de recepción |
 | `src/lib/inventario` | FEFO, saldos, reservas, entregas y movimientos de inventario |
 | `src/lib/documentos` | GridFS, validación de contenido, permisos y revisión documental |
+| `src/lib/informes` | Informes y trazabilidad con lectura coherente y alcance por cuenta |
 | `src/lib/transacciones.ts` | Transacción y autorización de escritura compartidas |
 | `scripts/inicializar-admin.ts` | Activación idempotente de la cuenta inicial |
 | `scripts/limpiar-archivos.ts` | Inspección y limpieza explícita de temporales propios sin referencias |
@@ -95,7 +103,7 @@ npm run build
 permisos de creación, lectura y escritura en esa base; no escribe en `bab_donaciones`.
 
 El proyecto base se publicó primero en `main` (commit `4a611e6`).
-La primera implementación está en `feat/backend-auth`.
+La entrega de las seis etapas está en `feat/backend-auth`.
 Repositorio: [MatiasVillafuerte/BancoAlimentosBOB](https://github.com/MatiasVillafuerte/BancoAlimentosBOB).
 
 ## Base migrada

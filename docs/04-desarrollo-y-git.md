@@ -6,12 +6,11 @@ Actualizado el 27 de noviembre de 2026.
 
 El proyecto base se publicó en `main` antes de crear `feat/backend-auth`. Next.js contiene tanto
 la interfaz React como el backend; no hay que iniciar otro servidor en `backend`.
-Las maquetas de `frontend` se conservan para orientar las pantallas siguientes.
+Las maquetas de `frontend` se conservan como referencia del diseño inicial.
 
-El avance implementa login, logout, consulta de sesión, cambio de contraseña, cuenta personal,
-contadores documentales, listas y fichas reales. La etapa 3 añade catálogos, versiones de convenios,
-recepción de donaciones y administración de cuentas. Consulta [la guía de registro](06-registros-y-catalogos.md)
-y [el plan de entrega](05-plan-entrega.md) para ver las etapas completas.
+La aplicación implementa acceso, catálogos, recepción, inventario, reservas y entregas, evidencias,
+revisión administrativa, informes y trazabilidad. Consulta el [manual de usuario](10-manual-usuario.md),
+el [manual técnico](11-manual-tecnico.md) y el [plan de entrega](05-plan-entrega.md) para ver el alcance completo.
 
 ## Abrir el proyecto actual
 
@@ -40,7 +39,7 @@ git clone https://github.com/MatiasVillafuerte/BancoAlimentosBOB.git
 Set-Location BancoAlimentosBOB
 git switch feat/backend-auth
 npm ci
-Copy-Item .env.example .env.local
+if (!(Test-Path -LiteralPath '.env.local')) { Copy-Item -LiteralPath '.env.example' -Destination '.env.local' }
 ```
 
 Completa `.env.local` localmente. Si ya existe, conserva sus valores. No compartas sus credenciales.
@@ -60,8 +59,11 @@ Si cambian los servidores del clúster, actualiza la conexión estándar desde A
 
 ## Administradora inicial
 
-El correo seleccionado es **admin.demo@example.com**. La contraseña inicial se consulta en
-`.runtime/admin-inicial.json`, solo en tu equipo; no está en GitHub.
+El correo seleccionado es **admin.demo@example.com**. Esta cuenta ya fue activada y su contraseña
+fue cambiada por el usuario. Inicia sesión con la contraseña actual; no repitas la activación.
+
+Para una activación inicial en una copia autorizada todavía sin contraseña, el comando descrito
+abajo genera `.runtime/admin-inicial.json`, solo en el equipo; no está en GitHub. En ese caso:
 
 1. Abre el archivo en tu editor y copia el valor de `password`.
 2. Inicia sesión con el correo indicado.
@@ -78,7 +80,7 @@ El comando verifica la cuenta existente y amplía el validador de `voluntarios` 
 V2. Respalda el validador anterior en `.runtime/validador-voluntarios-anterior.ejson`.
 Solo crea el hash cuando la cuenta no lo tiene. Repetirlo no restablece la contraseña ni destruye sesiones.
 Necesita lectura, escritura y `collMod` en `bab_donaciones`; el uso cotidiano no necesita `collMod`.
-Las otras cuatro cuentas siguen sin acceso hasta establecer sus contraseñas individualmente desde
+Las demás cuentas que todavía no tengan contraseña se habilitan individualmente desde
 **Equipo → Editar → Contraseña inicial**. Activa también la cuenta si está inactiva. Una contraseña
 ya establecida se cambia desde **Mi cuenta**; el administrador no la sobrescribe con este formulario.
 
@@ -131,6 +133,7 @@ La etapa 4 añade `/inventario`, `/entregas/nueva`, las acciones de programació
 y los movimientos desde cada lote. Uso y rutas: [guía de inventario](07-inventario-y-entregas.md).
 La etapa 5 añade `/convenios/:id`, carga y descarga de archivos, corrección y revisión de expedientes.
 Uso, API y mantenimiento: [guía de evidencias y revisión](08-evidencias-y-revision.md).
+La etapa 6 añade `/informes` y `/trazabilidad/:codigoEntrega`: [guía de informes](09-informes-y-trazabilidad.md).
 Para instalar las nuevas dependencias utiliza `npm ci` antes de iniciar con `npm run dev`.
 No vuelvas a ejecutar la migración ni `admin:init`: la cuenta que ya cambió su contraseña se conserva.
 
@@ -185,5 +188,6 @@ Cuando quieran integrar el avance, revisen un Pull Request de `feat/backend-auth
 No hace falta fusionarlo para compartir o seguir trabajando en esta rama.
 
 El Word principal de diseño está un nivel por encima del repositorio: `3_Diseno_BD_corregido.docx`.
-Se actualizó en ese archivo. No se añade automáticamente al hacer un commit dentro de
-`BancoAlimentos_Proyectos`.
+Se actualizó en ese archivo. La entrega también incluye una copia sincronizada en
+`docs/modelo/Diseno_BD_BAB.docx`, el diccionario y el diagrama editable. Los cambios posteriores
+en el Word principal deben copiarse de nuevo al archivo del repositorio antes de publicar.

@@ -16,7 +16,7 @@ con botones que todavía no guardan o consultan datos reales.
 | 3. Registro y catálogos | Terminada | Administrar donantes y organizaciones; registrar una recepción con sus lotes; asociar una versión de convenio cuando corresponda; habilitar otras cuentas según rol. | Donante ocasional sin NIT ni contrato obligatorio; autor automático; recepción y movimientos atómicos; reintento sin duplicar; datos y versión del convenio correctos. |
 | 4. Inventario y distribución | Terminada | Consultar las cuatro zonas; sugerir lotes por FEFO; programar, modificar, cancelar y confirmar entregas; registrar mermas y devoluciones. | Reservas concurrentes, saldo suficiente, lote apto, entrega parcial, liberación de remanentes y movimientos compensatorios con trazabilidad. |
 | 5. Evidencias y revisión | Terminada | Subir, consultar y descargar fotografías y PDF, incluidos los convenios; reenviar correcciones; validar o solicitar cambios como administrador. | Archivo propio y tipo real admitido; fotografía mínima; revisión de la versión vigente; rechazo, reenvío y reapertura; cambios documentales sin repetir movimientos físicos. |
-| 6. Integración y entrega final | Pendiente | Recorrer una donación completa hasta su distribución e informe; instalar y presentar el prototipo con documentación coherente. | Pruebas integrales, permisos por rol, interfaz móvil, datos ficticios de demostración, manuales, instrucciones de instalación y revisión del modelo final. |
+| 6. Integración y entrega final | Terminada | Recorrer una donación completa hasta su distribución e informe; instalar y presentar el prototipo con documentación coherente. | Pruebas integrales, permisos por rol, interfaz móvil, datos ficticios de demostración, manuales, instrucciones de instalación y revisión del modelo final. |
 
 La administración completa de usuarios de la etapa 3 amplía la cuenta inicial de la etapa 1.
 Los datos de convenios se incorporan en la etapa 3 y su manejo de PDF se integra en la etapa 5.
@@ -97,8 +97,28 @@ Uso, ejemplos, límites y campos añadidos: [guía de inventario y entregas](07-
 - Sin nueva migración ni cambio de contraseñas. Las bases de prueba se retiraron.
 
 Uso, API, campos y límites: [guía de evidencias y revisión](08-evidencias-y-revision.md).
-La siguiente etapa es **6. Integración y entrega final**: trazabilidad, informes, recorrido completo,
-manuales y actualización consolidada del Word de diseño.
+## Avance de la etapa 6
+
+- Informes por período inclusivo en Bolivia: operaciones físicas, aprobación vigente, cobertura de peso
+  y atenciones, cantidades originales, corregidas, devueltas y netas por producto y unidad.
+- Trazabilidad desde cada entrega hasta sus lotes, recepciones y convenio opcional; las referencias
+  no permiten consultar expedientes ajenos a los permisos de la cuenta.
+- Recorrido completo con servicios reales, validadores, transacciones y GridFS: recepción de 200 bolsas,
+  reserva de 100, rechazo de 120 adicionales, salida parcial de 80 y devolución posterior de 10.
+- 71 pruebas locales y 43 escenarios de integración aprobados. Compilación, TypeScript y ESLint correctos.
+  La suite de integración informa 47 pruebas al incluir sus cuatro contenedores de escenarios.
+- 14 consultas de informes/trazabilidad según cuenta y dos rutas sin sesión verificadas. Huella de datos
+  de negocio conservada antes/después; sin migraciones, reinicio de contraseñas ni aprobaciones ficticias.
+- Revisión visual en escritorio y móvil de informes, trazabilidad y acceso a evidencia. Las escrituras
+  completas se comprobaron en integración sobre bases temporales, retiradas al terminar.
+- Manuales de usuario y técnico, guion de demostración, diccionario y diagrama editable.
+  Word principal actualizado en su mismo archivo, con copia sincronizada dentro del repositorio.
+- El perfil académico conserva la hipótesis y sus límites. No se presenta el prototipo como prueba
+  de una falla real de organización del BAB.
+
+Resultado, pruebas y límites: [verificación final](13-verificacion-final.md).
+Las seis etapas del prototipo están completas. El alojamiento público y la fusión hacia `main`
+son decisiones posteriores; el código de la entrega permanece en la rama de desarrollo.
 
 ## Forma de trabajo y Git
 
@@ -117,7 +137,7 @@ al terminar una etapa.
 
 ## Contenido de la entrega final
 
-| Entregable | Contenido previsto |
+| Entregable | Contenido de la entrega |
 | --- | --- |
 | Aplicación | Frontend React y backend Next.js, con MongoDB Atlas y archivos en GridFS. |
 | Modelo de datos | Word de diseño actualizado, diccionario de campos, relaciones y diagrama editable coherentes con la implementación. |

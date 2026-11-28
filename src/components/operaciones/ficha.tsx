@@ -39,6 +39,7 @@ export async function FichaDeOperacion({ tipo, id }: { tipo: TipoOperacion; id: 
     <Link className="back-link" href={`/${tipo}`}>← Volver a {tipo}</Link>
     <div className="page-heading record-heading"><div><span className="eyebrow text-red">{donacion ? "RECEPCIÓN DE DONACIÓN" : "EXPEDIENTE DE ENTREGA"}</span>
       <h1>{f.codigo}</h1><p>{f.contraparteNombreRegistrado || "Contraparte sin registro"}</p></div><EstadoOperacion estado={f.estado} /></div>
+    {!donacion && <p><Link className="record-link" href={`/trazabilidad/${encodeURIComponent(f.codigo)}`}>Ver recorrido de los lotes y sus donaciones →</Link></p>}
     <div className={`operation-notice ${f.estado === "observada" ? "rose" : f.estado === "por_documentar" ? "amber" : "blue"}`}>
       <strong>{f.estado === "observada" ? "Requiere corrección" : "Estado de la operación"}</strong><p>{mensajes[f.estado] || "Consulta los datos registrados de esta operación."}</p>
       {f.estado === "observada" && f.revision.observacion && <p className="preserve-lines">{f.revision.observacion}</p>}

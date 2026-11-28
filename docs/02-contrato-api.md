@@ -1,6 +1,6 @@
 # Contrato aprobado para la aplicación BAB
 
-Actualizado el 27 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. La aplicación incluye acceso, consultas, catálogos, cuentas, recepción de donaciones, inventario, FEFO, reservas, entregas, movimientos, fotografías, PDF y revisión administrativa. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
+Actualizado el 27 de noviembre de 2026. Este contrato reúne las reglas aceptadas por Matias. La aplicación incluye acceso, consultas, catálogos, cuentas, recepción de donaciones, inventario, FEFO, reservas, entregas, movimientos, fotografías, PDF, revisión administrativa, informes y trazabilidad. Los HTML son referencias visuales; el seed y los JSON conservan la versión anterior para probar y respaldar la migración.
 
 La aplicación utiliza Next.js con React y TypeScript dentro de BancoAlimentos_Proyectos. El servidor accede a MongoDB; las credenciales de Atlas nunca llegan al navegador. Se mantienen ocho colecciones de negocio y GridFS. El acceso está documentado en [la guía de desarrollo](04-desarrollo-y-git.md).
 
@@ -100,7 +100,7 @@ Los indicadores operativos se calculan con recepciones y salidas reales, aunque 
 
 No se suman cajas, bolsas y kilos como una sola unidad. Sin peso medido, se muestra sin registro. La suma de beneficiariosAtendidos representa atenciones, no personas únicas.
 
-## Rutas previstas
+## Rutas implementadas
 
 Las rutas requieren sesión y permisos salvo el inicio de sesión.
 
@@ -116,8 +116,8 @@ y cuentas; y recepción de donaciones con sus lotes y movimientos. Los permisos 
 solicitudes se detallan en [la guía de registros](06-registros-y-catalogos.md). La etapa 4 incorpora
 inventario, FEFO, responsables, programación, confirmación, cancelación y movimientos, detallados en
 [la guía de inventario y entregas](07-inventario-y-entregas.md). Los archivos y revisión de la etapa 5
-están descritos en [su guía](08-evidencias-y-revision.md); trazabilidad consolidada e informes finales
-quedan previstos para la etapa 6.
+están descritos en [su guía](08-evidencias-y-revision.md). La etapa 6 incorpora trazabilidad e informes,
+con alcance por cuenta y cálculos detallados en [la guía de informes](09-informes-y-trazabilidad.md).
 
 | Ruta | Responsabilidad |
 | --- | --- |
@@ -142,13 +142,13 @@ quedan previstos para la etapa 6.
 | PATCH /api/donaciones/:id/documentacion, PATCH /api/entregas/:id/documentacion | Corrección descriptiva con versión, motivo e historial. No cambia cantidades. |
 | GET/POST /api/movimientos | Historial y operaciones de merma, devolución o ajuste autorizadas. |
 | GET/POST /api/organizaciones, GET/PATCH /api/organizaciones/:id | Instituciones receptoras. |
-| GET /api/trazabilidad/:codigoEntrega (prevista, etapa 6) | Todas las líneas hasta sus recepciones y convenios opcionales. |
+| GET /api/trazabilidad/:codigoEntrega | Todas las líneas hasta sus recepciones y convenios opcionales, respetando sus permisos. |
 | GET/POST /api/archivos, GET /api/archivos/:id | Cargar, consultar y descargar con permisos. |
 | POST /api/archivos/:id/retirar | Apartar una evidencia actual con motivo, sin borrar su historial. |
-| GET /api/informes/:tipo (prevista, etapa 6) | Informes calculados; distinguir hechos físicos y aprobación administrativa. |
+| GET /api/informes/resumen?desde=AAAA-MM-DD&hasta=AAAA-MM-DD | Recepciones y entregas físicas del período, aprobación vigente, cobertura de peso/atenciones y cantidades corregidas y netas. |
 | GET/POST /api/usuarios, GET/PATCH /api/usuarios/:id | Administración de cuentas; jamás devolver hashes. |
 
-## Validación y siguientes etapas
+## Validación de la entrega
 
 La migración prepara datos, índices y validadores. Las pruebas cubren autoría, filtros, campos privados,
 referencias de archivos, registros históricos, recepción concurrente, reversión ante fallo, convenios,
@@ -158,6 +158,9 @@ La etapa 5 añade pruebas de contenido real, cargas fallidas, cambios durante re
 reenvío, reapertura, PDF por convenio y limpieza de temporales con conservación de referencias.
 La autenticación prueba cierre y vencimiento de sesiones, cuentas desactivadas, cambios de rol,
 limitación de intentos y exclusión de campos privados.
+La etapa 6 conecta recepción, reserva, salida parcial, revisión y devolución en un recorrido de integración;
+comprueba fechas de informes, cantidades netas, cobertura de datos y límites de acceso en la trazabilidad.
+Los resultados y sus límites están en [la verificación final](13-verificacion-final.md).
 
 Coordinación y administración gestionan todas las entregas. Voluntariado consulta y confirma entregas
 registradas por su cuenta o asignadas a ella; conserva consulta de las que entregó físicamente.
